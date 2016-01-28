@@ -1,0 +1,71 @@
+extends layout_main
+
+block content
+	container.col-md-8
+		
+		br
+		h1= title
+		br
+
+		h5.text-info Bonjour, bienvenue dans ce tutoriel/tp. Ce serveur vous permettra de partager le résultat de votre labeur avec tous. Pensez donc à faire du chouette travail et à partager de bon lolCats ;)
+		br
+
+
+		button.btn.btn-primary.btn-success(type='button', onclick="location.href='/server';") 
+			b Voir les serveurs disponibles
+		
+		br
+		br
+		hr
+		br
+
+		h2 Indications TP
+
+		a(href='https://github.com/sallareznov/p2p-wiki/wiki' target='blank') Wiki général
+		br
+		br
+		ol
+			li
+				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Overview#' target='blank') Overview
+			li
+				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Arborescence-d\'un-projet-Node-Express#' target='blank') Arborescence d\'un projet Node.js & Express-js
+			li
+				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Guide-technique#' target='blank') Guide technique
+			li
+				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Ressources-Utiles#' target='blank') Ressources utiles
+			li
+				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Pour-Aller-Plus-Loin-Avec-Node.js#' target='blank') Pour aller plus loin avec Node.js
+		
+		br
+		br
+
+		h2 Outils
+
+		p 
+			a(href='https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop' target='blank') Post man 
+			| permet de contrôler des requêtes HTTP (GET, POST, ... | HEADERS, FORMS, BODY, ... | REQUEST & RESPONSE)
+		p 
+			a(href='https://chrome.google.com/webstore/detail/sqlite-database-browser-b/jlpbdkmaomigeneadlamehkfchdmojgg' target='blank') Sqlite Manager 
+			| permet de facilement gérer des fichiers de DB SqlLite
+		br
+
+		h2 Infos utiles
+
+		p
+			a(href='http://nodejs.org' target='blank') node js
+		p
+			a(href='http://expressjs.com' target='blank') express js
+		p
+			a(href='http://getbootstrap.com' target='blank') bootstrap
+		br
+
+		h2 Autre
+
+		p 
+			a(href='http://html2jade.aaron-powell.com/' target='blank') Html to Jade
+			| Traduit du code Html en Jade
+
+
+
+
+

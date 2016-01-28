@@ -1,0 +1,39 @@
+extends layout_main
+
+block content
+    container.col-md-8
+
+        br
+        br
+        h2 Les parcours disponibles
+
+        br
+        b nom :
+        | #{parcour.nom}
+        br
+        b description :
+        | #{parcour.description}
+        br
+        b date de création :
+        | #{parcour.ctime}
+        br
+
+        table.table.table-hover.table-bordered
+            thead
+                tr
+                    th #
+                    th balise
+                    th question
+
+            each item in data
+                tr
+                    td #{item.id}
+                    td
+                        a(href='/balise/'+item.bid)
+                            #{item.bname}
+                    td
+                        a(href='/question/'+item.qid)
+                            #{item.qname}
+
+                    
+       

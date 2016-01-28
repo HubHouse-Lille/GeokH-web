@@ -1,0 +1,51 @@
+extends layout_main
+
+block content
+    container.col-md-8
+
+        br
+        br
+        h2 Créer un parcour
+        div
+            p Pour plus d'informations sur comment créer un parcour, 
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') apprenez-en plus
+            #info.collapse
+                .well
+                    p Informations pour la création d'un parcour:
+                        br
+                        br
+                        | Lorsque vous créez un parcour, veillez à avoir déjà crée les balises et les questions associées.
+                        
+            form(name="addParcour", method="post")
+                div.input
+                    input(type="text", name="author", placeholder="Quel nom souhaitez-vous donner au parcour ?").form-control
+                p.help-block exemple: HubHouse lille1-ouest pour etudiant info
+                br
+                div.input
+                    input(type="textarea", name="ip", placeholder="Donnez une descrition du parcours").form-control
+                br
+                div.input
+                    select(type="text", name="ip", placeholder="Combien de balises et de questions souhaitez-vous ?").form-control
+                      option(value="1") 1
+                      option(value="2") 2
+                      option(value="3") 3
+                      option(value="4") 4
+                      option(value="5") 5
+                      option(value="6") 6
+                      option(value="7") 7
+                      option(value="8") 8
+                      option(value="9") 9
+                      option(value="10") 10
+                      option(value="11") 11
+                      option(value="12") 12
+                      option(value="13") 13
+                      option(value="14") 14
+                      option(value="15") 15
+                      option(value="16") 16
+                      option(value="17") 17
+                      option(value="18") 18
+                      option(value="19") 19
+                      option(value="20") 20
+                br
+                div.actions
+                    input(type="submit", value="Continuer").btn.btn-success

@@ -1,0 +1,32 @@
+extends layout_main
+
+block content
+    container.col-md-8
+
+        br
+        br
+        h2 Les parcours disponibles
+
+
+        form(name="editParcour", method="post")
+            table.table.table-hover.table-bordered
+                thead
+                    tr
+                        th #
+                        th Balise
+                        th Question
+
+                each item in data
+                    tr
+                        td #
+                        td
+                            select(type="text", name="", placeholder="Choisissez une balise").form-control
+                                each item_b in data_balises
+                                    option(value=item_b.id) item_b.nom
+                        td
+                            select(type="text", name="", placeholder="Choisissez une question").form-control
+                                each item_q in data_question
+                                    option(value=item_q.id) item_q.nom
+           
+
+

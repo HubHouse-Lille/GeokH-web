@@ -1,0 +1,76 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/sidebar.css')
+		script(src='/js/jquery-2.1.4.min.js')
+		script(src='/js/bootstrap.min.js')
+	body
+		nav.navbar.navbar-default.navbar-static-top.navbar-inverse(role='navigation' style='position: fixed;top: 0px;width: 100%;')
+			.container-fluid
+				.navbar-header
+					.navbar-brand Administration GeokH
+				div
+					ul.nav.navbar-nav
+						li.active
+							a(href='/') Accueil
+						li
+							a(href='/apropos') A propos
+
+		block sidebar
+		#wrapper
+			// Sidebar
+			#sidebar-wrapper
+				ul.sidebar-nav
+					li
+						p
+					li.sidebar-brand
+						h3 Parcours
+					li
+						a(href='/parcours/view') Voir les parcours
+					li
+						a(href='/parcours/create') Créer un parcour
+					li
+						p
+					li.sidebar-brand
+						h3 Balises
+					li
+						a(href='/balises/view') Voir les balises
+					li
+						a(href='/balises/create') Créer une balise
+					li
+						p
+					li.sidebar-brand
+						h3 Questions
+					li
+						a(href='/questions/view') Voir les questions
+					li
+						a(href='/questions/create') Créer un question
+					li
+						p
+					li.sidebar-brand
+						h3 Entrepreneurs
+					li
+						a(href='/entrepreneurs/view') Voir les entrepreneurs
+					li
+						a(href='/entrepreneurs/create') Créer un entrepreneur
+					li
+						hr(style='height: 1px;margin: 5 0 5 0; color:#000000; background-color:#A9A9A9;')
+					li.sidebar-brand
+						h3 Utilisateurs
+					li
+						a(href='/comptes/view') Mon compte
+					li
+						a(href='/comptes/gestion') Gérer les utilisateurs
+					li
+						a(href='/logout') Déconnexion
+
+			// /#sidebar-wrapper
+
+			#page-content-wrapper
+				block content
+
+
+
