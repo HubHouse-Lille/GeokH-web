@@ -23,6 +23,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
+
+
 // MIDDLEWARE CONFIG
 // -----------------------------------------------------
 // session handler [ express-session > https://github.com/expressjs/session ]
@@ -30,7 +33,7 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true
-}))
+}));
 
 
 // ROUTES DEFINITION
@@ -44,17 +47,23 @@ var rBalises = require('./routes/balises');
 var rEntrepreneurs = require('./routes/entrepreneurs');
 var rComptes = require('./routes/comptes');
 
+var rDalUsers = require('./dal/users');
+var rDalTasks = require('./dal/tasks');
+
+
 // ROUTES CONFIGURATION
 // -----------------------------------------------------
 app.use('/', rLogin);
 app.use('/', rServer);
+
 app.use('/parcours', rParcours);
 app.use('/questions', rQuestions);
 app.use('/balises', rBalises);
 app.use('/entrepreneurs', rEntrepreneurs);
 app.use('/comptes', rComptes);
 
-
+app.use('/dal/users', rDalUsers);
+app.use('/dal/tasks', rDalTasks);
 
 // SERVER CONFIG
 // -----------------------------------------------------

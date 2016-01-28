@@ -1,12 +1,25 @@
+var models  = require('../models');
 var express = require('express');
 var router = express.Router();
 var request = require('request');
 var bodyParser = require('body-parser');
+var models = require('../models');
 
 
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
-    res.render('pei');
+
+    models.User.findAll({
+        include: [ models.Task ]
+    }).then(function(users) {
+
+        res.render('comptes', {
+            title: 'Express',
+            users: users
+        });
+
+    });
+
 });
 
 // VIEW ONE > GET

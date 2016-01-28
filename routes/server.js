@@ -4,10 +4,6 @@ var request = require('request');
 
 var bodyParser = require('body-parser');
 
-
-var sqlite3 = require('sqlite3');
-var db = new sqlite3.Database('model/dal/serveurs.db');
-
 router.get('/', function(req, res) {
     res.render('index');
 });
