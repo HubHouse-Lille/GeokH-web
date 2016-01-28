@@ -1,0 +1,32 @@
+extends layout_main
+
+block content
+    container.col-md-12
+
+        br
+        h2 Les parcours disponibles
+        br
+        table.table.table-hover.table-bordered
+            thead
+                tr
+                    th #
+                    th nom
+                    th description
+                    th actions
+                    th création
+                    th mise à jour
+
+            each parcour in parcours
+                tr
+                    td #{parcour.id}
+                    td
+                        a(href="/parcours/view/"+ parcour.id) #{parcour.nom}
+                    td #{parcour.description}
+                    td
+                        a(href="/parcours/view/"+ parcour.id) Détails
+                        | &nbsp;-&nbsp;
+                        a(href="/dal/parcours/destroy/"+ parcour.id) Supprimer
+                        | &nbsp;-&nbsp;
+                        a(href="/parcours/edit/"+ parcour.id) Editer
+                    td #{parcour.createdAt}
+                    td #{parcour.updatedAt}

@@ -1,29 +1,29 @@
 extends layout_main
-
 block content
 	container.col-md-8
-		
 		br
-		h1= title
-		br
-
-		h5.text-info Bonjour, bienvenue dans ce tutoriel/tp. Ce serveur vous permettra de partager le résultat de votre labeur avec tous. Pensez donc à faire du chouette travail et à partager de bon lolCats ;)
+		h2 Serveur d'administration GeokH
+		h5.text-info Ce serveur vous permet de définir les parcours disponible sur l'application GeokH. Toutes les entités sont éditables et devraient permettre de donner une grande liberté à la plateforme.
 		br
 
 
-		button.btn.btn-primary.btn-success(type='button', onclick="location.href='/server';") 
-			b Voir les serveurs disponibles
-		
+		button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/view';")
+			b Voir les parcours disponibles
+
 		br
 		br
 		hr
+
+		h3 A propos de ce serveur d'administration
+		br
+		p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquam suscipit nisi, in eleifend libero fermentum at. Fusce augue enim, feugiat a lorem sit amet, eleifend viverra nisi. Sed viverra ipsum vitae volutpat maximus. Ut convallis venenatis metus id convallis. Vivamus placerat eros sed feugiat malesuada. Sed ipsum leo, rutrum ac eleifend eu, dictum ac lorem. Proin vel erat odio. Donec sollicitudin enim est, finibus pharetra magna molestie at. Quisque eleifend nisl efficitur tincidunt euismod. Praesent imperdiet enim in ipsum pulvinar facilisis. Quisque lacinia non enim id dictum. Quisque vel congue sapien. Aenean tempus sodales ante ut viverra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+		br
+		p Suspendisse mi ante, auctor ullamcorper dapibus et, laoreet in ex. Donec id lectus vel elit eleifend tincidunt et non neque. In bibendum risus a massa egestas, sed mollis diam vehicula. Morbi vehicula mattis elit a mattis. Maecenas id enim tortor. Vestibulum eget condimentum velit, lacinia egestas elit. Maecenas volutpat tellus quam, nec elementum sem condimentum scelerisque. Nulla facilisi. Maecenas feugiat vestibulum nisl, eget lobortis sem bibendum nec. Maecenas imperdiet, nunc mollis fermentum convallis, arcu ante tempus ante, sed maximus erat ex ut risus. Morbi non diam faucibus, porttitor felis malesuada, interdum augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+
 		br
 
-		h2 Indications TP
+		h3 Permiers pas avec le serveur d'administration
 
-		a(href='https://github.com/sallareznov/p2p-wiki/wiki' target='blank') Wiki général
-		br
-		br
 		ol
 			li
 				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Overview#' target='blank') Overview
@@ -35,35 +35,19 @@ block content
 				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Ressources-Utiles#' target='blank') Ressources utiles
 			li
 				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Pour-Aller-Plus-Loin-Avec-Node.js#' target='blank') Pour aller plus loin avec Node.js
-		
-		br
-		br
 
-		h2 Outils
-
-		p 
-			a(href='https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop' target='blank') Post man 
-			| permet de contrôler des requêtes HTTP (GET, POST, ... | HEADERS, FORMS, BODY, ... | REQUEST & RESPONSE)
-		p 
-			a(href='https://chrome.google.com/webstore/detail/sqlite-database-browser-b/jlpbdkmaomigeneadlamehkfchdmojgg' target='blank') Sqlite Manager 
-			| permet de facilement gérer des fichiers de DB SqlLite
 		br
 
-		h2 Infos utiles
+		h3 Infos utiles
 
 		p
-			a(href='http://nodejs.org' target='blank') node js
+			a(href='http://hubhouse.univ-lille1.fr/Accueil/' target='blank') Hub House Lille 1
 		p
-			a(href='http://expressjs.com' target='blank') express js
+			a(href='http://univ-lille1.fr' target='blank') L'université de Lille 1
 		p
-			a(href='http://getbootstrap.com' target='blank') bootstrap
+			a(href='https://github.com/HubHouse-Lille' target='blank') Le git de l'application et du serveur d'administration
 		br
 
-		h2 Autre
-
-		p 
-			a(href='http://html2jade.aaron-powell.com/' target='blank') Html to Jade
-			| Traduit du code Html en Jade
 
 
 

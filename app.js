@@ -49,7 +49,7 @@ var rComptes = require('./routes/comptes');
 
 var rDalUsers = require('./dal/users');
 var rDalTasks = require('./dal/tasks');
-
+var rDalParcours = require('./dal/parcours');
 
 // ROUTES CONFIGURATION
 // -----------------------------------------------------
@@ -64,6 +64,11 @@ app.use('/comptes', rComptes);
 
 app.use('/dal/users', rDalUsers);
 app.use('/dal/tasks', rDalTasks);
+app.use('/dal/parcours', rDalParcours);
+
+
+
+
 
 // SERVER CONFIG
 // -----------------------------------------------------

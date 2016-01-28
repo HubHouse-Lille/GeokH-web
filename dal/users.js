@@ -8,17 +8,17 @@ router.post('/create', function(req, res) {
         email: req.body.email,
         password: req.body.password
     }).then(function() {
-        res.redirect('/');
+        res.redirect('/comptes/view');
     });
 });
 
-router.get('/:user_id/destroy', function(req, res) {
+router.get('/destroy:user_id', function(req, res) {
     models.User.destroy({
         where: {
             id: req.params.user_id
         }
     }).then(function() {
-        res.redirect('/');
+        res.redirect('/comptes/view');
     });
 });
 

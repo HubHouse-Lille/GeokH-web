@@ -4,7 +4,7 @@ block content
     h1= title
 
     h2 Creating a new user
-    
+
     form(action="/dal/users/create", method="post")
         div.input-lg-4
             input(type="text", name="username", placeholder="Login").form-control
@@ -26,7 +26,7 @@ block content
             = user.username
             | &nbsp;
             | (
-            a(href="/dal/users/" + user.id + "/destroy") Destroy
+            a(href="/dal/users/destroy/"+ user.id) Destroy
             | )
             ul
                 li
@@ -36,8 +36,8 @@ block content
                         input(type="submit")
                 each task in user.Tasks
                     li
-                        = task.title
-                        | &nbsp;
-                        | (
-                        a(href="/dal/tasks/" + user.id + "/" + task.id + "/destroy") Destroy
-                        | )
+                        form(action="/dal/tasks/" + task.id + "/update", method="post", style="display: inline")
+                            input(type="text", name="title", placeholder=task.title)
+                            input(type="submit")
+                            | &nbsp;
+                            a(href="/dal/tasks/" + user.id + "/destroy/" + task.id) Destroy

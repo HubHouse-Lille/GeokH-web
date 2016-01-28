@@ -8,19 +8,26 @@ router.post('/:user_id/create', function (req, res) {
         title: req.body.title,
         UserId: req.params.user_id
     }).then(function() {
-        res.redirect('/');
+        res.redirect('/comptes/view');
     });
 });
 
-router.get('/:user_id/:task_id/destroy', function (req, res) {
+router.get('/:user_id/destroy/:task_id', function (req, res) {
     models.Task.destroy({
-        where: {
-            id: req.params.task_id
-        }
+        where: { id: req.params.task_id }
     }).then(function() {
-        res.redirect('/');
+        res.redirect('/comptes/view');
     });
 });
 
+router.post('/:task_id/update', function (req, res) {
+    models.Task.update({
+            title: req.body.title
+        },{
+            where: { id : req.params.task_id }
+        }).then(function() {
+            res.redirect('/comptes/view');
+        });
+});
 
 module.exports = router;

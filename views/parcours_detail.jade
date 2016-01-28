@@ -14,8 +14,6 @@ block content
         b description :
         | #{parcour.description}
         br
-        b date de création :
-        | #{parcour.ctime}
         br
 
         table.table.table-hover.table-bordered
@@ -25,15 +23,11 @@ block content
                     th balise
                     th question
 
-            each item in data
+            each balise in parcour.Balises
                 tr
-                    td #{item.id}
-                    td
-                        a(href='/balise/'+item.bid)
-                            #{item.bname}
-                    td
-                        a(href='/question/'+item.qid)
-                            #{item.qname}
+                    td #{balise.id}
+                    td #{balise.nom}
+                    td #{balise.question}
 
                     
        

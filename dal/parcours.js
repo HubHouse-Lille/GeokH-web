@@ -3,28 +3,33 @@ var express = require('express');
 var router  = express.Router();
 
 router.post('/create', function(req, res) {
-    models.User.create({
+    models.Parcour.create({
         nom: req.body.nom,
-        objectif: req.body.objectif,
-        type: req.body.type,
-        difficulte: req.body.difficulte,
-        question: req.body.question,
-        propositions: req.body.propositions,
-        reponses: req.body.reponses,
-        retours: req.body.retours
+        description: req.body.description
     }).then(function() {
-        res.redirect('/');
+        res.redirect('/parcours/view');
     });
 });
 
-router.get('/:user_id/destroy', function(req, res) {
-    models.User.destroy({
-        where: {
-            id: req.params.parcour_id
-        }
+router.get('/destroy/:parcour_id', function(req, res) {
+    models.Parcour.destroy({
+        where: { id: req.params.parcour_id }
     }).then(function() {
-        res.redirect('/');
+        res.redirect('/parcours/view');
     });
+});
+
+router.post('/update/:parcour_id', function(req, res) {
+
+    models.Parcour.update({
+        nom: req.body.nom,
+        description: req.body.description
+    },{
+        where: { id : req.params.parcour_id }
+    }).then(function() {
+        res.redirect('/parcours/view/' + req.params.parcour_id);
+    });
+
 });
 
 module.exports = router;
