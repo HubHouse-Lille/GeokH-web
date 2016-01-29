@@ -18,7 +18,6 @@ router.get('/view/', function(req, res) {
 // VIEW ONE > GET
 router.get('/view/:id', function(req, res) {
     models.Parcour.findOne({
-        include: [ models.Balise ],
         where: { id: req.params.id }
     }).then(
         function(parcour) {

@@ -20,7 +20,6 @@ router.get('/destroy/:parcour_id', function(req, res) {
 });
 
 router.post('/update/:parcour_id', function(req, res) {
-
     models.Parcour.update({
         nom: req.body.nom,
         description: req.body.description
@@ -29,7 +28,6 @@ router.post('/update/:parcour_id', function(req, res) {
     }).then(function() {
         res.redirect('/parcours/view/' + req.params.parcour_id);
     });
-
 });
 
 module.exports = router;

@@ -1,0 +1,48 @@
+extends layout_main
+
+block content
+    container.col-md-8
+
+        br
+        h2 Créer une balise
+        br
+        div
+            p Pour plus d'informations concernant la création d'une balise,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
+            #info.collapse
+                .well
+                    p Informations pour la création d'une balise:
+                        br
+                        br
+                        | Lorsque vous créez une balise, veillez à avoir déjà crée la question associée.
+                        br
+                        | Toute balise possède une question. Plusieurs balises peuvent avoir la même question.
+                        br
+                        | Pour trouver la position GPS d'une position, vous pouvez utiliser&nbsp;
+                        a(href='https://www.google.com/maps/') google maps
+                        br
+                        | Si vous souhaitez plus d'informations concernant les coordonnées géographiques, veuillez vous référer à&nbsp;
+                        a(href='https://fr.wikipedia.org/wiki/Coordonn%C3%A9es_g%C3%A9ographiques') Wikipédia
+
+
+        form(action="/dal/balises/create", method="post").input-group.input-group-lg
+            div.input-lg-8.input-lg
+                input(type="text", name="nom", placeholder="nom de la balise").form-control
+            p.help-block exemple: HubHouse lille1-ouest pour etudiant info
+            br
+            div.input-lg-8.input-lg
+                input(type="text", name="indice", placeholder="indice de la balise").form-control
+            p.help-block exemple: Entre l'arbre et le banc
+            br
+            div.input-lg-8.input-lg
+                input(type="text", name="latitude", placeholder="latitude").form-control
+            p.help-block exemple: entre -90 et 90. Exemple: 50.6101406 (si positif, NORD)
+            br
+            div.input-lg-8.input-lg
+                input(type="text", name="longitude", placeholder="longitude").form-control
+            p.help-block exemple: Entre -180 et 180. Exemple 3.1412428 (si positif, EST)
+            br
+            div.actions
+                input(type="submit", value="Créer la balise").btn.btn-success
+            br
+            br

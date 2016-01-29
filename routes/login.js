@@ -29,7 +29,7 @@ router.post('/login', function(req, res) {
   if (login == 'a' && pwd == 'b') {
     sess.connected = true;
     res.render('index', {
-      title: 'Bienvenue sur l\'admin-server GeokH'
+        menu: "accueil"
     });
   } else {
     sess.connected = false;

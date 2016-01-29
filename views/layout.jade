@@ -14,11 +14,19 @@ html
 					.navbar-brand Administration GeokH
 				div
 					ul.nav.navbar-nav
-						li.active
-							a(href='/') Accueil
-						li
-							a(href='/apropos') A propos
+						if menu == "accueil"
+							li.active
+								a(href='/') Accueil
+						else
+							li
+								a(href='/') Accueil
 
+						if menu == "apropos"
+							li.active
+								a(href='/apropos') A propos
+						else
+							li
+								a(href='/apropos') A propos
 		block sidebar
 		#wrapper
 			// Sidebar

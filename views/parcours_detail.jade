@@ -4,30 +4,29 @@ block content
     container.col-md-8
 
         br
+        h2 Détail d'un parcour
         br
-        h2 Les parcours disponibles
+        div
+            p Pour plus d'informations sur les parcours,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez cet l'encart
+            #info.collapse
+                .well
+                    p Informations pour la création d'un parcour:
+                        br
+                        br
+                        | Lorsque vous créez un parcour, veillez à avoir déjà crée les balises et les questions associées.
+                        br
+                        | Dans un premier temps vous créez le parcours, et ensuite vous y associerez des balises.
 
-        br
-        b nom :
-        | #{parcour.nom}
-        br
-        b description :
-        | #{parcour.description}
-        br
-        br
-
-        table.table.table-hover.table-bordered
-            thead
-                tr
-                    th #
-                    th balise
-                    th question
-
-            each balise in parcour.Balises
-                tr
-                    td #{balise.id}
-                    td #{balise.nom}
-                    td #{balise.question}
-
-                    
-       
+        div.input-group.input-group-lg
+            div.input-lg-8.input-lg
+                input(type="text", name="nom", value=parcour.nom, placeholder="nom du parcour" readonly).form-control
+            p.help-block exemple: HubHouse lille1-ouest pour etudiant info
+            br
+            div.input-lg-8.input-lg
+                input(type="textarea", name="description", value=parcour.description, placeholder="description du parcour" readonly).form-control
+            br
+            div.actions
+                button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcour.id+"';") modifier
+            br
+            br

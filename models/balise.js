@@ -7,12 +7,12 @@ module.exports = function(sequelize, DataTypes) {
     indice: DataTypes.TEXT,
     nom: DataTypes.STRING
   }, {
-    classMethods: {
-      associate: function(models) {
-        Balise.hasOne(models.Question)
+      classMethods: {
+        associate: function(models) {
+          Balise.hasMany(models.Ptobq)
+        }
       }
-    }
-  });
+    });
 
   return Balise;
 };

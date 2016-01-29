@@ -1,0 +1,35 @@
+extends layout_main
+
+block content
+    container.col-md-12
+
+        br
+        h2 Les balises disponibles
+        br
+        table.table.table-hover.table-bordered
+            thead
+                tr
+                    th #
+                    th nom
+                    th indice
+                    th actions
+                    th position
+                    th création
+                    th mise à jour
+
+            each balise in balises
+                tr
+                    td #{balise.id}
+                    td
+                        a(href="/balises/view/"+ balise.id) #{balise.nom}
+                    td #{balise.indice}
+                    td
+                        a(href="/balises/view/"+ balise.id) Détails
+                        | &nbsp;-&nbsp;
+                        a(href="/dal/balises/destroy/"+ balise.id) Supprimer
+                        | &nbsp;-&nbsp;
+                        a(href="/balises/edit/"+ balise.id) Editer
+                    td
+                        a(target="_blank", href="http://google.com/maps/place/"+balise.latitude+","+balise.longitude) #{balise.latitude+", "+balise.longitude}
+                    td #{balise.createdAt}
+                    td #{balise.updatedAt}

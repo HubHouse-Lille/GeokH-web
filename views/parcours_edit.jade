@@ -7,7 +7,7 @@ block content
         br
         h2 Modifier le parcour
         div
-            p Pour plus d'informations sur les conséquences de ma modification d'un parcour,
+            p Pour plus d'informations sur les conséquences de ma modification d'un parcour,&nbsp;
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
             #info.collapse
                 .well
@@ -23,9 +23,11 @@ block content
             p.help-block exemple: HubHouse lille1-ouest pour etudiant info
             br
             div.input-md-12
-                textarea(name="description", rows="8", cols="60", value=parcour.description).form-control
+                input(type="textarea", name="description", value=parcour.description, placeholder="description du parcour").form-control
             br
             div.actions
                 input(type="submit", value="Mettre à jour le parcour").btn.btn-success
+                | &nbsp; &nbsp;
+                button.btn.btn-primary.btn-secondary(type='button', onclick="location.href='/parcours/view/"+parcour.id+"';") Annuler
 
 

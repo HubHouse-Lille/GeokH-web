@@ -50,6 +50,9 @@ var rComptes = require('./routes/comptes');
 var rDalUsers = require('./dal/users');
 var rDalTasks = require('./dal/tasks');
 var rDalParcours = require('./dal/parcours');
+var rDalBalises = require('./dal/balises');
+var rDalQuestions = require('./dal/questions');
+var rDalEntrepreneurs = require('./dal/entrepreneurs');
 
 // ROUTES CONFIGURATION
 // -----------------------------------------------------
@@ -65,6 +68,9 @@ app.use('/comptes', rComptes);
 app.use('/dal/users', rDalUsers);
 app.use('/dal/tasks', rDalTasks);
 app.use('/dal/parcours', rDalParcours);
+app.use('/dal/balises', rDalBalises);
+app.use('/dal/questions', rDalQuestions);
+app.use('/dal/entrepreneurs', rDalEntrepreneurs);
 
 
 

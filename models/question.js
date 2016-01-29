@@ -10,6 +10,12 @@ module.exports = function(sequelize, DataTypes) {
     propositions: DataTypes.TEXT,
     reponses: DataTypes.TEXT,
     retours: DataTypes.TEXT
-  });
+  }, {
+       classMethods: {
+         associate: function(models) {
+           Question.hasMany(models.Ptobq)
+         }
+       }
+     });
   return Question;
 };
