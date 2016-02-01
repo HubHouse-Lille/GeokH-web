@@ -21,12 +21,16 @@ block content
         hr
 
         form(action="/dal/parcours/create", method="post").input-group.input-group-lg
-            div.input-lg-8.input-lg
-                input(type="text", name="nom", placeholder="nom du parcour").form-control
-            p.help-block exemple: HubHouse lille1-ouest pour etudiant info
+            #e1
+                p Nom du parcours
+                div.input-lg-8.input-lg
+                    input(type="text", name="nom", placeholder="nom du parcour").form-control
+                p.help-block exemple: HubHouse lille1-ouest pour etudiant info
             br
-            div.input-lg-8.input-lg
-                input(type="textarea", name="description", placeholder="description du parcour").form-control
+            #e2
+                p Description du parcours
+                div.input-lg-8.input-lg
+                    input(type="textarea", name="description", placeholder="description du parcour").form-control
             br
             div.actions
                 input(type="submit", value="Créer le parcour").btn.btn-success

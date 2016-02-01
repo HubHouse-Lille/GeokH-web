@@ -63,3 +63,16 @@ button {
 .szindex {
     z-index: 1001;
 }
+.menuIcons {
+    width: 24px;
+    height: 25px;
+    float: left;
+    margin-left: 20px;
+}
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+}

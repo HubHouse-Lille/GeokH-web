@@ -7,37 +7,40 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
-    res.render('pei');
+    models.Entrepreneur.findAll().then(
+        function(entrepreneurs) {
+            res.render('entrepreneurs_view', {
+                entrepreneurs: entrepreneurs
+            });
+        });
 });
 
 // VIEW ONE > GET
 router.get('/view/:id', function(req, res) {
-    res.render('pei');
+    models.Entrepreneur.findOne({
+           where: { id: req.params.id }
+       }).then(function(entrepreneur) {
+            res.render('entrepreneurs_detail', {
+                entrepreneur: entrepreneur
+            });
+        });
 });
 
 // CREATE > GET
 router.get('/create/', function(req, res) {
-    res.render('pei');
-});
-
-// CREATE > POST
-router.post('/create/', function(req, res) {
-    res.render('pei');
+    res.render('entrepreneurs_create');
 });
 
 // EDIT > GET
 router.get('/edit/:id', function(req, res) {
-    res.render('pei');
-});
-
-// EDIT > POST
-router.post('/edit/', function(req, res) {
-    res.render('pei');
-});
-
-// DELETE > GET
-router.get('/delete/:id', function(req, res) {
-    res.render('pei');
+    models.Entrepreneur.findOne({
+        where: { id: req.params.id }
+    }).then(
+        function(entrepreneur) {
+            res.render('entrepreneurs_edit', {
+                entrepreneur: entrepreneur
+            });
+        });
 });
 
 module.exports = router;

@@ -1,39 +1,45 @@
 var models  = require('../models/index');
 var express = require('express');
 var router  = express.Router();
+var base64 = require('node-base64-image');
 
 router.post('/create', function(req, res) {
-    models.Question.create({
+
+    var photo = req.body.newPhoto;
+
+    models.Entrepreneur.create({
         nom: req.body.nom,
         prenom: req.body.prenom,
-        photo: req.body.photo,
+        photo: photo,
         interview: req.body.interview,
         indice: req.body.indice
     }).then(function() {
-        res.redirect('/Questions/view');
+        res.redirect('/Entrepreneurs/view');
     });
 });
 
-router.get('/destroy/:Question_id', function(req, res) {
-    models.Question.destroy({
-        where: { id: req.params.Question_id }
+router.get('/destroy/:Entrepreneur_id', function(req, res) {
+    models.Entrepreneur.destroy({
+        where: { id: req.params.Entrepreneur_id }
     }).then(function() {
-        res.redirect('/Questions/view');
+        res.redirect('/Entrepreneurs/view');
     });
 });
 
-router.post('/update/:Question_id', function(req, res) {
+router.post('/update/:Entrepreneur_id', function(req, res) {
 
-    models.Question.update({
+    var photo = req.body.newPhoto;
+
+    models.Entrepreneur.update({
         nom: req.body.nom,
         prenom: req.body.prenom,
-        photo: req.body.photo,
+        photo: photo,
         interview: req.body.interview,
         indice: req.body.indice
     },{
-        where: { id : req.params.Question_id }
+        where: { id : req.params.Entrepreneur_id }
     }).then(function() {
-        res.redirect('/Questions/view/' + req.params.Question_id);
+        res.redirect('/Entrepreneurs/view/' + req.params.Entrepreneur_id);
     });
 
 });

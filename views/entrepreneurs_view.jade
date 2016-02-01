@@ -1,0 +1,37 @@
+extends layout_main
+
+block content
+    container.col-md-12
+
+        br
+        h2 Les entrepreneurs disponibles
+        br
+        table.table.table-hover.table-bordered
+            thead
+                tr
+                    th #
+                    th nom
+                    th photo
+                    th interview
+                    th indice
+                    th actions
+                    th création
+                    th mise à jour
+
+            each entrepreneur in entrepreneurs
+                tr
+                    td #{entrepreneur.id}
+                    td
+                        a(href="/entrepreneurs/view/"+ entrepreneur.id) #{entrepreneur.prenom}&nbsp;#{entrepreneur.nom}
+                    td
+                        img(alt='photo', src='#{entrepreneur.photo}', style="max-height: 50px; max-width: 50px")
+                    td #{entrepreneur.interview}
+                    td #{entrepreneur.indice}
+                    td
+                        a(href="/entrepreneurs/view/"+ entrepreneur.id) Détails
+                        | &nbsp;-&nbsp;
+                        a(href="/dal/entrepreneurs/destroy/"+ entrepreneur.id) Supprimer
+                        | &nbsp;-&nbsp;
+                        a(href="/entrepreneurs/edit/"+ entrepreneur.id) Editer
+                    td #{entrepreneur.createdAt}
+                    td #{entrepreneur.updatedAt}
