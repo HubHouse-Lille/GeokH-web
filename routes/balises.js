@@ -28,12 +28,7 @@ router.get('/view/:id', function(req, res) {
 
 // CREATE > GET
 router.get('/create/', function(req, res) {
-    models.Question.findAll().then(
-        function(questions) {
-            res.render('balises_create', {
-                questions: questions
-            });
-        });
+    res.render('balises_create');
 });
 
 // EDIT > GET

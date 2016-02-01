@@ -4,8 +4,8 @@ block content
     container.col-md-8
 
         br
-        br
         h2 Modifier le parcour
+        br
         div
             p Pour plus d'informations sur les conséquences de ma modification d'un parcour,&nbsp;
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
@@ -17,17 +17,31 @@ block content
                         | Lorsque vous modifiez un parcour, ls balises et les questions ne sont pas affectées. Seul le parcours disparait.
                         | Si vous voulez supprimer les balises et les questions associées, vous devez le faire manuellement.
 
+        hr
+
         form(action="/dal/parcours/update/"+parcour.id , method="post")
-            div.input-md-12
-                input(type="text", name="nom", value=parcour.nom).form-control
-            p.help-block exemple: HubHouse lille1-ouest pour etudiant info
+            #e1
+                p Nom du parcour
+                div.input-md-12
+                    input(type="text", name="nom", value=parcour.nom).form-control
+                p.help-block exemple: HubHouse lille1-ouest pour etudiant info
             br
-            div.input-md-12
-                input(type="textarea", name="description", value=parcour.description, placeholder="description du parcour").form-control
+            #e2
+                p Le parcour est-il visible dans l'application mobile ?
+                    | &nbsp; &nbsp;
+                    if (parcour.actif == 1)
+                        input(type="checkbox", name="actif", value="1" checked)
+                    else
+                        input(type="checkbox", name="actif", value="1")
+            br
+            #e3
+                p Description du parcour
+                div.input-md-12
+                    input(type="textarea", name="description", value=parcour.description, placeholder="description du parcour").form-control
             br
             div.actions
                 input(type="submit", value="Mettre à jour le parcour").btn.btn-success
                 | &nbsp; &nbsp;
                 button.btn.btn-primary.btn-secondary(type='button', onclick="location.href='/parcours/view/"+parcour.id+"';") Annuler
-
-
+                | &nbsp; &nbsp;
+                button.confirm-delete.btn.btn-default(href="#",data-id="3") Supprimer

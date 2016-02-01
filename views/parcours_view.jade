@@ -12,6 +12,7 @@ block content
                     th #
                     th nom
                     th description
+                    th état
                     th actions
                     th création
                     th mise à jour
@@ -22,6 +23,11 @@ block content
                     td
                         a(href="/parcours/view/"+ parcour.id) #{parcour.nom}
                     td #{parcour.description}
+
+                    if (parcour.actif == 1)
+                        td actif
+                    else
+                        td innactif
                     td
                         a(href="/parcours/view/"+ parcour.id) Détails
                         | &nbsp;-&nbsp;

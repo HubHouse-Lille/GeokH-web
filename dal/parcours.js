@@ -20,9 +20,15 @@ router.get('/destroy/:parcour_id', function(req, res) {
 });
 
 router.post('/update/:parcour_id', function(req, res) {
+
+    var actif = 0;
+    if (req.body.actif == 1)
+        actif = 1;
+
     models.Parcour.update({
         nom: req.body.nom,
-        description: req.body.description
+        description: req.body.description,
+        actif: actif
     },{
         where: { id : req.params.parcour_id }
     }).then(function() {

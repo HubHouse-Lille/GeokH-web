@@ -7,37 +7,47 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
-    res.render('pei');
-});
+    models.Question.findAll().then(
+        function(questions) {
+            res.render('questions_view', {
+                questions: questions
+            });
+        });});
 
 // VIEW ONE > GET
 router.get('/view/:id', function(req, res) {
-    res.render('pei');
+    models.Question.findOne({
+        where: { id: req.params.id }
+    }).then(
+        function(question) {
+            res.render('questions_detail', {
+                question: question,
+                propositions: question.propositions,
+                reponses: question.reponses,
+                retours: question.retours
+            });
+        });
 });
 
 // CREATE > GET
 router.get('/create/', function(req, res) {
-    res.render('pei');
-});
-
-// CREATE > POST
-router.post('/create/', function(req, res) {
-    res.render('pei');
+    res.render('questions_create');
 });
 
 // EDIT > GET
 router.get('/edit/:id', function(req, res) {
-    res.render('pei');
+    models.Question.findOne({
+        where: { id: req.params.id }
+    }).then(
+        function(question) {
+            res.render('questions_edit', {
+                question: question,
+                propositions: question.propositions,
+                reponses: question.reponses,
+                retours: question.retours
+            });
+        });
 });
 
-// EDIT > POST
-router.post('/edit/', function(req, res) {
-    res.render('pei');
-});
-
-// DELETE > GET
-router.get('/delete/:id', function(req, res) {
-    res.render('pei');
-});
 
 module.exports = router;

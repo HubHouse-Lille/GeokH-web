@@ -18,13 +18,27 @@ block content
                         br
                         | Dans un premier temps vous créez le parcours, et ensuite vous y associerez des balises.
 
+        hr
+
         div.input-group.input-group-lg
-            div.input-lg-8.input-lg
-                input(type="text", name="nom", value=parcour.nom, placeholder="nom du parcour" readonly).form-control
-            p.help-block exemple: HubHouse lille1-ouest pour etudiant info
             br
-            div.input-lg-8.input-lg
-                input(type="textarea", name="description", value=parcour.description, placeholder="description du parcour" readonly).form-control
+            #e1
+                p Le nom du parcour
+                div.input-lg-8.input-lg
+                    input(type="text", name="nom", value=parcour.nom, placeholder="nom du parcour" readonly).form-control
+                p.help-block exemple: HubHouse lille1-ouest pour etudiant info
+            br
+            #e2
+                p Le parcour est-il visible dans l'application mobile ?
+                    | &nbsp; &nbsp;
+                    if (parcour.actif == 1)
+                        input(type="checkbox", name="actif", value="1" checked disabled)
+                    else
+                        input(type="checkbox", name="actif", value="1" disabled)
+            #e3
+                p Description
+                div.input-lg-8.input-lg
+                    input(type="textarea", name="description", value=parcour.description, placeholder="description du parcour" readonly).form-control
             br
             div.actions
                 button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcour.id+"';") modifier
