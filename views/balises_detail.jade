@@ -44,6 +44,18 @@ block content
             p.help-block exemple: Entre -180 et 180. Exemple 3.1412428 (si positif, EST)
             br
             div.actions
-                button.btn.btn-primary.btn-success(type='button', onclick="location.href='/balises/edit/"+balise.id+"';") modifier
+                button.btn.btn-primary.btn-success(type='button', id="downloadQr") modifier
             br
             br
+
+    #rqcode(style="float:right")
+        br
+        br
+        #qrcodeCanvas
+        a(id="qrcodedl", data-value="#{balise.id}") Télécharger l'image
+
+    script
+        | var globalBaliseId = #{balise.id};
+
+
+
