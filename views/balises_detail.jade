@@ -33,7 +33,7 @@ block content
             .alert.alert-warning(role="alert") #{err}
         div.input-group.input-group-lg
             div.input-lg-8.input-lg.disabled
-                input(type="text", name="nom", value=balise.nom, placeholder="nom de la balise" readonly).form-control
+                input(type="text", name="nom", value="#{balise.nom}", placeholder="nom de la balise" readonly).form-control
             p.help-block exemple: HubHouse lille1-ouest pour etudiant info
             br
             div.input-lg-8.input-lg.disabled
@@ -49,7 +49,7 @@ block content
             p.help-block exemple: Entre -180 et 180. Exemple 3.1412428 (si positif, EST)
             br
             div.actions
-                button.btn.btn-primary.btn-success(type='button', id="downloadQr") modifier
+                button.btn.btn-primary.btn-success(type='button', onclick="location.href='/balises/edit/"+balise.id+"';") modifier
             br
             br
 
@@ -62,5 +62,7 @@ block content
     script
         | var globalBaliseId = #{balise.id};
 
-
+    script(src='/js/jquery.qrcode.js')
+    script(src='/js/qrcodeHandler.js')
+    script(src='/js/qrcode.js')
 

@@ -26,13 +26,13 @@ block content
             thead
                 tr
                     th #
-                    th nom
-                    th photo
-                    th interview
-                    th indice
-                    th actions
-                    th création
-                    th mise à jour
+                    th Nom
+                    th Photo
+                    th Interview
+                    th Indice
+                    th Actions
+                    th Création
+                    th Mise à jour
 
             each entrepreneur in entrepreneurs
                 tr
@@ -45,8 +45,6 @@ block content
                     td #{entrepreneur.indice}
                     td
                         a(href="/entrepreneurs/view/"+ entrepreneur.id) Détails
-                        | &nbsp;-&nbsp;
-                        a(href="/dal/entrepreneurs/destroy/"+ entrepreneur.id) Supprimer
                         | &nbsp;-&nbsp;
                         a(href="/entrepreneurs/edit/"+ entrepreneur.id) Editer
                     td #{entrepreneur.createdAt}

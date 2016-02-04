@@ -77,7 +77,6 @@ block content
 
             #qqcm
                 p Les réponses sous forme de QCM
-                div.input-lg-8.input-lg
                     if (question.type == "QCM")
                         -var reps = JSON.parse(reponses)
                     else
@@ -135,9 +134,11 @@ block content
                 input(type="submit", value="Modifier la question").btn.btn-success
                 | &nbsp; &nbsp;
                 button.btn.btn-primary.btn-secondary(type='button', onclick="location.href='/questions/view/"+question.id+"';") Annuler
+                if (session.admin)
+                    | &nbsp; &nbsp;
+                    button.btn.btn-default(type='button', onclick="location.href='/dal/questions/destroy/#{question.id}';") Supprimer
             br
             br
-
 
     script(type="text/javascript").
         $(function() {

@@ -35,12 +35,12 @@ block content
             thead
                 tr
                     th #
-                    th nom
-                    th indice
-                    th actions
-                    th position
-                    th création
-                    th mise à jour
+                    th Nom
+                    th Indice
+                    th Actions
+                    th Position
+                    th Création
+                    th Mise à jour
 
             each balise in balises
                 tr
@@ -50,8 +50,6 @@ block content
                     td #{balise.indice}
                     td
                         a(href="/balises/view/"+ balise.id) Détails
-                        | &nbsp;-&nbsp;
-                        a(href="/dal/balises/destroy/"+ balise.id) Supprimer
                         | &nbsp;-&nbsp;
                         a(href="/balises/edit/"+ balise.id) Editer
                     td

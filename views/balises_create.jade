@@ -32,23 +32,30 @@ block content
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
         form(action="/dal/balises/create", method="post").input-group.input-group-lg
-            div.input-lg-8.input-lg
-                input(type="text", name="nom", placeholder="nom de la balise").form-control
-            p.help-block exemple: HubHouse lille1-ouest pour etudiant info
+            #e1
+                p Nom de la balise
+                div.input-lg-8.input-lg
+                    input(type="text", name="nom", placeholder="nom de la balise").form-control
             br
-            div.input-lg-8.input-lg
-                input(type="text", name="indice", placeholder="indice de la balise").form-control
-            p.help-block exemple: Entre l'arbre et le banc
+            #e2
+                p indice
+                div.input-lg-8.input-lg
+                    input(type="text", name="indice", placeholder="indice de la balise").form-control
             br
-            div.input-lg-8.input-lg
-                input(type="text", name="latitude", placeholder="latitude").form-control
-            p.help-block exemple: entre -90 et 90. Exemple: 50.6101406 (si positif, NORD)
+            #e3
+                p Latitude
+                div.input-lg-8.input-lg
+                    input(type="text", name="latitude", placeholder="latitude").form-control
+                p.help-block exemple: entre -90 et 90. Exemple: 50.6101406 (si positif, NORD)
             br
-            div.input-lg-8.input-lg
-                input(type="text", name="longitude", placeholder="longitude").form-control
-            p.help-block exemple: Entre -180 et 180. Exemple 3.1412428 (si positif, EST)
+            #e4
+                p Longitude
+                div.input-lg-8.input-lg
+                    input(type="text", name="longitude", placeholder="longitude").form-control
+                p.help-block exemple: Entre -180 et 180. Exemple 3.1412428 (si positif, EST)
             br
-            div.actions
-                input(type="submit", value="Créer la balise").btn.btn-success
+            #e5
+                div.actions
+                    input(type="submit", value="Créer la balise").btn.btn-success
             br
             br

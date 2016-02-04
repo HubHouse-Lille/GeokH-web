@@ -97,11 +97,55 @@ router.post('/create', function(req, res) {
 });
 
 router.get('/destroy/:Question_id', function(req, res) {
-    models.Question.destroy({
-        where: { id: req.params.Question_id }
-    }).then(function() {
-        res.redirect('/Questions/view');
-    });
+
+
+    if (!req.session.admin) {
+        res.render('error', {
+            message: "Accès refusé",
+            error: "Accès refusé"
+        });
+
+    } else {
+
+        models.Ptobq.findAll({
+            where: { QuestionId: req.params.Question_id }
+        }).then(
+            function(ents) {
+
+                if (ents.length > 0) {
+
+                  models.Question.findOne({
+                      where: { id: req.params.Question_id }
+                  }).then(
+                      function(question) {
+                          res.render('questions_detail', {
+                              question: question,
+                              propositions: question.propositions,
+                              reponses: question.reponses,
+                              retours: question.retours,
+                              err: "Vous ne pouvez pas supprimer cette balise car elle appartient à des Parcours."
+                          });
+                      });
+
+                } else {
+
+                    models.Question.destroy({
+                        where: { id: req.params.Question_id }
+                    }).then(function() {
+
+                        models.Question.findAll().then(
+                            function(questions) {
+                                res.render('questions_view', {
+                                    questions: questions,
+                                    ok: "La question à corrrectement été supprimée"
+                                });
+                            });
+
+                    });
+
+                }
+            });
+    }
 });
 
 router.post('/update/:Question_id', function(req, res) {

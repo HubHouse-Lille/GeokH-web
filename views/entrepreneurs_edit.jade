@@ -62,6 +62,8 @@ block content
                 input(type="submit", value="Mettre à jour les données").btn.btn-success
                 | &nbsp; &nbsp;
                 button.btn.btn-primary.btn-secondary(type='button', onclick="location.href='/entrepreneurs/view/"+entrepreneur.id+"';") Annuler
-                | &nbsp; &nbsp;
-                button.confirm-delete.btn.btn-default(href="#",data-id="3") Supprimer
+                if (session.admin)
+                    | &nbsp; &nbsp;
+                    button.btn.btn-default(type='button', onclick="location.href='/dal/entrepreneurs/destroy/#{entrepreneur.id}';") Supprimer
+
 

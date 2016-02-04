@@ -22,23 +22,29 @@ block content
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
         form(action="/dal/questions/create", method="post").input-group.input-group-lg
-            div.input-lg-8.input-lg
-                input(type="text", name="question", placeholder="Question").form-control
-            p.help-block exemple: Quel est la couleur rose du cheval de napoléon ?
+            #e1
+                p La question qui sera posée
+                div.input-lg-8.input-lg
+                    input(type="text", name="question", placeholder="Question").form-control
+                p.help-block exemple: Quel est la couleur rose du cheval de napoléon ?
             br
-            div.input-lg-8.input-lg
-                input(type="text", name="theme", placeholder="Thème").form-control
-            p.help-block exemple: Connaître la définition d’un entrepreneur
+            #e2
+                p Le thème
+                div.input-lg-8.input-lg
+                    input(type="text", name="theme", placeholder="Thème").form-control
+                p.help-block exemple: Connaître la définition d’un entrepreneur
             br
-            div.input-lg-8.input-lg
-                input(type="text", name="objectif", placeholder="Objectif").form-control
-            p.help-block exemple: entre -90 et 90. Exemple: 50.6101406 (si positif, NORD)
+            #e3
+                p L'objectif
+                div.input-lg-8.input-lg
+                    input(type="text", name="objectif", placeholder="Objectif").form-control
             br
-            div.input-lg-8.input-lg
-                select#type(name="type").form-control
-                    option(value="QCU" selected) Question à choix unitaire
-                    option(value="QCM") Question à choix multiple
-            p.help-block Type de question
+            #e4
+                p Le type de question
+                div.input-lg-8.input-lg
+                    select#type(name="type").form-control
+                        option(value="QCU" selected) Question à choix unitaire
+                        option(value="QCM") Question à choix multiple
             br
             #qqcu
                 p Les réponses sous forme de QCU
@@ -98,8 +104,6 @@ block content
                 div.input-lg-8.input-lg
                     input(type="text", name="ret5", placeholder="Retour 5").form-control
             br
-            br
-            br
             #diff
                 p Difficulté de la question
                 div.input-lg-8.input-lg
@@ -108,11 +112,11 @@ block content
                       option(value="2") Niveau 2
                       option(value="3") Niveau 3
             br
+            br
             div.actions
                 input(type="submit", value="Créer la question").btn.btn-success
             br
             br
-
 
     script(type="text/javascript").
         $(function() {

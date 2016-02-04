@@ -90,73 +90,58 @@ router.post('/update/', function(req, res) {
 
 router.get('/destroy/:user_id', function(req, res) {
 
-    if (req.params.user_id === req.session.sid && req.session.admin == true) {
-        res.render('users_management', {
-            users: users,
-            err: "Vous ne pouvez pas supprimer votre compte en tant qu'administrateur"
+
+    if (!req.session.admin) {
+        res.render('error', {
+            message: "Accès refusé",
+            error: "Accès refusé"
         });
+
     } else {
 
-        models.User.destroy({
-            where: {
-                id: req.params.user_id
-            }
-        }).then(function() {
 
-            models.User.findAll().then(
-            function(users) {
-                res.render('users_management', {
-                    users: users,
-                    ok: "Un nouvel à correctement été supprimé"
-                });
+        if (req.params.user_id === req.session.sid && req.session.admin == true) {
+            res.render('users_management', {
+                users: users,
+                err: "Vous ne pouvez pas supprimer votre compte en tant qu'administrateur"
             });
+        } else {
 
-        });
+            models.User.destroy({
+                where: {
+                    id: req.params.user_id
+                }
+            }).then(function() {
+
+                models.User.findAll().then(
+                function(users) {
+                    res.render('users_management', {
+                        users: users,
+                        ok: "Un nouvel à correctement été supprimé"
+                    });
+                });
+
+            });
+        }
+
     }
+
 });
 
 
 router.get('/makeAdmin/:user_id', function(req, res) {
 
-    models.User.update({
-        admin: 1
-    },{
-        where: { id : req.params.user_id }
-    }).then(function() {
-       models.User.findAll().then(
-        function(users) {
-            res.render('users_management', {
-                users: users,
-                ok: "Un Administrateur est devenu utilisateur privilégié"
-            });
+
+    if (!req.session.admin) {
+        res.render('error', {
+            message: "Accès refusé",
+            error: "Accès refusé"
         });
-    });
 
-
-});
-
-
-
-
-router.get('/makeUser/:user_id', function(req, res) {
-
-
-    console.log(">>>>>>>>>>> session admin: " + req.session.admin);
-    console.log(">>>>>>>>>>> session sid: " + req.session.sid);
-    console.log(">>>>>>>>>>> user admin: " + req.params.user_id);
-
-    if (req.params.user_id == req.session.sid) {
-        models.User.findAll().then(
-        function(users) {
-            res.render('users_management', {
-                users: users,
-                err: "Vous ne pouvez pas modifier vos droits !"
-            });
-        });
     } else {
 
         models.User.update({
-            admin: 0
+            admin: 1
         },{
             where: { id : req.params.user_id }
         }).then(function() {
@@ -168,6 +153,49 @@ router.get('/makeUser/:user_id', function(req, res) {
                 });
             });
         });
+
+    }
+
+});
+
+
+
+
+router.get('/makeUser/:user_id', function(req, res) {
+
+
+    if (!req.session.admin) {
+        res.render('error', {
+            message: "Accès refusé",
+            error: "Accès refusé"
+        });
+
+    } else {
+
+        if (req.params.user_id == req.session.sid) {
+            models.User.findAll().then(
+            function(users) {
+                res.render('users_management', {
+                    users: users,
+                    err: "Vous ne pouvez pas modifier vos droits !"
+                });
+            });
+        } else {
+
+            models.User.update({
+                admin: 0
+            },{
+                where: { id : req.params.user_id }
+            }).then(function() {
+               models.User.findAll().then(
+                function(users) {
+                    res.render('users_management', {
+                        users: users,
+                        ok: "Un Administrateur est devenu utilisateur privilégié"
+                    });
+                });
+            });
+        }
     }
 
 });

@@ -12,11 +12,23 @@ router.post('/create', function(req, res) {
 });
 
 router.get('/destroy/:parcour_id', function(req, res) {
-    models.Parcour.destroy({
-        where: { id: req.params.parcour_id }
-    }).then(function() {
-        res.redirect('/parcours/view');
-    });
+
+
+    if (!req.session.admin) {
+        res.render('error', {
+            message: "Accès refusé",
+            error: "Accès refusé"
+        });
+
+    } else {
+
+        models.Parcour.destroy({
+            where: { id: req.params.parcour_id }
+        }).then(function() {
+            res.redirect('/parcours/view');
+        });
+
+    }
 });
 
 router.post('/update/:parcour_id', function(req, res) {

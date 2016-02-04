@@ -102,7 +102,7 @@
     background: none;
 }
 
-@media(min-width:768px) {
+
     #wrapper {
         padding-left: 270px;
     }
@@ -128,4 +128,3 @@
         position: relative;
         margin-right: 0;
     }
-}

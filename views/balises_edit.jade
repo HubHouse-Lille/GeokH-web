@@ -52,5 +52,8 @@ block content
                 input(type="submit", value="Mettre à jour la balise").btn.btn-success
                 | &nbsp; &nbsp;
                 button.btn.btn-primary.btn-secondary(type='button', onclick="location.href='/balises/view/"+balise.id+"';") Annuler
+                if (session.admin)
+                    | &nbsp; &nbsp;
+                    button.btn.btn-default(type='button', onclick="location.href='/dal/balises/destroy/#{balise.id}';") Supprimer
             br
             br

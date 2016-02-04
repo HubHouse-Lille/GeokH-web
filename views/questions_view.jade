@@ -26,14 +26,14 @@ block content
             thead
                 tr
                     th #
-                    th question
-                    th actions
-                    th theme
-                    th objectif
-                    th type
-                    th difficulté
-                    th création
-                    th mise à jour
+                    th Question
+                    th Actions
+                    th Theme
+                    th Objectif
+                    th Type
+                    th Difficulté
+                    th Création
+                    th Mise à jour
 
             each question in questions
                 tr
@@ -42,8 +42,6 @@ block content
                         a(href="/questions/view/"+ question.id) #{question.question}
                     td
                         a(href="/questions/view/"+ question.id) Détails
-                        | &nbsp;-&nbsp;
-                        a(href="/dal/questions/destroy/"+ question.id) Supprimer
                         | &nbsp;-&nbsp;
                         a(href="/questions/edit/"+ question.id) Editer
                     td #{question.theme}

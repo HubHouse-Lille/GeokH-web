@@ -18,11 +18,57 @@ router.post('/create', function(req, res) {
 });
 
 router.get('/destroy/:Entrepreneur_id', function(req, res) {
-    models.Entrepreneur.destroy({
-        where: { id: req.params.Entrepreneur_id }
-    }).then(function() {
-        res.redirect('/Entrepreneurs/view');
-    });
+
+
+    if (!req.session.admin) {
+        res.render('error', {
+            message: "Accès refusé",
+            error: "Accès refusé"
+        });
+
+    } else {
+
+
+        models.Ptoe.findAll({
+            where: { EntrepreneurId: req.params.Entrepreneur_id }
+        }).then(
+            function(ents) {
+
+                if (ents.length > 0) {
+
+                    models.Entrepreneur.findOne({
+                        where: { id: req.params.Entrepreneur_id }
+                    }).then(
+                        function(entrepreneur) {
+                           models.Entrepreneur.findOne({
+                                  where: { id: req.params.Entrepreneur_id }
+                              }).then(function(entrepreneur) {
+                                   res.render('entrepreneurs_detail', {
+                                       entrepreneur: entrepreneur,
+                                       err: "Vous ne pouvez pas supprimer cet enttrepreneur car il appartient à des parcours. Vous devez d'abord le supprimer du parcour."
+                                   });
+                               });
+                    });
+
+                } else {
+
+                    models.Entrepreneur.destroy({
+                        where: { id: req.params.Entrepreneur_id }
+                    }).then(function() {
+
+                        models.Entrepreneur.findAll().then(
+                            function(entrepreneurs) {
+                                res.render('entrepreneurs_view', {
+                                    entrepreneurs: entrepreneurs,
+                                    ok: "L'entrepreneur à correctement été supprimé"
+                                });
+                            });
+
+                    });
+
+                }
+            });
+    }
 });
 
 router.post('/update/:Entrepreneur_id', function(req, res) {

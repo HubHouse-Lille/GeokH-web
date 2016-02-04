@@ -12,7 +12,8 @@ router.get('/view/', function(req, res) {
             res.render('questions_view', {
                 questions: questions
             });
-        });});
+        });
+});
 
 // VIEW ONE > GET
 router.get('/view/:id', function(req, res) {

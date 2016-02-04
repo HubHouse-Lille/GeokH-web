@@ -29,12 +29,12 @@ block content
             thead
                 tr
                     th #
-                    th nom
-                    th description
-                    th état
-                    th actions
-                    th création
-                    th mise à jour
+                    th Nom
+                    th Description
+                    th Etat
+                    th Actions
+                    th Création
+                    th Mise à jour
 
             each parcour in parcours
                 tr
@@ -49,8 +49,6 @@ block content
                         td innactif
                     td
                         a(href="/parcours/view/"+ parcour.id) Détails
-                        | &nbsp;-&nbsp;
-                        a(href="/dal/parcours/destroy/"+ parcour.id) Supprimer
                         | &nbsp;-&nbsp;
                         a(href="/parcours/edit/"+ parcour.id) Editer
                     td #{parcour.createdAt}

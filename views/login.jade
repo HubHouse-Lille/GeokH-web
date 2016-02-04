@@ -4,7 +4,17 @@ block content
     container.col-md-12
         br
         br
-        div.col-lg-4.col-lg-offset-4
+        div.col-lg-4.col-lg-offset-2
+
+            img(src="/img/hubhouse.png", width="100%")
+            br
+            br
+            p  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin efficitur, elit et tincidunt facilisis, tellus dui egestas odio, a tincidunt tellus mi non diam. Cras posuere feugiat augue mollis lobortis. Aliquam sit amet nisi lacinia, interdum sapien in, auctor urna. Proin justo ligula, aliquet vel sem at, commodo scelerisque nulla. Praesent eget elementum mauris, ac pulvinar dolor. Mauris dictum elementum nunc, ac vestibulum lectus laoreet id. Praesent accumsan tempor velit, a blandit purus luctus viverra.
+            br
+            p Donec sagittis quam at sollicitudin condimentum. Nullam aliquet nisl neque, vitae gravida lacus auctor non. Vestibulum vitae massa dui. Maecenas ligula purus, suscipit vel felis vitae, gravida scelerisque dui. Sed diam nisi, elementum quis quam volutpat, semper ultricies ligula. Mauris eget turpis mi. Etiam ac lobortis sapien, ac tempus massa. Pellentesque varius, metus quis euismod pretium, erat odio blandit justo, sed iaculis augue tellus eu magna. Vivamus egestas ligula ac ante congue, vel gravida nunc iaculis.
+
+
+        div.col-lg-3.col-lg-offset-1(style="margin-top:80px")
             h2 Connexion
             if (msg != undefined)
                 .alert.alert-warning(role="alert") #{msg}
@@ -21,3 +31,4 @@ block content
                 br
                 div.actions
                     input(type="submit", value="Connexion").btn.btn-success
+
