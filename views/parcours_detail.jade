@@ -44,3 +44,35 @@ block content
                 button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcour.id+"';") modifier
             br
             br
+
+        //
+            h4 Les entrepreneurs associés à ce parcour
+            br
+            table.table.table-hover.table-bordered
+                thead
+                    tr
+                        th #
+                        th nom
+                        th photo
+                        th actions
+
+                each entrepreneur in entrepreneurs_selected
+                    tr
+                        td #{entrepreneur.id}
+                        td
+                            a(href="/entrepreneurs/view/"+ entrepreneur.id) #{entrepreneur.prenom}&nbsp;#{entrepreneur.nom}
+                        td
+                            img(alt='photo', src='#{entrepreneur.photo}', style="max-height: 50px; max-width: 50px")
+                        td
+                            a(href="/entrepreneurs/view/"+ entrepreneur.id) Détails
+                            | &nbsp;-&nbsp;
+                            a(href="/entrepreneurs/edit/"+ entrepreneur.id) Editer
+
+        //
+            #e1
+                p Ajouter un entrepreneur
+                div.input-lg-8.input-lg
+                    form(action="/dal/"+parcour.id+"/ptoe/create", method="post").input-group.input-group-lg
+                        select(name="entrepreneur_id")
+                            each nsent in entrepreneur_all
+                                option(value="#{nsent.id}") #{nsent.prenom} #{nsent.nom}

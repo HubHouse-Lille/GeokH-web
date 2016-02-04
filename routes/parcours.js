@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var models  = require('../models/index');
-
+var sequelize = require('sequelize');
 var bodyParser = require('body-parser');
 
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
+
     models.Parcour.findAll().then(
         function(parcours) {
             res.render('parcours_view', {
@@ -17,14 +18,19 @@ router.get('/view/', function(req, res) {
 
 // VIEW ONE > GET
 router.get('/view/:id', function(req, res) {
+
+    // Parcour
     models.Parcour.findOne({
         where: { id: req.params.id }
     }).then(
         function(parcour) {
-            res.render('parcours_detail', {
-                parcour: parcour
-            });
+        res.render('parcours_detail', {
+            parcour: parcour,
+            entrepreneurs_selected: {},
+            entrepreneur_all: {}
         });
+    });
+
 });
 
 // CREATE > GET

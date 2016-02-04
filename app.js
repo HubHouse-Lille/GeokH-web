@@ -41,18 +41,25 @@ app.use(session({
 var rLogin = require('./routes/login');
 var rServer = require('./routes/server');
 
+// routes
 var rParcours = require('./routes/parcours');
 var rQuestions = require('./routes/questions');
 var rBalises = require('./routes/balises');
 var rEntrepreneurs = require('./routes/entrepreneurs');
 var rComptes = require('./routes/comptes');
 
+// data access layer
 var rDalUsers = require('./dal/users');
 var rDalTasks = require('./dal/tasks');
 var rDalParcours = require('./dal/parcours');
 var rDalBalises = require('./dal/balises');
 var rDalQuestions = require('./dal/questions');
 var rDalEntrepreneurs = require('./dal/entrepreneurs');
+
+// api
+var rApiEntrepreneurs = require('./api/entrepreneurs');
+var rApiBalises = require('./api/balises');
+var rApiQuestions = require('./api/questions');
 
 // ROUTES CONFIGURATION
 // -----------------------------------------------------
@@ -72,7 +79,9 @@ app.use('/dal/balises', rDalBalises);
 app.use('/dal/questions', rDalQuestions);
 app.use('/dal/entrepreneurs', rDalEntrepreneurs);
 
-
+app.use('/api/entrepreneurs', rApiEntrepreneurs);
+app.use('/api/balises', rApiBalises);
+app.use('/api/questions', rApiQuestions);
 
 
 
