@@ -25,7 +25,12 @@ block content
                         a(href='https://fr.wikipedia.org/wiki/Coordonn%C3%A9es_g%C3%A9ographiques') Wikipédia
 
         hr
-
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
         form(action="/dal/balises/create", method="post").input-group.input-group-lg
             div.input-lg-8.input-lg
                 input(type="text", name="nom", placeholder="nom de la balise").form-control

@@ -24,8 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-
-
 // MIDDLEWARE CONFIG
 // -----------------------------------------------------
 // session handler [ express-session > https://github.com/expressjs/session ]
@@ -34,6 +32,14 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+
+// DYNAMIC HELPERS
+// -----------------------------------------------------
+app.use(function(req,res,next){
+    res.locals.session = req.session;
+    next();
+});
+
 
 
 // ROUTES DEFINITION
@@ -64,6 +70,7 @@ var rApiBalises = require('./api/balises');
 var rApiQuestions = require('./api/questions');
 var rApiPtoes = require('./api/ptoes');
 var rApiPtobqs = require('./api/ptobqs');
+var rApiParcours = require('./api/parcours');
 
 // ROUTES CONFIGURATION
 // -----------------------------------------------------
@@ -90,6 +97,8 @@ app.use('/api/balises', rApiBalises);
 app.use('/api/questions', rApiQuestions);
 app.use('/api/ptoes', rApiPtoes);
 app.use('/api/ptobqs', rApiPtobqs);
+app.use('/api/parcours', rApiParcours);
+
 
 
 
@@ -130,4 +139,5 @@ if (app.get('env') === 'development') {
         });
     });
 }
+
 module.exports = app;

@@ -6,6 +6,25 @@ block content
         br
         h2 Les parcours disponibles
         br
+        div
+            p Pour plus d'informations sur les conséquences de ma modification d'un parcour,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
+            #info.collapse
+                .well
+                    p Informations pour la création d'un parcour:
+                        br
+                        br
+                        | Lorsque vous modifiez un parcour, ls balises et les questions ne sont pas affectées. Seul le parcours disparait.
+                        | Si vous voulez supprimer les balises et les questions associées, vous devez le faire manuellement.
+
+        hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
+        br
         table.table.table-hover.table-bordered
             thead
                 tr

@@ -1,0 +1,45 @@
+extends layout_main
+
+block content
+    container.col-md-8
+
+        br
+        h2 Votre compte utilisateur
+        br
+        div
+            p Pour plus d'informations concernant les balises,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez l'encart ici
+            #info.collapse
+                .well
+                    p Information concernant les utilisateurs
+
+        hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
+        div.input-group.input-group-lg
+            #e1
+                Votre login
+                div.input-lg-8.input-lg.disabled
+                    input(type="text", name="login", value="#{user.username}", placeholder="login" readonly).form-control
+            br
+            #e2
+                p Adresse mail
+                div.input-lg-8.input-lg.disabled
+                    input(type="text", name="email", value=user.email, placeholder="email" readonly).form-control
+            br
+            #e3
+                if (user.admin == 1)
+                    p Vous êtes administrateur
+                else
+                    p Vous êtes utilisateur privilégié
+            br
+            div.actions
+                button.btn.btn-primary.btn-success(type='button', onclick="location.href='/comptes/edit/mine';") Modifier
+            br
+            br
+
+

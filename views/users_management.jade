@@ -1,0 +1,72 @@
+extends layout_main
+
+block content
+    container.col-md-12
+
+        br
+        h2 Utilisateurs disponibles
+        br
+        div
+            p Pour plus d'informations concernant les balises,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez l'encart ici
+            #info.collapse
+                .well
+                    p Information concernant les utilisateurs
+
+        hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
+        br
+        h4 Les utilisateurs
+        table.table.table-hover.table-bordered
+            thead
+                tr
+                    th #
+                    th Login
+                    th Email
+                    th Status
+                    th actions
+                    th création
+                    th mise à jour
+
+            each user in users
+                tr
+                    td #{user.id}
+                    td #{user.username}
+                    td #{user.email}
+                    if (user.admin == 1)
+                        td administrateur
+                    else
+                        td utilisateur privilégié
+                    td
+                        a(href="/dal/users/destroy/"+ user.id) Supprimer
+                        | &nbsp;
+                        if (user.admin == 0)
+                            a(href="/dal/users/makeAdmin/"+ user.id) Rendre admin
+                        else
+                            a(href="/dal/users/makeUser/"+ user.id) Rendre utilisateur privilégié
+
+                    td #{user.createdAt}
+                    td #{user.updatedAt}
+
+        br
+        hr
+        br
+        h4 Créer un nouvel utilisateur
+        form(action="/dal/users/create/" , method="post")
+            p Login
+            div.input-md-12
+                input(type="text", name="username", placeholder="Login").form-control
+            p Adresse mail
+            div.input-md-12
+                input(type="text", name="email", placeholder="Adresse email").form-control
+            p Mot de passe provisoire
+            div.input-md-12
+                input(type="text", name="password", placeholder="Mot de passe provisoire").form-control
+            br
+            div.actions
+                input(type="submit", value="Créer l'utilisateur").btn.btn-success

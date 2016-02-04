@@ -16,7 +16,12 @@ block content
 
 
         hr
-
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
         form(action="/dal/questions/create", method="post").input-group.input-group-lg
 
             #e1

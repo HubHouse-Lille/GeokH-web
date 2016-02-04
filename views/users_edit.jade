@@ -1,0 +1,54 @@
+extends layout_main
+
+block content
+    container.col-md-12
+
+        br
+        h2 Votre compte utilisateur
+        br
+        div
+            p Pour plus d'informations concernant les balises,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez l'encart ici
+            #info.collapse
+                .well
+                    p Information concernant les utilisateurs
+
+        hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
+        form(action="/dal/users/update/", method="post").input-group.input-group-lg
+            #e1
+                p Votre login
+                div.input-lg-8.input-lg.disabled
+                    input(type="text", name="username", value="#{user.username}", placeholder="login" ).form-control
+            br
+            #e2
+                p Adresse mail
+                div.input-lg-8.input-lg.disabled
+                    input(type="text", name="email", value=user.email, placeholder="email" ).form-control
+            br
+            #e3
+                p Nouveau mot de passe
+                div.input-lg-8.input-lg.disabled
+                    input(type="password", name="password1", value="", placeholder="" ).form-control
+                br
+                div.input-lg-8.input-lg.disabled
+                    input(type="password", name="password2", value="", placeholder="" ).form-control
+                p.help-block Si vous laissez ce champ vide votre mot de passe ne sera pas changé
+            br
+            #e3
+                if (user.admin == true)
+                    p Vous êtes utilisateur privilégié
+                else
+                    p Vous êtes administrateur
+            br
+            div.actions
+                input(type="submit", value="Mettre à jour vos données").btn.btn-success
+                | &nbsp; &nbsp;
+                button.btn.btn-primary.btn-secondary(type='button', onclick="location.href='/comptes/view/mine';") Annuler
+            br
+            br

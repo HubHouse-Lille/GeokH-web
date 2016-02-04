@@ -6,13 +6,18 @@ block content
         br
         div.col-lg-4.col-lg-offset-4
             h2 Connexion
-            p!=msg
+            if (msg != undefined)
+                .alert.alert-warning(role="alert") #{msg}
             form(name="login", method="post", action="/login/")
-                div.input-lg-4
-                    input(type="text", name="login", placeholder="Login").form-control
+                #e1
+                    p Login
+                        div.input-lg-12
+                            input(type="text", name="username", placeholder="Login").form-control
                 br
-                div.input-lg-4
-                    input(type="password", name="pwd", placeholder="Mot de passe").form-control
+                #e2
+                    p Mot de passe
+                        div.input-lg-12
+                            input(type="password", name="password", placeholder="Mot de passe").form-control
                 br
                 div.actions
                     input(type="submit", value="Connexion").btn.btn-success

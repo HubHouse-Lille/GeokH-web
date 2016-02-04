@@ -7,49 +7,39 @@ var models = require('../models');
 
 
 // VIEW ALL > GET
-router.get('/view/', function(req, res) {
-
-    models.User.findAll({
-        include: [ models.Task ]
-    }).then(function(users) {
-
-        res.render('comptes', {
-            title: 'Express',
+router.get('/gestion', function(req, res) {
+    models.User.findAll().then(
+    function(users) {
+        res.render('users_management', {
             users: users
         });
-
     });
-
 });
+
 
 // VIEW ONE > GET
-router.get('/gestion', function(req, res) {
-    res.render('pei');
+router.get('/view/mine', function(req, res) {
+
+    models.User.findOne({
+        where: { id: req.session.sid }
+    }).then(
+        function(user) {
+            res.render('users_detail', {
+                user: user
+            });
+        });
 });
 
-// CREATE > GET
-router.get('/create/', function(req, res) {
-    res.render('pei');
-});
+router.get('/edit/mine', function(req, res) {
 
-// CREATE > POST
-router.post('/create/', function(req, res) {
-    res.render('pei');
-});
-
-// EDIT > GET
-router.get('/edit/:id', function(req, res) {
-    res.render('pei');
-});
-
-// EDIT > POST
-router.post('/edit/', function(req, res) {
-    res.render('pei');
-});
-
-// DELETE > GET
-router.get('/delete/:id', function(req, res) {
-    res.render('pei');
+    models.User.findOne({
+        where: { id: req.session.sid }
+    }).then(
+        function(user) {
+            res.render('users_edit', {
+                user: user
+            });
+        });
 });
 
 module.exports = router;

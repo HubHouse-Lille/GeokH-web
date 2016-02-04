@@ -18,8 +18,16 @@ block content
                         | Si vous voulez supprimer les balises et les questions associées, vous devez le faire manuellement.
 
         hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
         br
         h4 Information générales
+        if (msg != undefined)
+            .alert.alert-warning(role="alert") #{msg}
         form(action="/dal/parcours/update/"+parcour.id , method="post")
             #e1
                 p Nom du parcour

@@ -2,9 +2,10 @@ doctype html
 html(lang="fr")
     head
         title= title
-        link(rel='stylesheet', href='/stylesheets/style.css')
         link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
         link(rel='stylesheet', href='/stylesheets/sidebar.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+
         script(src='/js/jquery-2.1.4.min.js')
         script(src='/js/bootstrap.min.js')
         script(src='/js/delete.js')
@@ -20,7 +21,7 @@ html(lang="fr")
         nav.navbar.navbar-default.navbar-static-top.navbar-inverse(role='navigation' style='position: fixed;top: 0px;width: 100%;')
             .container-fluid
                 .navbar-header
-                    .navbar-brand Administration GeokH
+                    .navbar-brand(style="color: #FF8851;") Administration GeokH
                 div
                     ul.nav.navbar-nav
                         if menu == "accueil"
@@ -92,9 +93,10 @@ html(lang="fr")
                             img(src="/img/params.png").menuIcons
                             h3 Utilisateurs
                         li
-                            a(href='/comptes/view') Mon compte
-                        li
-                            a(href='/comptes/gestion') Gérer les utilisateurs
+                            a(href='/comptes/view/mine') Mon compte
+                        if (session.admin)
+                            li
+                                a(href='/comptes/gestion') Gérer les utilisateurs
                         li
                             a(href='/logout') Déconnexion
 
