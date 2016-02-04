@@ -55,11 +55,15 @@ var rDalParcours = require('./dal/parcours');
 var rDalBalises = require('./dal/balises');
 var rDalQuestions = require('./dal/questions');
 var rDalEntrepreneurs = require('./dal/entrepreneurs');
+var rDalPtoes = require('./dal/ptoe');
+var rDalPtobqs = require('./dal/ptobq');
 
 // api
 var rApiEntrepreneurs = require('./api/entrepreneurs');
 var rApiBalises = require('./api/balises');
 var rApiQuestions = require('./api/questions');
+var rApiPtoes = require('./api/ptoes');
+var rApiPtobqs = require('./api/ptobqs');
 
 // ROUTES CONFIGURATION
 // -----------------------------------------------------
@@ -78,10 +82,14 @@ app.use('/dal/parcours', rDalParcours);
 app.use('/dal/balises', rDalBalises);
 app.use('/dal/questions', rDalQuestions);
 app.use('/dal/entrepreneurs', rDalEntrepreneurs);
+app.use('/dal/ptoes', rDalPtoes);
+app.use('/dal/ptobqs', rDalPtobqs);
 
 app.use('/api/entrepreneurs', rApiEntrepreneurs);
 app.use('/api/balises', rApiBalises);
 app.use('/api/questions', rApiQuestions);
+app.use('/api/ptoes', rApiPtoes);
+app.use('/api/ptobqs', rApiPtobqs);
 
 
 

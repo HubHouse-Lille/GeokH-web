@@ -6,21 +6,22 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/', function(req, res) {
-    models.Ptoe.findAll({
+    models.Ptobq.findAll({
             include: [ models.Entrepreneur ]
           }).then(
-        function(ptoes) {
-            res.json(ptoes);
+        function(ptobqs) {
+            res.json(ptobqs);
         });
 });
 
 router.get('/parcour/:id', function(req, res) {
-    models.Ptoe.findAll({
+    models.Ptobq.findAll({
             where: { ParcourId: req.params.id },
-            include: [ models.Entrepreneur ]
+            include: [ models.Balise, models.Question ],
+            order: '`ordre` ASC'
           }).then(
-        function(ptoes) {
-            res.json(ptoes);
+        function(ptobqs) {
+            res.json(ptobqs);
         });
 });
 

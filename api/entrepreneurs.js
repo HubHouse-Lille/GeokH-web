@@ -13,7 +13,20 @@ router.get('/', function(req, res) {
                 res.send(entrepreneurs);
               }
             });
+        });
+});
 
+
+// VIEW ONE > GET
+router.get('/:id', function(req, res) {
+    models.Entrepreneur.findOne({
+           where: { id: req.params.id }
+       }).then(function(entrepreneur) {
+            res.format({
+              'application/json': function(){
+                res.send(entrepreneur);
+              }
+            });
         });
 });
 

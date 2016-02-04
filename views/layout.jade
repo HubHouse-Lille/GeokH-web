@@ -27,6 +27,13 @@ html(lang="fr")
                             li
                                 a(href='/') Accueil
 
+                        if menu == "aide"
+                            li.active
+                                a(href='/aide') Aide
+                        else
+                            li
+                                a(href='/aide') Aide
+
                         if menu == "apropos"
                             li.active
                                 a(href='/apropos') A propos

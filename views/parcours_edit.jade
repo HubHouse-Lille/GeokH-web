@@ -53,7 +53,7 @@ block content
         br
         h4 Les entrepreneurs liés à ce parcour
         br
-        table.table.table-hover.table-bordered
+        table.table.table-hover.table-bordered(id="parcourEntTable")
             thead
                 tr
                     th #
@@ -61,44 +61,41 @@ block content
                     th actions
 
 
-        form(action="/dal/ptoe/create/" + parcour.id , method="post")
+        form(action="/dal/ptoes/"+parcour.id+"/create/", method="post")
             #ee1
                 p Ajouter un entrepreneur
-                div.input-md-12
-                    select.form-control(id="optionsEntrepreneurs", name="ent")
-            br
-
-            div.actions
-                input(type="submit", value="Ajouter cet entrepreneur").btn.btn-success
-
-
+                div.input-md-12(style="float:left; margin-right:8px;")
+                    select.form-control(id="optionsEntrepreneurs", name="entrepreneur_id")
+                div.actions(style="float:left; margin-right:8px;")
+                    input(type="submit", value="Ajouter cet entrepreneur").btn.btn-success
+        br
         br
         hr
         br
-        h4 Les balises et les questions
+        h4 Les balises et questions de ce parcour
         br
-        table.table.table-hover.table-bordered
+        table.table.table-hover.table-bordered(id="parcourBalQuestTable")
             thead
                 tr
                     th #
                     th nom balise
                     th question
+                    th ordre
                     th actions
 
-        form(action="/dal/ptobq/create/" + parcour.id , method="post")
+        form(action="/dal/ptobqs/"+parcour.id+"/create/" , method="post")
             #eb1
-                p Ajouter une balise
-                div.input-md-12
+                p Ajouter une balise, associée à une question, selon l'ordre souhaité
+                div.input-md-12(style="float:left; margin-right:8px;")
                     select.form-control(id="optionsBalise", name="balise")
-            #eb2
-                p L'associer à cette question
-                div.input-md-12
+                div.input-md-12(style="float:left;margin-right:8px;")
                     select.form-control(id="optionsQuestion", name="question")
-            br
-
-            div.actions
-                input(type="submit", value="Ajouter la balise").btn.btn-success
+                div.input-md-12(style="float:left; margin-right:8px;")
+                    input.form-control(id="optionsBalise", name="ordre", placeholder="un nombre")
+                div.actions(style="float:left;")
+                    input(type="submit", value="Ajouter la balise").btn.btn-success
 
 
         script
-          var globalParcourId = #{parcour.id};
+            | var globalParcourId = #{parcour.id};
+            | var editable = true;

@@ -19,7 +19,8 @@ block content
                         | Dans un premier temps vous créez le parcours, et ensuite vous y associerez des balises.
 
         hr
-
+        br
+        h4 Information générales
         div.input-group.input-group-lg
             br
             #e1
@@ -45,34 +46,27 @@ block content
             br
             br
 
-        //
-            h4 Les entrepreneurs associés à ce parcour
-            br
-            table.table.table-hover.table-bordered
-                thead
-                    tr
-                        th #
-                        th nom
-                        th photo
-                        th actions
-
-                each entrepreneur in entrepreneurs_selected
-                    tr
-                        td #{entrepreneur.id}
-                        td
-                            a(href="/entrepreneurs/view/"+ entrepreneur.id) #{entrepreneur.prenom}&nbsp;#{entrepreneur.nom}
-                        td
-                            img(alt='photo', src='#{entrepreneur.photo}', style="max-height: 50px; max-width: 50px")
-                        td
-                            a(href="/entrepreneurs/view/"+ entrepreneur.id) Détails
-                            | &nbsp;-&nbsp;
-                            a(href="/entrepreneurs/edit/"+ entrepreneur.id) Editer
-
-        //
-            #e1
-                p Ajouter un entrepreneur
-                div.input-lg-8.input-lg
-                    form(action="/dal/"+parcour.id+"/ptoe/create", method="post").input-group.input-group-lg
-                        select(name="entrepreneur_id")
-                            each nsent in entrepreneur_all
-                                option(value="#{nsent.id}") #{nsent.prenom} #{nsent.nom}
+        hr
+        br
+        h4 Les entrepreneurs liés à ce parcour
+        br
+        table.table.table-hover.table-bordered(id="parcourEntTable")
+            thead
+                tr
+                    th #
+                    th nom
+        br
+        hr
+        br
+        h4 Les balises et questions de ce parcour
+        br
+        table.table.table-hover.table-bordered(id="parcourBalQuestTable")
+            thead
+                tr
+                    th #
+                    th nom balise
+                    th question
+                    th ordre
+        script
+            | var globalParcourId = #{parcour.id};
+            | var editable = false;

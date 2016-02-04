@@ -11,10 +11,14 @@ router.get('/', function(req, res) {
 });
 
 router.get('/apropos/', function(req, res) {
-    console.log('A propos');
     res.render('apropos', {
         menu: "apropos"
     });
 });
 
+router.get('/aide/', function(req, res) {
+    res.render('aide', {
+        menu: "aide"
+    });
+});
 module.exports = router;

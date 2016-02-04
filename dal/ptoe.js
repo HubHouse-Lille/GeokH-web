@@ -2,27 +2,28 @@ var models  = require('../models/index');
 var express = require('express');
 var router  = express.Router();
 
-router.post(':Parcour_id/create', function(req, res) {
+
+router.post('/:Parcour_id/create', function(req, res) {
     models.Ptoe.create({
-        ParcourId : req.params.parcour_id,
-        EntrepreneurId : req.body.entrepreneur_id
+        EntrepreneurId : req.body.entrepreneur_id,
+        ParcourId : req.params.Parcour_id
     }).then(function() {
-        res.redirect('/Parcours/view/' + req.params.Parcour_id);s
+        res.redirect('/Parcours/edit/' + req.params.Parcour_id);
     });
 });
 
-router.get(':Parcour_id/destroy/:Entrepreneur_id', function(req, res) {
+router.get('/:Parcour_id/destroy/:Entrepreneur_id', function(req, res) {
     models.Ptoe.destroy({
         where: {
-            ParcourId: req.params.Entrepreneur_id,
-            EntrepreneurId: req.params.Entrepreneur_id
+            EntrepreneurId: req.params.Entrepreneur_id,
+            ParcourId: req.params.Parcour_id
         }
     }).then(function() {
-        res.redirect('/Parcours/view/' + req.params.Parcour_id);
+        res.redirect('/Parcours/edit/' + req.params.Parcour_id);
     });
 });
 
-router.post(':Parcour_id/update/:Entrepreneur_id', function(req, res) {
+router.post('/:Parcour_id/update/:Entrepreneur_id', function(req, res) {
     models.Ptoe.update({
         ParcourId : req.params.parcour_id,
         EntrepreneurId : req.body.entrepreneur_id
@@ -32,7 +33,7 @@ router.post(':Parcour_id/update/:Entrepreneur_id', function(req, res) {
             EntrepreneurId : req.params.Entrepreneur_id
         }
     }).then(function() {
-        res.redirect('/Parcours/view/' + req.params.Parcour_id);
+        res.redirect('/Parcours/edit/' + req.params.Parcour_id);
     });
 
 });
