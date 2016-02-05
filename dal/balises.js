@@ -26,7 +26,11 @@ router.get('/destroy/:Balise_id', function(req, res) {
     } else {
 
     models.Ptobq.findAll({
-        where: { BaliseId: req.params.Balise_id }
+        where: { BaliseId: req.params.Balise_id,
+                 ParcourId: {
+                       $ne: null
+                   }
+               }
     }).then(
         function(ents) {
 

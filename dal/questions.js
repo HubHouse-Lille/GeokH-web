@@ -108,7 +108,11 @@ router.get('/destroy/:Question_id', function(req, res) {
     } else {
 
         models.Ptobq.findAll({
-            where: { QuestionId: req.params.Question_id }
+            where: { QuestionId: req.params.Question_id,
+                 ParcourId: {
+                     $ne: null
+                 }
+              }
         }).then(
             function(ents) {
 

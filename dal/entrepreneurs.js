@@ -30,7 +30,11 @@ router.get('/destroy/:Entrepreneur_id', function(req, res) {
 
 
         models.Ptoe.findAll({
-            where: { EntrepreneurId: req.params.Entrepreneur_id }
+            where: { EntrepreneurId: req.params.Entrepreneur_id,
+                      ParcourId: {
+                          $ne: null
+                      }
+                   }
         }).then(
             function(ents) {
 

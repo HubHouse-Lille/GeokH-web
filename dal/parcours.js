@@ -22,12 +22,39 @@ router.get('/destroy/:parcour_id', function(req, res) {
 
     } else {
 
-        models.Parcour.destroy({
-            where: { id: req.params.parcour_id }
-        }).then(function() {
-            res.redirect('/parcours/view');
-        });
 
+        models.Ptobq.destroy({
+            where: {
+                ParcourId: req.params.Parcour_id
+            }
+            }).then(function() {
+
+
+                models.Ptoe.destroy({
+                    where: {
+                        ParcourId: req.params.Parcour_id
+                    }
+                }).then(function() {
+
+
+                     models.Parcour.destroy({
+                         where: { id: req.params.parcour_id }
+                     }).then(function() {
+
+
+                          models.Parcour.findAll().then(
+                              function(parcours) {
+                                  res.render('parcours_view', {
+                                      parcours: parcours,
+                                      ok: "Le parcour a correctement éré supprimé"
+                                  });
+                              });
+
+                     });
+
+                });
+
+        });
     }
 });
 
