@@ -1,24 +1,31 @@
 extends layout_main
 block content
-	container.col-md-8
-		br
-		h2 Serveur d'administration GeokH
-		h5.text-info Ce serveur vous permet de définir les parcours disponible sur l'application GeokH. Toutes les entités sont éditables et devraient permettre de donner une grande liberté à la plateforme.
-		br
+	container.col-md-12
 
+		#rtitle.row
+			#titre.col-md-8
+				br
+				br
+				h2 Serveur d'administration GeokH
+				h5.text-info Ce serveur vous permet de définir les parcours disponible sur l'application GeokH. Toutes les entités sont éditables. Pour plus d'information veuillez vous référer à l'aide.
+				br
 
-		button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/view';")
-			b Voir les parcours disponibles
+				button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/view';")
+					b Voir les parcours disponibles
 
-		br
 		br
 		hr
 
 		h3 A propos de ce serveur d'administration
 		br
-		p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquam suscipit nisi, in eleifend libero fermentum at. Fusce augue enim, feugiat a lorem sit amet, eleifend viverra nisi. Sed viverra ipsum vitae volutpat maximus. Ut convallis venenatis metus id convallis. Vivamus placerat eros sed feugiat malesuada. Sed ipsum leo, rutrum ac eleifend eu, dictum ac lorem. Proin vel erat odio. Donec sollicitudin enim est, finibus pharetra magna molestie at. Quisque eleifend nisl efficitur tincidunt euismod. Praesent imperdiet enim in ipsum pulvinar facilisis. Quisque lacinia non enim id dictum. Quisque vel congue sapien. Aenean tempus sodales ante ut viverra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
 		br
-		p Suspendisse mi ante, auctor ullamcorper dapibus et, laoreet in ex. Donec id lectus vel elit eleifend tincidunt et non neque. In bibendum risus a massa egestas, sed mollis diam vehicula. Morbi vehicula mattis elit a mattis. Maecenas id enim tortor. Vestibulum eget condimentum velit, lacinia egestas elit. Maecenas volutpat tellus quam, nec elementum sem condimentum scelerisque. Nulla facilisi. Maecenas feugiat vestibulum nisl, eget lobortis sem bibendum nec. Maecenas imperdiet, nunc mollis fermentum convallis, arcu ante tempus ante, sed maximus erat ex ut risus. Morbi non diam faucibus, porttitor felis malesuada, interdum augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+		p Le Géok’H a été lancé pour la première fois auprès de 170 étudiants de L3 informatique fin septembre. Le Géok’h est une adaptation du Géocaching, un loisir qui a pour but d’aller à la recherche de « caches » à l’aide de coordonnées GPS.
+
+		p Il résulte d’un travail collaboratif mené depuis 2 ans entre l’équipe du Hubhouse, les étudiants du master IPM (Ingénierie Pédagogique Multimédia) qui ont travaillé sur la maquette du jeu et les étudiants de master informatique qui ont réalisé l’application mobile.
+
+		p Le Géok’H est proposé depuis cette rentrée universitaire aux responsables de formation qui  souhaitent sensibiliser leurs étudiants à l’entrepreneuriat de manière ludique et collaborative.  Ce jeu permet aussi de développer l’esprit d’équipe, de cohésion et de compétition.
+
+		p Les retours des étudiants de L3 informatique sont encourageants ; comme en témoigne l’équipe de Mustapha : « le Géok’H est un excellent moyen de découvrir l’entrepreneuriat ; on a découvert qu’il existe des services à Lille 1 qui aident les porteurs de projet à se lancer. » L’équipe d’Aymeric a apprécié « l’esprit d’équipe et trouve que le Géok’H est une manière originale de découvrir l’entrepreneuriat ». Pour l’équipe d’Hélène, « découvrir les jeunes entrepreneurs mystères nous montre que créer son entreprise, c’est possible. »
 
 		br
 
@@ -26,16 +33,20 @@ block content
 
 		ol
 			li
-				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Overview#' target='blank') Overview
+				a(href='#general') General
 			li
-				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Arborescence-d\'un-projet-Node-Express#' target='blank') Arborescence d\'un projet Node.js & Express-js
-			li
-				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Guide-technique#' target='blank') Guide technique
-			li
-				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Ressources-Utiles#' target='blank') Ressources utiles
-			li
-				a(href='https://github.com/sallareznov/p2p-wiki/wiki/Pour-Aller-Plus-Loin-Avec-Node.js#' target='blank') Pour aller plus loin avec Node.js
-
+				a(href='#entites') Les entités
+				ol
+					li
+						a(href='/aide#util') Utilisateurs
+					li
+						a(href='/aide#parcour') Parcours
+					li
+						a(href='/aide#balise') Balises
+					li
+						a(href='/aide#question') Questions
+					li
+						a(href='/aide#entrepreneur') Entrepreneurs
 		br
 
 		h3 Infos utiles
