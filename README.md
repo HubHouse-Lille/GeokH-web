@@ -25,8 +25,6 @@ This server reflect the application data model. The following entities are edita
 
 The server run a Node [ExpressJS 4](http://expressjs.com/) module. The ORM is handled by Sequelize.
 
-### To install
-
 ```
 git clone
 npm install
