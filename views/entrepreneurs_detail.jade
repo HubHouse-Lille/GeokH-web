@@ -1,0 +1,50 @@
+extends layout_main
+
+block content
+    container.col-md-8
+
+        br
+        h2 Détails de l'entrepreneur
+        br
+        div
+            p Pour plus d'informations sur comment concernant les entrepreneurs,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus ici
+            #info.collapse
+                .well
+                    p Informations concernant les entrepreneurs:
+                        br
+
+        hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
+        #e1
+            p Nom de l'entrepreneur
+            div.input-lg-8.input-lg
+                input(type="text", name="nom", value="#{entrepreneur.nom}" disabled).form-control
+        br
+        #e2
+            p Prénom de l'entrepreneur
+            div.input-lg-8.input-lg
+                input(type="textarea", name="prenom", value="#{entrepreneur.prenom}" disabled).form-control
+        br
+        #e3
+            p Image de profil
+            div.input-lg-8
+                img(src="#{entrepreneur.photo}", height="200px")
+        br
+        #e2
+            p Interview de l'entrepreneur
+            div.input-lg-8.input-lg
+                input(type="textarea", name="interview", value="#{entrepreneur.interview}" disabled).form-control
+        br
+        #e2
+            p Indice
+            div.input-lg-8.input-lg
+                input(type="textarea", name="indice", value="#{entrepreneur.indice}" disabled).form-control
+        br
+        div.actions
+            button.btn.btn-primary.btn-success(type='button', onclick="location.href='/entrepreneurs/edit/"+entrepreneur.id+"';") modifier

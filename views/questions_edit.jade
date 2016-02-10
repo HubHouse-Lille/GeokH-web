@@ -1,0 +1,163 @@
+extends layout_main
+
+block content
+    container.col-md-8
+
+        br
+        h2 Créer une question
+        br
+        div
+            p Pour plus d'informations concernant les questions,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
+            #info.collapse
+                .well
+                    p Informations concernant les questions:
+                    br
+
+        hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
+        form(action="/dal/questions/update/#{question.id}", method="post").input-group.input-group-lg
+            #e1
+                p Question à poser
+                div.input-lg-8.input-lg
+                    input(type="text", name="question", value=question.question, placeholder="Question").form-control
+                p.help-block exemple: Quel est la couleur rose du cheval de napoléon ?
+            br
+            #e2
+                p Le thème
+                div.input-lg-8.input-lg
+                    input(type="text", name="theme", value=question.theme, placeholder="Thème").form-control
+                p.help-block exemple: Connaître la définition d’un entrepreneur
+            br
+            #e3
+                p L'objectif
+                div.input-lg-8.input-lg
+                    input(type="text", name="objectif", value=question.objectif, placeholder="Objectif").form-control
+            br
+            #e4
+                p Le type de question
+                div.input-lg-8.input-lg
+                    select#type(name="type").form-control
+                        if (question.type == "QCM")
+                            option(value="QCM" selected) Question à choix multiple
+                            option(value="QCU") Question à choix unitaire
+                        if (question.type == "QCU")
+                            option(value="QCM") Question à choix multiple
+                            option(value="QCU" selected) Question à choix unitaire
+            br
+            -var props = JSON.parse(propositions)
+
+            -var dispRB = block;
+            -var dispCB = block;
+            if (question.type == "QCU")
+                -dispRB = none
+            else
+                -dispCB = none
+
+            #qqcu
+                p Les réponses sous forme de QCU
+                    if (question.type == "QCU")
+                        -var repu = reponses;
+                    else
+                        -var repu = -1;
+                    -each prop in [1, 2, 3, 4, 5]
+                        div.input-lg-8.input-lg
+                            input(type="text", name="qu#{prop}", value=props[prop-1], placeholder="Réponse possible #{prop}").form-control
+                            | &nbsp;&nbsp;&nbsp;&nbsp;
+                            -var repok = 0
+                            if (repu == prop)
+                                input(type="radio", name="repQcu", value="#{prop}" checked)
+                            else
+                                input(type="radio", name="repQcu", value="#{prop}")
+
+            #qqcm
+                p Les réponses sous forme de QCM
+                    if (question.type == "QCM")
+                        -var reps = JSON.parse(reponses)
+                    else
+                        -var reps = []
+                    -each prop in [1, 2, 3, 4, 5]
+                        div.input-lg-8.input-lg
+                            input(type="text", name="qm#{prop}", value=props[prop-1], placeholder="Réponse possible #{prop}").form-control
+                            | &nbsp;&nbsp;&nbsp;&nbsp;
+                            -var repok = 0
+                            -for(var rep in reps)
+                                if (reps[rep] == prop)
+                                    -repok = 1
+                            if (repok == 1)
+                                input(type="checkbox", name="repQcm#{prop}", value="rq#{prop}" checked)
+                            else
+                                input(type="checkbox", name="repQcm#{prop}", value="rq#{prop}")
+
+            div.row
+            br
+            br
+            -var rets = JSON.parse(retours)
+            #rep
+                p Les Retours que vous souhaitez renvoyer
+                div.input-lg-8.input-lg
+                    input(type="text", name="ret1", value=rets[0], placeholder="Retour 1").form-control
+                div.input-lg-8.input-lg
+                    input(type="text", name="ret2", value=rets[1], placeholder="Retour 2").form-control
+                div.input-lg-8.input-lg
+                    input(type="text", name="ret3", value=rets[2], placeholder="Retour 3").form-control
+                div.input-lg-8.input-lg
+                    input(type="text", name="ret4", value=rets[3], placeholder="Retour 4").form-control
+                div.input-lg-8.input-lg
+                    input(type="text", name="ret5", value=rets[4], placeholder="Retour 5").form-control
+            br
+            br
+            br
+            #diff
+                p Difficulté de la question
+                div.input-lg-8.input-lg
+                    select(name="difficulte").form-control
+                        if (question.difficulte == 1)
+                            option(value="1" selected) Niveau 1
+                            option(value="2") Niveau 2
+                            option(value="3") Niveau 3
+                        if (question.difficulte == 2)
+                            option(value="1") Niveau 1
+                            option(value="2" selected) Niveau 2
+                            option(value="3") Niveau 3
+                        if (question.difficulte == 3)
+                            option(value="1") Niveau 1
+                            option(value="2") Niveau 2
+                            option(value="3" selected) Niveau 3
+            br
+            div.actions
+                input(type="submit", value="Modifier la question").btn.btn-success
+                | &nbsp; &nbsp;
+                button.btn.btn-primary.btn-secondary(type='button', onclick="location.href='/questions/view/"+question.id+"';") Annuler
+                if (session.admin)
+                    | &nbsp; &nbsp;
+                    button.btn.btn-default(type='button', onclick="location.href='/dal/questions/destroy/#{question.id}';") Supprimer
+            br
+            br
+
+    script(type="text/javascript").
+        $(function() {
+        $('#qqcm').hide();
+        $('#type').change(function(){
+        if($('#type').val() == 'QCM') {
+            $('#qqcm').show();
+            $('#qqcu').hide();
+        } else {
+            $('#qqcm').hide();
+            $('#qqcu').show();
+        }
+        });
+        if($('#type').val() == 'QCM') {
+            $('#qqcm').show();
+            $('#qqcu').hide();
+        } else {
+            $('#qqcm').hide();
+            $('#qqcu').show();
+        }
+
+        });

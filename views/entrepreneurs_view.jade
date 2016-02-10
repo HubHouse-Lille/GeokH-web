@@ -1,0 +1,52 @@
+extends layout_main
+
+block content
+    container.col-md-12
+
+        br
+        h2 Les entrepreneurs disponibles
+        br
+        div
+            p Pour plus d'informations sur comment concernant les entrepreneurs,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus ici
+            #info.collapse
+                .well
+                    p Informations concernant les entrepreneurs:
+                        br
+
+        hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
+        br
+        table.table.table-hover.table-bordered
+            thead
+                tr
+                    th #
+                    th Nom
+                    th Photo
+                    th Interview
+                    th Indice
+                    th Actions
+                    th Création
+                    th Mise à jour
+
+            each entrepreneur in entrepreneurs
+                tr
+                    td #{entrepreneur.id}
+                    td
+                        a(href="/entrepreneurs/view/"+ entrepreneur.id) #{entrepreneur.prenom}&nbsp;#{entrepreneur.nom}
+                    td
+                        img(alt='photo', src='#{entrepreneur.photo}', style="max-height: 50px; max-width: 50px")
+                    td #{entrepreneur.interview}
+                    td #{entrepreneur.indice}
+                    td
+                        a(href="/entrepreneurs/view/"+ entrepreneur.id) Détails
+                        | &nbsp;-&nbsp;
+                        a(href="/entrepreneurs/edit/"+ entrepreneur.id) Editer
+                    td #{entrepreneur.createdAt}
+                    td #{entrepreneur.updatedAt}
+        br

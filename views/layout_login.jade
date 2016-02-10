@@ -1,0 +1,14 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		script(src='/js/bootstrap.min.js')
+	body
+		nav.navbar.navbar-default.navbar-static-top.navbar-inverse(role='navigation' style='position: fixed;top: 0px;width: 100%;')
+			.container-fluid
+				.navbar-header
+					.navbar-brand Administration GeokH
+		block content
+

@@ -1,0 +1,69 @@
+extends layout_main
+
+block content
+    container.col-md-8
+
+        br
+        h2 Créer un entrepreneur
+        br
+        div
+            p Pour plus d'informations sur comment concernant les entrepreneurs,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus ici
+            #info.collapse
+                .well
+                    p Informations concernant les entrepreneurs:
+                        br
+
+        hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
+        form(action="/dal/entrepreneurs/update/#{entrepreneur.id}", method="post").input-group.input-group-lg
+            #e1
+                p Nom de l'entrepreneur
+                div.input-lg-8.input-lg
+                    input(type="text", name="nom", value=entrepreneur.nom, placeholder="nom de l'entrepreneur").form-control
+            br
+            #e2
+                p Prénom de l'entrepreneur
+                div.input-lg-8.input-lg
+                    input(type="textarea", name="prenom", value=entrepreneur.prenom,placeholder="prénom de l'entrepreneur").form-control
+            br
+            #e3a
+                p Image de profil actuelle
+                div.input-lg-8
+                    img(src="#{entrepreneur.photo}", height="200")
+            br
+            #e3b
+                p Mettre à jour la photo de profil
+                div.input-lg-8.input-lg
+                    input(type="file", name="photo", onchange="previewFile()")
+                p.help-block Pour un rendu optimal, l'image doit être de format carré.
+            br
+            #e3c
+                div.input-lg-8
+                    img(id="imgPreview", name="newPhoto", src="", style="max-height:200px", alt="Image preview...")
+                    input(id="newPhoto", type="textarea", name="newPhoto", style="visibility: hidden;")
+            br
+            #e2
+                p Interview de l'entrepreneur
+                div.input-lg-8.input-lg
+                    input(type="textarea", name="interview", value=entrepreneur.interview, placeholder="Interview").form-control
+            br
+            #e2
+                p Indice
+                div.input-lg-8.input-lg
+                    input(type="textarea", name="indice", value=entrepreneur.indice, placeholder="Indice").form-control
+            br
+            div.actions
+                input(type="submit", value="Mettre à jour les données").btn.btn-success
+                | &nbsp; &nbsp;
+                button.btn.btn-primary.btn-secondary(type='button', onclick="location.href='/entrepreneurs/view/"+entrepreneur.id+"';") Annuler
+                if (session.admin)
+                    | &nbsp; &nbsp;
+                    button.btn.btn-default(type='button', onclick="location.href='/dal/entrepreneurs/destroy/#{entrepreneur.id}';") Supprimer
+
+

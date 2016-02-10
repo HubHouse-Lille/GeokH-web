@@ -1,0 +1,107 @@
+extends layout_main
+
+block content
+    container.col-md-8
+
+        br
+        h2 Détail d'une question
+        br
+        div
+            p Pour plus d'informations concernant les questions,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
+            #info.collapse
+                .well
+                    p Informations concernant les questions:
+                    br
+
+
+        hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
+        form(action="/dal/questions/create", method="post").input-group.input-group-lg
+
+            #e1
+                p Question à poser
+                div.input-lg-8.input-lg
+                    input(type="text", name="question", value=question.question, placeholder="Question" readonly).form-control
+                p.help-block exemple: Quel est la couleur rose du cheval de napoléon ?
+            br
+            #e2
+                p Le thème
+                div.input-lg-8.input-lg
+                    input(type="text", name="theme", value=question.theme, placeholder="Thème" readonly).form-control
+                p.help-block exemple: Connaître la définition d’un entrepreneur
+            br
+            #e3
+                p L'objectif
+                div.input-lg-8.input-lg
+                    input(type="text", name="objectif", value=question.objectif, placeholder="Objectif" readonly).form-control
+            br
+            #e4
+                p Le type de question
+                div.input-lg-8.input-lg
+                    select#type(name="type" readonly).form-control
+                        if (question.type == "QCM")
+                            option(value="QCM" selected) Question à choix multiple
+                        if (question.type != "QCM")
+                            option(value="QCU" selected) Question à choix unitaire
+            br
+            if (question.type == "QCU")
+                #qqcu
+                    p Les réponses sous forme de QCU
+
+                    - var props = JSON.parse(propositions)
+                    - var repu = reponses
+                    - for(var prop in props)
+                        div.input-lg-8.input-lg
+                            input(type="text", value="#{props[prop]}" readonly).form-control
+                            | &nbsp;&nbsp;
+                            - var repok = 0
+                            if (prop == (repu-1))
+                                input(type="radio", name="repQcu", value="rq1" checked readonly disabled)
+                            else
+                                input(type="radio", name="repQcu", value="rq1" readonly disabled)
+
+            if (question.type == "QCM")
+                #qqcm
+                    p Les réponses sous forme de QCM
+                    - var props = JSON.parse(propositions)
+                    - var reps = JSON.parse(reponses)
+                    - for(var prop in props)
+                        div.input-lg-8.input-lg
+                            input(type="text", value="#{props[prop]}" readonly).form-control
+                            | &nbsp;&nbsp;
+                            - var repok = 0
+                            - for(var rep in reps)
+                                if ((reps[rep]-1) == prop)
+                                    - repok = 1
+
+                            if (repok == 1)
+                                input(type="checkbox", name="repQcm1", value="rq1" checked readonly disabled )
+                            else
+                                input(type="checkbox", name="repQcm1", value="rq1" readonly disabled )
+
+            br
+            #rep
+                p Les Retours que vous souhaitez renvoyer
+
+                - var rets = JSON.parse(retours)
+                - for(var ret in rets)
+                    div.input-lg-8.input-lg
+                        input(type="text", name="ret1", value="#{rets[ret]}", placeholder="Retour 1" readonly).form-control
+            br
+            br
+            #diff
+                p Difficulté de la question
+                div.input-lg-8.input-lg
+                    input(type="text", value=question.difficulte readonly).form-control
+
+            br
+        div.actions
+            button.btn.btn-primary.btn-success(type='button', onclick="location.href='/questions/edit/"+question.id+"';") modifier
+        br
+        br

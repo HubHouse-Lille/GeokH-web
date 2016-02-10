@@ -1,0 +1,52 @@
+extends layout_main
+
+block content
+    container.col-md-12
+
+        br
+        h2 Les questions disponibles
+        br
+        div
+            p Pour plus d'informations concernant les questions,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
+            #info.collapse
+                .well
+                    p Informations concernant les questions:
+                    br
+
+        hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
+        br
+        table.table.table-hover.table-bordered
+            thead
+                tr
+                    th #
+                    th Question
+                    th Actions
+                    th Theme
+                    th Objectif
+                    th Type
+                    th Difficulté
+                    th Création
+                    th Mise à jour
+
+            each question in questions
+                tr
+                    td #{question.id}
+                    td
+                        a(href="/questions/view/"+ question.id) #{question.question}
+                    td
+                        a(href="/questions/view/"+ question.id) Détails
+                        | &nbsp;-&nbsp;
+                        a(href="/questions/edit/"+ question.id) Editer
+                    td #{question.theme}
+                    td #{question.objectif}
+                    td #{question.type}
+                    td #{question.difficulte}
+                    td #{question.createdAt}
+                    td #{question.updatedAt}

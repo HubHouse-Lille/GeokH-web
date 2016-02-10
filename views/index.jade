@@ -1,0 +1,66 @@
+extends layout_main
+block content
+	container.col-md-12
+
+		#rtitle.row
+			#titre.col-md-8
+				br
+				br
+				h2 Serveur d'administration GeokH
+				h5.text-info Ce serveur vous permet de définir les parcours disponible sur l'application GeokH. Toutes les entités sont éditables. Pour plus d'information veuillez vous référer à l'aide.
+				br
+
+				button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/view';")
+					b Voir les parcours disponibles
+
+		br
+		hr
+
+		h3 A propos de ce serveur d'administration
+		br
+		br
+		p Le Géok’H a été lancé pour la première fois auprès de 170 étudiants de L3 informatique fin septembre. Le Géok’h est une adaptation du Géocaching, un loisir qui a pour but d’aller à la recherche de « caches » à l’aide de coordonnées GPS.
+
+		p Il résulte d’un travail collaboratif mené depuis 2 ans entre l’équipe du Hubhouse, les étudiants du master IPM (Ingénierie Pédagogique Multimédia) qui ont travaillé sur la maquette du jeu et les étudiants de master informatique qui ont réalisé l’application mobile.
+
+		p Le Géok’H est proposé depuis cette rentrée universitaire aux responsables de formation qui  souhaitent sensibiliser leurs étudiants à l’entrepreneuriat de manière ludique et collaborative.  Ce jeu permet aussi de développer l’esprit d’équipe, de cohésion et de compétition.
+
+		p Les retours des étudiants de L3 informatique sont encourageants ; comme en témoigne l’équipe de Mustapha : « le Géok’H est un excellent moyen de découvrir l’entrepreneuriat ; on a découvert qu’il existe des services à Lille 1 qui aident les porteurs de projet à se lancer. » L’équipe d’Aymeric a apprécié « l’esprit d’équipe et trouve que le Géok’H est une manière originale de découvrir l’entrepreneuriat ». Pour l’équipe d’Hélène, « découvrir les jeunes entrepreneurs mystères nous montre que créer son entreprise, c’est possible. »
+
+		br
+
+		h3 Permiers pas avec le serveur d'administration
+
+		ol
+			li
+				a(href='#general') General
+			li
+				a(href='#entites') Les entités
+				ol
+					li
+						a(href='/aide#util') Utilisateurs
+					li
+						a(href='/aide#parcour') Parcours
+					li
+						a(href='/aide#balise') Balises
+					li
+						a(href='/aide#question') Questions
+					li
+						a(href='/aide#entrepreneur') Entrepreneurs
+		br
+
+		h3 Infos utiles
+
+		p
+			a(href='http://hubhouse.univ-lille1.fr/Accueil/' target='blank') Hub House Lille 1
+		p
+			a(href='http://univ-lille1.fr' target='blank') L'université de Lille 1
+		p
+			a(href='https://github.com/HubHouse-Lille' target='blank') Le git de l'application et du serveur d'administration
+		br
+
+
+
+
+
+

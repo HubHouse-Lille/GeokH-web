@@ -1,0 +1,128 @@
+extends layout
+
+block content
+    container
+        row.col-md-8
+            h1 Aide
+            br
+            hr
+            h3 Contenu
+            ol
+                li
+                    a(href='#general') General
+                li
+                    a(href='#entites') Les entités
+                    ol
+                        li
+                            a(href='#util') Utilisateurs
+                        li
+                            a(href='#parcour') Parcours
+                        li
+                            a(href='#balise') Balises
+                        li
+                            a(href='#question') Questions
+                        li
+                            a(href='#entrepreneur') Entrepreneurs
+
+            br
+            hr
+
+            a(name="general")
+            h3 1 Général
+            br
+            p L'application dans sa partie graphique se structure en trois partie. Premièrement la bare de navigation horizontale (noir, en haut), qui vous permet d'accéder aux options générales de l'application (accueil, aide etc).
+            p Deuxièmement, le volet de gauche donne accès à toutes les entités. Les Parcours, Balises, Questions et Entrepreneurs sont structurés de la même manière. Une page de visualisation permet d'avoir une vue globale sur les entités respective enregistrées dans le système. Pour chacune de ces entités, il est possible de les modifier. En tant qu'administrateur vous pourrez aussi les supprimer si les conditions de réfrencement sont respectées (voir encart référence de l'entité). Vous pouvez aussi créer de nouvelles entités.
+            p Concernant les parcours, il ne suffit pas de les créer, ils doivent ensuite être associés à des enttrepreneurs et des questions et balises.
+            br
+            br
+            a(name="entites")
+            h3 2 Les entités
+            br
+            p Les entités ci-dessous sont au coeur du système dès lors qu'ils doivent les gérer. Le schéma ci-dessous illustre les liens entre les différentes entités.
+            p Les entités PtoE et PtoBQ ne sont pas directement visibles par l'utilisateur mais correspond aux associations entre les parcours et les entrepreneurs (PtoE) d'une part, et les parcours et les balises et Questions d'autre part (PtoBQ)
+            p Ces associations sont editables dans l'édition des parcours. Veuillez vous référes aux sous-parties Références des entités pour plus de détails.
+            br
+            img(src="/img/modeldb.png")
+            br
+            br
+            br
+            a(name="util")
+            h4 2.1 Utilisateurs
+            br
+            p Les utilisateurs sont dissociés du reste des entités car ils n'interfèrent pas avec l'application mobile.
+            p Les utilisateurs possèdent un login avec lequel ils peuvent se connecter, une adresse e-mail qui les représente, un mot de passe et un status.
+            p Pour se connecter l'utilisateur doit utiliser son login et son mot de passe.
+            p Le status de l'utilisateur est soit Utilisateur Privilégié, soit Administrateur. Seul un administrateur peut modifier le status d'un Utilisateur. Enfin, il n'est pas possible pour un administrateur de changer son status.
+            br
+            br
+            br
+            a(name="parcour")
+            h4 2.2 Parcours
+            br
+            p Les parcours sont la pièce maittresse du système. Ce sont eux qui lient les autres éléments. Ils possèdent des entrepreneurs, des balises et des questions.
+            p Le nom du parcour permet de facilement l'identifier.
+            p La description du parcour permet d'avoir plus d'information concernant celui-ci.
+            p Enfin, l'état d'un parcour est actif ou innactif. Seulement s'il est actif celui-ci sera visible par les utilisateurs mobile.
+            br
+            h5 Références :
+            p Les parcours possèdent des entrepreneurs. Un entrepreneur défini peut appartenir à plusieu parcours.
+            p Ils possèdent aussi des Balise-Question. C'est à dire, une association entre une balise et une question. Ceci donne plus de souplesse au système et permet par exemple de faire passer l'utilisateur mobile deux fois à la même balise avec deux questions différente.
+            br
+            br
+            br
+            a(name="balise")
+            h4 2.3 Balises
+            br
+            p Les balises sont la représentation géographique d'un lieu. Elles sont constituées de coordonnées géographique, d'un nom et dun indice.
+            p Le nom des balises permet de mieux les manipuler dans le système. Veuillez donc à en indiquer un nom clair.
+            p L'indice d'une balise est une courte phrase qui peut aider l'utilisateru mobile à trouver la balise. On donner par exemple l'indice "Au pied du grand arbre".
+            p Les coordonnées géographiques en latitude doivent être comprises entre -90° et 90°. Pour indiquer une position dans l'émisphère nord on notera une valeur positive tandis que pour une position dans l'émisphère sud on notera une valeur négative.
+            p Les coordonnées géographiques en longitude doivent elles être comprises entre -180° et 180°. Pour indiquer une position à l'ouest du méridien de Greenwich notez une valeur négative, tandis que pour une position à l'est, notez une valeur positive.
+            br
+            h5 Références :
+            p Toutes les balises lorsquelles sont utilisées par un parcour sont associées à une question. Cette opération d'association se fait dans l'édition du parcour.
+            p Vous ne puuvez pas supprimer une balise qui est référencée par un parcours. Ceci assure l'intégrité des données.
+            br
+            h5 Aide :
+            p Pour trouver la position GPS d'une position, vous pouvez utiliser&nbsp;
+            a(href='https://www.google.com/maps/') google maps
+            p Si vous souhaitez plus d'informations concernant les coordonnées géographiques, veuillez vous référer à&nbsp;
+            a(href='https://fr.wikipedia.org/wiki/Coordonn%C3%A9es_g%C3%A9ographiques') Wikipédia
+            br
+            br
+            br
+            a(name="question")
+            h4 2.4 Questions
+            br
+            p Les questions sont essentielles dans le jeu. Parmi les éléments a manipuler, les questions seront le plus visible pour l'utilisateur, veuillez donc à bien les vérifier.
+            p Les questions comportent tout d'abord la question qui sera posée à l'utilisateur mobile.
+            p Le thème de la question n'est pas indiqué pour l'utilisateur mobile. Il vous aidera à ordonner les questions et à créer un parcour cohérent. Vous pouvez par exemple utiliser le thème Economie ou Business Plan
+            p L'objectif de la question n'est pas non plus indiqué à l'utilisateur mobile. Il permet de donner une indication supplémentaire sur la question posée pour mieux en comprendre l'enjeu.
+            p Les questions peuvent soit être de type Question Choix Multiple (QCM), soit Question Choix Unitaire (QCU).
+            p Cette distinction modifie la facon dont l'utilisateur doit répondre à la question. Il ne peut (et doit) donner qu'une bonne réponse avec une question de type QCU, alors qu'il doit choisir quel question est la bonne parmi les propositions dans le cas d'une QCM.
+            p Les propositions sont les options de réponse données aux utilisateurs mobile.
+            p La difficulté de la question modifiera le comportement de la gestion des points de l'application mobile lors de la réponse à la question.
+            p Les réponses déterminent quels réponses sont les bonne
+            p Les retours sont des informations qui seront données aux utilisateur mobile après la réponse à la question en tant qu'aide.
+            br
+            h5 Références :
+            p Toutes les questions lorsquelles sont utilisées par un parcour sont associées à une balise. Cette opération d'association se fait dans l'édition du parcour.
+            p Vous ne puuvez pas supprimer une question qui est référencée par un parcours. Ceci assure l'intégrité des données.
+            br
+            br
+            br
+            a(name="entrepreneur")
+            h4 2.5 Entrepreneurs
+            br
+            p Les entrepreneurs permettent de définir la dernière question du parcour, celle ou l'utilisateur mobile devera choisir le bon entrepreneur avec tous les indices reçu durant la partie.
+            p Le nom et le prénom permettent de l'identifier
+            p La photo de l'entrepreneur est affichée çà l'utilisateur mobile. Veuillez à choisir une image carré pour un meilleur rendu, et pas trop volumineuse afin de fluidifier la récupération des données par l'utilisateur.
+            p L'interview de l'entrepreneur est un text qui permet qui le décrit et qui sera affiché lors de la sélection de l'enttrepreneur pour aider les utilisateurs à répondre à la dernière question.
+            p Enfin les indices sont les informations que les utilisateurs glaneront en répondant aux questions.
+            br
+            h5 Références :
+            p les enttrepreneurs peuvent être associés à un parcour dans la page d'édition d'un parcours.
+            p Vous ne pouvez pas supprimer un entrepreneur qui est référencée par un parcours. Ceci assure l'intégrité des données.
+            br
+            br
+            br

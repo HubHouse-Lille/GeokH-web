@@ -1,0 +1,41 @@
+extends layout_login
+
+block content
+    container.col-md-12
+        br
+        br
+        div.col-lg-4.col-lg-offset-2
+
+            img(src="/img/hubhouse.png", width="100%")
+            br
+            br
+            p Le Géok’H a été lancé pour la première fois auprès de 170 étudiants de L3 informatique fin septembre. Le Géok’h est une adaptation du Géocaching, un loisir qui a pour but d’aller à la recherche de « caches » à l’aide de coordonnées GPS.
+            br
+            p Il résulte d’un travail collaboratif mené depuis 2 ans entre l’équipe du Hubhouse, les étudiants du master IPM (Ingénierie Pédagogique Multimédia) qui ont travaillé sur la maquette du jeu et les étudiants de master informatique qui ont réalisé l’application mobile.
+            br
+            p Le Géok’H est proposé depuis cette rentrée universitaire aux responsables de formation qui  souhaitent sensibiliser leurs étudiants à l’entrepreneuriat de manière ludique et collaborative.  Ce jeu permet aussi de développer l’esprit d’équipe, de cohésion et de compétition.
+            br
+            p Le principe est simple : les équipes d’étudiants téléchargent l’application mobile sur leurs smartphones. Le parcours se décompose en onze caches matérialisées par des QR codes disséminées sur le campus de Lille 1. Chaque équipe est guidée par un compas. Dès le QR code trouvé, l’équipe le scanne avec son téléphone et une question sur l’entrepreneuriat apparait. Les équipes peuvent faire des paris et doivent, à l’issue du jeu, découvrir un entrepreneur mystère issu de Lille 1.
+            br
+            br
+            br
+
+
+        div.col-lg-3.col-lg-offset-1(style="margin-top:80px")
+            h2 Connexion
+            if (msg != undefined)
+                .alert.alert-warning(role="alert") #{msg}
+            form(name="login", method="post", action="/login/")
+                #e1
+                    p Login
+                        div.input-lg-12
+                            input(type="text", name="username", placeholder="Login").form-control
+                br
+                #e2
+                    p Mot de passe
+                        div.input-lg-12
+                            input(type="password", name="password", placeholder="Mot de passe").form-control
+                br
+                div.actions
+                    input(type="submit", value="Connexion").btn.btn-success
+

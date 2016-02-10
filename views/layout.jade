@@ -1,0 +1,121 @@
+doctype html
+html(lang="fr")
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+        link(rel='stylesheet', href='/stylesheets/sidebar.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+
+        script(src='/js/jquery-2.1.4.min.js')
+        script(src='/js/bootstrap.min.js')
+        script(src='/js/delete.js')
+        script(src='/js/photoPreview.js')
+        script(src='/js/ptoe.js')
+        script(src='/js/ptobq.js')
+
+
+    body
+
+        nav.navbar.navbar-default.navbar-static-top.navbar-inverse(role='navigation' style='position: fixed;top: 0px;width: 100%;')
+            .container-fluid
+                .navbar-header
+                    .navbar-brand(style="color: #FF8851;") Administration GeokH
+                div
+                    ul.nav.navbar-nav
+                        if menu == "accueil"
+                            li.active
+                                a(href='/') Accueil
+                        else
+                            li
+                                a(href='/') Accueil
+
+                        if menu == "aide"
+                            li.active
+                                a(href='/aide') Aide
+                        else
+                            li
+                                a(href='/aide') Aide
+
+                        if menu == "apropos"
+                            li.active
+                                a(href='/apropos') A propos
+                        else
+                            li
+                                a(href='/apropos') A propos
+
+        #container.row(style="margin-right:15px;")
+            block sidebar
+            #wrapper
+                // Sidebar
+                #sidebar-wrapper
+                    ul.sidebar-nav
+                        li
+                            p
+                        li.sidebar-brand
+                            img(src="/img/paperplane.png").menuIcons
+                            h3 Parcours
+                        li
+                            a(href='/parcours/view') Voir les parcours
+                        li
+                            a(href='/parcours/create') Créer un parcour
+                        li
+                            p
+                        li.sidebar-brand
+                            img(src="/img/location.png").menuIcons
+                            h3 Balises
+                        li
+                            a(href='/balises/view') Voir les balises
+                        li
+                            a(href='/balises/create') Créer une balise
+                        li
+                            p
+                        li.sidebar-brand
+                            img(src="/img/lab.png").menuIcons
+                            h3 Questions
+                        li
+                            a(href='/questions/view') Voir les questions
+                        li
+                            a(href='/questions/create') Créer un question
+                        li
+                            p
+                        li.sidebar-brand
+                            img(src="/img/user.png").menuIcons
+                            h3 Entrepreneurs
+                        li
+                            a(href='/entrepreneurs/view') Voir les entrepreneurs
+                        li
+                            a(href='/entrepreneurs/create') Créer un entrepreneur
+                        li
+                            hr(style='height: 1px;margin: 5 0 5 0; color:#000000; background-color:#A9A9A9;')
+                        li.sidebar-brand
+                            img(src="/img/params.png").menuIcons
+                            h3 Utilisateurs
+                        li
+                            a(href='/comptes/view/mine') Mon compte
+                        if (session.admin)
+                            li
+                                a(href='/comptes/gestion') Gérer les utilisateurs
+                        li
+                            a(href='/logout') Déconnexion
+
+
+
+                // /#sidebar-wrapper
+
+                #page-content-wrapper
+                    block content
+
+        #myModal.modal.hide.szindex
+            .modal-header
+                a.close(href="#", data-dismiss="modal", aria-hidden="true") &#215;
+                h3 Delete
+            .modal-body
+                p You are about to delete.
+                p Do you want to proceed?
+            .modal-footer
+                a#btnYes.btn.danger(href="#") Yes
+                a.btn.secondary(href="#", data-dismiss="modal", aria-hidden="true") No
+        //
+            footer.footer
+                .container
+                    p.text-muted(style="padding-left:200px;") All rights reserved 2016

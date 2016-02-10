@@ -1,0 +1,41 @@
+extends layout_main
+
+block content
+    container.col-md-8
+
+        br
+        h2 Créer un parcour
+        br
+        div
+            p Pour plus d'informations sur comment créer un parcour,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') apprenez-en plus
+            #info.collapse
+                .well
+                    p Informations pour la création d'un parcour:
+                        br
+                        br
+                        | Lorsque vous créez un parcour, veillez à avoir déjà crée les balises et les questions associées.
+                        br
+                        | Dans un premier temps vous créez le parcours, et ensuite vous y associerez des balises.
+
+        hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
+        form(action="/dal/parcours/create", method="post").input-group.input-group-lg
+            #e1
+                p Nom du parcours
+                div.input-lg-8.input-lg
+                    input(type="text", name="nom", placeholder="nom du parcour").form-control
+                p.help-block exemple: HubHouse lille1-ouest pour etudiant info
+            br
+            #e2
+                p Description du parcours
+                div.input-lg-8.input-lg
+                    input(type="textarea", name="description", placeholder="description du parcour").form-control
+            br
+            div.actions
+                input(type="submit", value="Créer le parcour").btn.btn-success

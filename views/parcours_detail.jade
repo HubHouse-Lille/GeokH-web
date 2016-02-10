@@ -1,0 +1,78 @@
+extends layout_main
+
+block content
+    container.col-md-8
+
+        br
+        h2 Détail d'un parcour
+        br
+        div
+            p Pour plus d'informations sur les parcours,&nbsp;
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez cet l'encart
+            #info.collapse
+                .well
+                    p Informations pour la création d'un parcour:
+                        br
+                        br
+                        | Lorsque vous créez un parcour, veillez à avoir déjà crée les balises et les questions associées.
+                        br
+                        | Dans un premier temps vous créez le parcours, et ensuite vous y associerez des balises.
+
+        hr
+        if (ok != undefined)
+            .alert.alert-success(role="alert") #{ok}
+        if (msg != undefined)
+            .alert.alert-info(role="alert") #{msg}
+        if (err != undefined)
+            .alert.alert-warning(role="alert") #{err}
+        br
+        h4 Information générales
+        div.input-group.input-group-lg
+            br
+            #e1
+                p Le nom du parcour
+                div.input-lg-8.input-lg
+                    input(type="text", name="nom", value=parcour.nom, placeholder="nom du parcour" readonly).form-control
+                p.help-block exemple: HubHouse lille1-ouest pour etudiant info
+            br
+            #e2
+                p Le parcour est-il visible dans l'application mobile ?
+                    | &nbsp; &nbsp;
+                    if (parcour.actif == 1)
+                        input(type="checkbox", name="actif", value="1" checked disabled)
+                    else
+                        input(type="checkbox", name="actif", value="1" disabled)
+            #e3
+                p Description
+                div.input-lg-8.input-lg
+                    input(type="textarea", name="description", value=parcour.description, placeholder="description du parcour" readonly).form-control
+            br
+            div.actions
+                button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcour.id+"';") modifier
+            br
+            br
+
+        hr
+        br
+        h4 Les entrepreneurs liés à ce parcour
+        br
+        table.table.table-hover.table-bordered(id="parcourEntTable")
+            thead
+                tr
+                    th #
+                    th nom
+        br
+        hr
+        br
+        h4 Les balises et questions de ce parcour
+        br
+        table.table.table-hover.table-bordered(id="parcourBalQuestTable")
+            thead
+                tr
+                    th #
+                    th nom balise
+                    th question
+                    th ordre
+        script
+            | var globalParcourId = #{parcour.id};
+            | var editable = false;
