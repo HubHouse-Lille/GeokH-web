@@ -6,7 +6,7 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/', function(req, res) {
-    models.Ptobq.findAll({
+      models.Ptobq.findAll({
             include: [ models.Entrepreneur ]
           }).then(
         function(ptobqs) {
@@ -14,6 +14,7 @@ router.get('/', function(req, res) {
         });
 });
 
+// /api/ptobqs/parcour/*
 router.get('/parcour/:id', function(req, res) {
     models.Ptobq.findAll({
             where: { ParcourId: req.params.id },

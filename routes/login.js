@@ -12,31 +12,32 @@ router.get('/*', function(req, res, next) {
     console.log("SID: " + sess.sid);
   }
 
-  // Accès depuis l'extérieur du site
-    var pathExceptionArray = new Array("/api/parcours", "/api/ptobqs/parcour/", "/api/ptoes/parcour/");
+// Accès depuis l'extérieur du site
+  var pathExceptionArray = new Array("/api/parcours", "/api/ptobqs/parcour/", "/api/ptoes/parcour/");
 
-    if (sess.connected == undefined || sess.connected == false) {
+  if (sess.connected == undefined || sess.connected == false) {
 
-      var freeToGo = false;
-      for(var i=0; i < pathExceptionArray.length; i++){
-          if(pathExceptionArray[i] == req.path ){
-              freeToGo = true;
-          }
-          // ajout charlie : permet de récupérer les balises et questions du parcours sélectionné
-          // NB : Peut être améliorer en récupérant la valeur dans le tableau et en la formattant pour la regexp
-          var r = new RegExp("\\/api\\/pto(bq|e)s\\/parcour\\/[0-9]+", "g")
-          if(r.test(req.path)){
+    var freeToGo = false;
+    for(var i=0; i < pathExceptionArray.length; i++){
+        if(pathExceptionArray[i] == req.path ){
             freeToGo = true;
-          }
+        }
+        // ajout charlie : permet de récupérer les balises et questions du parcours sélectionné
+        // NB : Peut être améliorer en récupérant la valeur dans le tableau et en la formattant pour la regexp
+        var r = new RegExp("\\/api\\/pto(bq|e)s\\/parcour\\/[0-9]+", "g")
+        if(r.test(req.path)){
+          freeToGo = true;
+        }
 
-      }
-      if (freeToGo) {
-          sess.connected = false;
-          next();
-      } else {
-          sess.connected = false;
-          res.render('login');
-      }
+    }
+    if (freeToGo) {
+        sess.connected = false;
+        next();
+    } else {
+        sess.connected = false;
+        res.render('login');
+    }
+
   } else {
 
     console.log('login ok');
