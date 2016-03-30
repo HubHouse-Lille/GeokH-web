@@ -25,12 +25,12 @@ block content
             #e1
                 p Nom de l'entrepreneur
                 div.input-lg-8.input-lg
-                    input(type="text", name="nom", placeholder="nom de l'entrepreneur", required=true).form-control
+                    input(type="text", name="nom", placeholder="nom de l'entrepreneur").form-control
             br
             #e2
                 p Prénom de l'entrepreneur
                 div.input-lg-8.input-lg
-                    input(type="textarea", name="prenom", placeholder="description du parcour", required=true).form-control
+                    input(type="textarea", name="prenom", placeholder="description du parcour").form-control
             br
             #e3b
                 p Mettre à jour la photo de profil
@@ -44,20 +44,13 @@ block content
             br
             #e2
                 p Interview de l'entrepreneur
-                button(type="button")#plusIqr.
-                    Ajouter Q/R
-                button(type="button")#moinsIqr.
-                    Supprimer Q/R
-                br
-                #interview
+                div.input-lg-8.input-lg
+                    input(type="textarea", name="interview", placeholder="Interview").form-control
             br
             #e2
                 p Indice
-                button(type="button")#plusInd.
-                    Ajouter Indice
-                button(type="button")#moinsInd.
-                    Supprimer Indice
-                #indice
+                div.input-lg-8.input-lg
+                    input(type="textarea", name="indice", placeholder="Indice").form-control
             br
             div.actions
                 input(type="submit", value="Créer l'entrepreneur").btn.btn-success
