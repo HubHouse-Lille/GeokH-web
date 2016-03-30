@@ -1,14 +1,24 @@
 {
   "development": {
-    "dialect": "sqlite",
-    "storage": "./db.development1.sqlite"
+    "username": "abyvpzijtnigcu",
+    "password": "ja0wEQfYo7F3fptAioE-0SCP64",
+    "database": "daqbtkq43aihbo",
+    "host": "ec2-54-235-199-36.compute-1.amazonaws.com",
+    "port": "5432",
+    "dialect": "postgres"
   },
   "test": {
-    "dialect": "sqlite",
-    "storage": "./db.test.sqlite"
+    "username": "update me",
+    "password": "update me",
+    "database": "update_me",
+    "host": "update me",
+    "dialect": "update me"
   },
   "production": {
-    "dialect": "sqlite",
-    "storage": "./db.production.sqlite"
+    "username": "update me",
+    "password": "update me",
+    "database": "update me",
+    "host": "update me",
+    "dialect": "update me"
   }
 }

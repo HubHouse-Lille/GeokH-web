@@ -4,8 +4,13 @@ var router  = express.Router();
 var base64 = require('node-base64-image');
 
 router.post('/create', function(req, res) {
-
+    // "[\"Le terme entrepreneur recouvre différentes significations connexes mais distinctes :\",
+    // \"L'usage courant l'assimile à un chef d'entreprise, tantôt porteur d'un projet d'entreprise en phase de démarrage, tantôt dirigeant d'une entreprise davantage établie, à laquelle le plus souvent il s'identifie étroitement et personnellement\",
+    // \"L'entrepreneur correspond également à l'appellation donnée aux chefs d'entreprise du secteur du bâtiment ou des travaux publics,En droit, l'entrepreneur (ou maître d'œuvre) désigne « la personne qui — dans un contrat d'entreprise — s'engage à effectuer un travail en réponse à la demande d'un maitre d'ouvrage\"]"
     var photo = req.body.newPhoto;
+    var iqr = [];
+
+
     models.Entrepreneur.create({
         nom: req.body.nom,
         prenom: req.body.prenom,

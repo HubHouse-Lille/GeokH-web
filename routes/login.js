@@ -3,6 +3,7 @@ var router = express.Router();
 var models  = require('../models/index');
 
 // SESSION HANDLER
+
 router.get('/*', function(req, res, next) {
   var sess = req.session;
 
@@ -63,12 +64,12 @@ router.post('/login', function(req, res) {
         if (user != null) {
             sess.connected = true;
 
-            if (user.admin == true) {
+           if (user.admin == true) {
                 req.session.admin = true;
-            } else {
+           } else {
                 req.session.admin = false;
             }
-            req.session.sid = user.id;
+       req.session.sid = user.id;
 
             res.render('index', {
                 menu: "accueil"
