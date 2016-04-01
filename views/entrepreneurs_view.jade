@@ -41,8 +41,36 @@ block content
                         a(href="/entrepreneurs/view/"+ entrepreneur.id) #{entrepreneur.prenom}&nbsp;#{entrepreneur.nom}
                     td
                         img(alt='photo', src='#{entrepreneur.photo}', style="max-height: 50px; max-width: 50px")
-                    td #{entrepreneur.interview}
-                    td #{entrepreneur.indice}
+                    td
+                        button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal'+entrepreneur.id) Voir
+                        .modal.fade(role='dialog', id='myModal'+entrepreneur.id)
+                            .modal-dialog
+                                .modal-content
+                                    .modal-header
+                                        button.close(type='button', data-dismiss='modal') ×
+                                        h4.modal-title Interview de #{entrepreneur.prenom}&nbsp;#{entrepreneur.nom}
+                                    .modal-body
+                                        - var n = entrepreneur.interviewQ.length
+                                        - for (var i = 0; i < n; i++)
+                                            p Q : #{entrepreneur.interviewQ[i]}
+                                            p R : #{entrepreneur.interviewR[i]}
+                                    .modal-footer
+                                        button.btn.btn-default(type='button', data-dismiss='modal') Close
+
+                    td
+                        button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal2'+entrepreneur.id) Voir
+                        .modal.fade(role='dialog', id='myModal2'+entrepreneur.id)
+                            .modal-dialog
+                                .modal-content
+                                    .modal-header
+                                        button.close(type='button', data-dismiss='modal') ×
+                                        h4.modal-title Indice de #{entrepreneur.prenom}&nbsp;#{entrepreneur.nom}
+                                    .modal-body
+                                        - var n = entrepreneur.indices.length
+                                        - for (var i = 0; i < n; i++)
+                                            p #{entrepreneur.indices[i]}
+                                    .modal-footer
+                                        button.btn.btn-default(type='button', data-dismiss='modal') Close
                     td
                         a(href="/entrepreneurs/view/"+ entrepreneur.id) Détails
                         | &nbsp;-&nbsp;

@@ -1,19 +1,19 @@
 $(document).ready(function(){
-    var i = 0;
-    var j = 0;
+    var i = $("#interview div.panel-primary").length;
+    var j = $("#indice div.panel-primary").length;;
 
   $("#plusIqr").click(function(){
         i++;
         $("#interview").append("" +
         "<div id='iqr"+i+"' class='panel panel-primary'>" +
             "<div class='panel-heading'>" +
-                "Question "+i+" :" +
+                "<p>Question "+i+" :</p>" +
             "</div>" +
             "<div class='panel-body'>" +
                 // Question :
-                "<input class='form-control' type='text' name='q"+i+"' placeholder='Question'/>" +
+                "<input class='form-control' type='text' name='q"+i+"' placeholder='Question' required/>" +
                 // Réponse :
-                "<input class='form-control' type='text' name='r"+i+"' placeholder='Reponse'/>" +
+                "<input class='form-control' type='text' name='r"+i+"' placeholder='Reponse' required/>" +
             "</div>" +
         "</div>");
   });
@@ -28,11 +28,11 @@ $(document).ready(function(){
             $("#indice").append("" +
             "<div id='iind"+j+"' class='panel panel-primary'>" +
                 "<div class='panel-heading'>" +
-                    "Indice "+j+" :" +
+                    "<p> Indice "+j+" : </p>" +
                 "</div>" +
                 "<div class='panel-body'>" +
                     // Question :
-                    "<input class='form-control' type='text' name='ind"+j+"' placeholder='Indice'/>" +
+                    "<input class='form-control' type='text' name='ind"+j+"' placeholder='Indice' required/>" +
                 "</div>" +
             "</div>");
       });
@@ -43,8 +43,10 @@ $(document).ready(function(){
             j--;
       });
 
-      $('form').submit(function(){
-            $("#interview").append("")
+      $('#form-e').submit(function(){
+            alert("submit");
+            $("#interview").append("<input name='nbquestion' type='hidden' value="+i+"/>");
+            $("#indice").append("<input name='nbindice' type='hidden' value="+j+"/>");
       });
 
 });
