@@ -5,7 +5,6 @@ $(document).ready(function(){
   $("#plusIqr").click(function(){
         i++;
         $("#interview").append("" +
-        "<br>" +
         "<div id='iqr"+i+"' class='panel panel-primary'>" +
             "<div class='panel-heading'>" +
                 "Question "+i+" :" +
@@ -27,7 +26,6 @@ $(document).ready(function(){
     $("#plusInd").click(function(){
             j++;
             $("#indice").append("" +
-            "<br>" +
             "<div id='iind"+j+"' class='panel panel-primary'>" +
                 "<div class='panel-heading'>" +
                     "Indice "+j+" :" +

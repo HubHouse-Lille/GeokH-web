@@ -8,13 +8,19 @@ var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + '/../config/config.json')[env];
 var db        = {};
 
-var sequelize = new Sequelize("postgres://abyvpzijtnigcu:ja0wEQfYo7F3fptAioE-0SCP64@ec2-54-235-199-36.compute-1.amazonaws.com:5432/daqbtkq43aihbo",{
+/*
+var sequelize = new Sequelize("postgres://abyvpzijtnigcu:ja0wEQfYo7F3fptAioE-0SCP64@ec2-54-235-199-36.compute-1.amazonaws.com:5432/daqbtkq43aihbo?sslmode=require",{
   dialect : 'postgres',
   dialectOptions: {
-    ssl:true
+    ssl: true
   }
 });
-
+*/
+// postgres://postgres:charlie887*@localhost:5432/geokh
+// postgres://postgres:postgres-postgres@91.121.181.105:5432/geokh
+var sequelize = new Sequelize("postgres://postgres:postgres-postgres@91.121.181.105:5432/geokh",{
+  dialect : 'postgres'
+});
 
 fs
   .readdirSync(__dirname)

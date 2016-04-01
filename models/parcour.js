@@ -9,8 +9,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Parcour.hasMany(models.Ptobq)
-      }
+       }
     }
-  });
+    });
   return Parcour;
 };
