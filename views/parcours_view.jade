@@ -33,6 +33,7 @@ block content
                     th Description
                     th Etat
                     th Actions
+                    th Créateur
                     th Création
                     th Mise à jour
 
@@ -51,5 +52,6 @@ block content
                         a(href="/parcours/view/"+ parcour.id) Détails
                         | &nbsp;-&nbsp;
                         a(href="/parcours/edit/"+ parcour.id) Editer
+                    td #{parcour.User.username}
                     td #{parcour.createdAt}
                     td #{parcour.updatedAt}

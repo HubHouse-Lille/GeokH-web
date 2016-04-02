@@ -44,7 +44,6 @@ $(document).ready(function(){
       });
 
       $('#form-e').submit(function(){
-            alert("submit");
             $("#interview").append("<input name='nbquestion' type='hidden' value="+i+"/>");
             $("#indice").append("<input name='nbindice' type='hidden' value="+j+"/>");
       });

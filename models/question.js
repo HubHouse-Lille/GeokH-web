@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     difficulte: DataTypes.STRING,
     question: DataTypes.STRING,
     propositions: DataTypes.ARRAY(DataTypes.TEXT),
-    reponses: DataTypes.ARRAY(DataTypes.TEXT),
+    reponses: DataTypes.ARRAY(DataTypes.INTEGER),
     retours: DataTypes.ARRAY(DataTypes.TEXT)
   }, {
        classMethods: {
