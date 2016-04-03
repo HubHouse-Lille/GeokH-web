@@ -21,7 +21,7 @@ block content
             .alert.alert-info(role="alert") #{msg}
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
-        form(action="/dal/entrepreneurs/create", method="post").input-group.input-group-lg
+        form(action="/dal/entrepreneurs/create", method="post").input-group.input-group-lg#form-e
             #e1
                 p Nom de l'entrepreneur
                 div.input-lg-8.input-lg

@@ -21,16 +21,16 @@ block content
             .alert.alert-info(role="alert") #{msg}
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
-        form(action="/dal/entrepreneurs/update/#{entrepreneur.id}", method="post").input-group.input-group-lg
+        form(action="/dal/entrepreneurs/update/#{entrepreneur.id}", method="post").input-group.input-group-lg#form-e
             #e1
                 p Nom de l'entrepreneur
                 div.input-lg-8.input-lg
-                    input(type="text", name="nom", value=entrepreneur.nom, placeholder="nom de l'entrepreneur").form-control
+                    input(type="text", name="nom", value=entrepreneur.nom, placeholder="nom de l'entrepreneur",required=true).form-control
             br
             #e2
                 p Prénom de l'entrepreneur
                 div.input-lg-8.input-lg
-                    input(type="textarea", name="prenom", value=entrepreneur.prenom,placeholder="prénom de l'entrepreneur").form-control
+                    input(type="textarea", name="prenom", value=entrepreneur.prenom,placeholder="prénom de l'entrepreneur", required=true).form-control
             br
             #e3a
                 p Image de profil actuelle
@@ -51,12 +51,33 @@ block content
             #e2
                 p Interview de l'entrepreneur
                 div.input-lg-8.input-lg
-                    input(type="textarea", name="interview", value=entrepreneur.interview, placeholder="Interview").form-control
+                    button.btn#plusIqr(type="button") Ajouter Q/R
+                    button.btn#moinsIqr(type="button") Supprimer Q/R
+                br
+                #interview
+                  - var n = entrepreneur.interviewQ.length
+                  - for (var i = 1; i <= n; i++)
+                    div.panel.panel-primary(id='iqr'+i)
+                       div.panel-heading
+                           p Question #{i} :
+                       div.panel-body
+                           input(type='text', name='q'+i, value=entrepreneur.interviewQ[i-1], placeholder='Question', required=true).form-control
+                           input(type='text', name='r'+i, value=entrepreneur.interviewR[i-1], placeholder='Reponse', required=true).form-control
             br
             #e2
                 p Indice
                 div.input-lg-8.input-lg
-                    input(type="textarea", name="indice", value=entrepreneur.indice, placeholder="Indice").form-control
+                    button.btn#plusInd(type="button") Ajouter Indice
+                    button.btn#moinsInd(type="button") Supprimer Indice
+                br
+                #indice
+                  - var n = entrepreneur.indices.length
+                  - for (var i = 1; i <= n; i++)
+                    div.panel.panel-primary(id='ind'+i)
+                        div.panel-heading
+                            p Indice #{i} :
+                        div.panel-body
+                            input(type='text', name='ind'+i, value=entrepreneur.indices[i-1], placeholder='Indice', required=true).form-control
             br
             div.actions
                 input(type="submit", value="Mettre à jour les données").btn.btn-success

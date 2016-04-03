@@ -38,13 +38,27 @@ block content
         br
         #e2
             p Interview de l'entrepreneur
-            div.input-lg-8.input-lg
-                input(type="textarea", name="interview", value="#{entrepreneur.interview}" disabled).form-control
+            div
+              - var n = entrepreneur.interviewQ.length
+              - for (var i = 1; i <= n; i++)
+                div.panel.panel-primary(id='iqr'+i)
+                    div.panel-heading
+                        p Question #{i} :
+                    div.panel-body
+                        input(type='text', name='q'+i, value=entrepreneur.interviewQ[i-1], placeholder='Question', required=true, disabled).form-control
+                        input(type='text', name='r'+i, value=entrepreneur.interviewR[i-1], placeholder='Reponse', required=true, disabled).form-control
         br
         #e2
             p Indice
-            div.input-lg-8.input-lg
-                input(type="textarea", name="indice", value="#{entrepreneur.indice}" disabled).form-control
+            div
+              - var n = entrepreneur.indices.length
+              - for (var i = 1; i <= n; i++)
+                div.panel.panel-primary(id='ind'+i)
+                    div.panel-heading
+                        p Indice #{i} :
+                    div.panel-body
+                        input(type='text', name='q'+i, value=entrepreneur.indices[i-1], placeholder='Indice', required=true, disabled).form-control
+
         br
         div.actions
             button.btn.btn-primary.btn-success(type='button', onclick="location.href='/entrepreneurs/edit/"+entrepreneur.id+"';") modifier

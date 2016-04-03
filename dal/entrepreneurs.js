@@ -2,21 +2,32 @@ var models  = require('../models/index');
 var express = require('express');
 var router  = express.Router();
 var base64 = require('node-base64-image');
+var Parse = require('parse').Parse;
 
 router.post('/create', function(req, res) {
-    // "[\"Le terme entrepreneur recouvre différentes significations connexes mais distinctes :\",
-    // \"L'usage courant l'assimile à un chef d'entreprise, tantôt porteur d'un projet d'entreprise en phase de démarrage, tantôt dirigeant d'une entreprise davantage établie, à laquelle le plus souvent il s'identifie étroitement et personnellement\",
-    // \"L'entrepreneur correspond également à l'appellation donnée aux chefs d'entreprise du secteur du bâtiment ou des travaux publics,En droit, l'entrepreneur (ou maître d'œuvre) désigne « la personne qui — dans un contrat d'entreprise — s'engage à effectuer un travail en réponse à la demande d'un maitre d'ouvrage\"]"
-    var photo = req.body.newPhoto;
-    var iqr = [];
 
+    var photo = req.body.newPhoto;
+    // Récupération des questions et réponses de l'interview et des différents indices.
+    var interviewQuestion = [];
+    var interviewReponse = [];
+    var indices_donnees = [];
+    var nbQR = Number.parseInt(req.body.nbquestion);
+    var nbI = Number.parseInt(req.body.nbindice);
+    for(var i = 1; i <= nbQR; i++){
+        interviewQuestion.push(req.body['q'+i]);
+        interviewReponse.push(req.body['r'+i]);
+    }
+    for(var i = 1; i <= nbI; i++){
+        indices_donnees.push(req.body['ind'+i]);
+    }
 
     models.Entrepreneur.create({
         nom: req.body.nom,
         prenom: req.body.prenom,
         photo: photo,
-        interview: req.body.interview,
-        indice: req.body.indice
+        interviewQ: interviewQuestion,
+        interviewR: interviewReponse,
+        indices: indices_donnees
     }).then(function() {
         res.redirect('/Entrepreneurs/view');
     });
@@ -83,13 +94,27 @@ router.get('/destroy/:Entrepreneur_id', function(req, res) {
 router.post('/update/:Entrepreneur_id', function(req, res) {
 
     var photo = req.body.newPhoto;
+    // Récupération des questions et réponses de l'interview et des différents indices.
+    var interviewQuestion = [];
+    var interviewReponse = [];
+    var indices_donnees = [];
+    var nbQR = Number.parseInt(req.body.nbquestion);
+    var nbI = Number.parseInt(req.body.nbindice);
+    for(var i = 1; i <= nbQR; i++){
+        interviewQuestion.push(req.body['q'+i]);
+        interviewReponse.push(req.body['r'+i]);
+    }
+    for(var i = 1; i <= nbI; i++){
+        indices_donnees.push(req.body['ind'+i]);
+    }
 
     models.Entrepreneur.update({
         nom: req.body.nom,
         prenom: req.body.prenom,
         photo: photo,
-        interview: req.body.interview,
-        indice: req.body.indice
+        interviewQ: interviewQuestion,
+        interviewR: interviewReponse,
+        indices: indices_donnees
     },{
         where: { id : req.params.Entrepreneur_id }
     }).then(function() {
