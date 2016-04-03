@@ -53,63 +53,23 @@ block content
                         option(value="QCU" selected) Question à choix unitaire
                         option(value="QCM") Question à choix multiple
             br
-            #qqcu
-                p Les réponses sous forme de QCU
+            #e5
+                p Les Propositions de réponses et les réponses
                 div.input-lg-8.input-lg
-                    input(type="text", name="qu1", placeholder="Réponse possible 1").form-control
-                    | &nbsp;&nbsp;
-                    input(type="radio", name="repQcu", value="1" checked)
-                div.input-lg-8.input-lg
-                    input(type="text", name="qu2", placeholder="Réponse possible 2").form-control
-                    | &nbsp;&nbsp;
-                    input(type="radio", name="repQcu", value="2")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qu3", placeholder="Réponse possible 3").form-control
-                    | &nbsp;&nbsp;
-                    input(type="radio", name="repQcu", value="3")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qu4", placeholder="Réponse possible 4").form-control
-                    | &nbsp;&nbsp;
-                    input(type="radio", name="repQcu", value="4")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qu5", placeholder="Réponse possible 5").form-control
-                    | &nbsp;&nbsp;
-                    input(type="radio", name="repQcu", value="5")
-            #qqcm
-                p Les réponses sous forme de QCM
-                div.input-lg-8.input-lg
-                    input(type="text", name="qm1", placeholder="Réponse possible 1").form-control
-                    | &nbsp;&nbsp;
-                    input(type="checkbox", name="repQcm1", value="1")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qm2", placeholder="Réponse possible 2").form-control
-                    | &nbsp;&nbsp;
-                    input(type="checkbox", name="repQcm2", value="2")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qm3", placeholder="Réponse possible 3").form-control
-                    | &nbsp;&nbsp;
-                    input(type="checkbox", name="repQcm3", value="3")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qm4", placeholder="Réponse possible 4").form-control
-                    | &nbsp;&nbsp;
-                    input(type="checkbox", name="repQcm4", value="4")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qm5", placeholder="Réponse possible 5").form-control
-                    | &nbsp;&nbsp;
-                    input(type="checkbox", name="repQcm5", value="5")
+                    button.btn#plusProps(type="button") Ajouter Propositions
+                    button.btn#moinsProps(type="button") Supprimer Propositions
+                br
+                #propsrep
+                br
             br
-            #rep
+            #e6
                 p Les Retours que vous souhaitez renvoyer
                 div.input-lg-8.input-lg
-                    input(type="text", name="ret1", placeholder="Retour 1").form-control
-                div.input-lg-8.input-lg
-                    input(type="text", name="ret2", placeholder="Retour 2").form-control
-                div.input-lg-8.input-lg
-                    input(type="text", name="ret3", placeholder="Retour 3").form-control
-                div.input-lg-8.input-lg
-                    input(type="text", name="ret4", placeholder="Retour 4").form-control
-                div.input-lg-8.input-lg
-                    input(type="text", name="ret5", placeholder="Retour 5").form-control
+                    button.btn#plusRet(type="button") Ajouter Retour
+                    button.btn#moinsRet(type="button") Supprimer Retour
+                br
+                #retours
+                br
             br
             #diff
                 p Difficulté de la question
@@ -124,38 +84,3 @@ block content
                 input(type="submit", value="Créer la question").btn.btn-success
             br
             br
-
-    script(type="text/javascript").
-        $(function() {
-        $('form').submit(function(){
-            for(var i=0;i< $("#selectTheme option").size();i++) {
-                if(document.getElementById("selectTheme").options[i].text.toLowerCase() == $("#inputNewTheme").val().toLowerCase()) {
-                    alert("Ce thème existe déjà");
-                    return false;
-                }
-            }
-        });
-        $("#addTheme").click(function() {
-
-            if($("#newTheme").is(":hidden")) {
-                $("#newTheme").show();
-                $("#selectTheme").attr('disabled', 'disabled');
-            } else {
-                $("#newTheme").hide();
-                $("#selectTheme").removeAttr('disabled');
-                $("#inputNewTheme").val("");
-            }
-        });
-        console.log($("#selectTheme").text());
-        $("#newTheme").hide();
-        $('#qqcm').hide();
-        $('#type').change(function(){
-        if($('#type').val() == 'QCM') {
-            $('#qqcm').show();
-            $('#qqcu').hide();
-        } else {
-            $('#qqcm').hide();
-            $('#qqcu').show();
-        }
-        });
-        });
