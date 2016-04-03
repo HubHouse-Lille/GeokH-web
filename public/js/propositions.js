@@ -9,8 +9,14 @@ $(document).ready(function(){
                 return false;
             }
         }
-        $("#propsrep").append("<input name='nbproposition' type='hidden' value="+i+"/>");
-        $("#retours").append("<input name='nbretours' type='hidden' value="+j+"/>");
+        $("#propsrep").append("<input name='nbproposition' type='hidden' value='"+i+"'/>");
+        $("#retours").append("<input name='nbretours' type='hidden' value='"+j+"'/>");
+         if(type == 'QCM'){
+                $('.radioqcu').remove();
+         }else{
+                $('.checkqcm').remove();
+         }
+
     });
     // Ajout du theme
     $("#addTheme").click(function() {
@@ -44,8 +50,8 @@ $(document).ready(function(){
         i++;
         $("#propsrep").append("" +
         "<div id='pr"+i+"' >" +
-            "<input type='text' name='props"+i+"' required />" +
-            "<input class='checkqcm' type='checkbox' name='rqcm'"+i+"' value='"+i+"'/>" +
+            "<input type='text' name='props' required />" +
+            "<input class='checkqcm' type='checkbox' name='rqcm' value='"+i+"'/>" +
             "<input class='radioqcu' type='radio' name='rqcu' value='"+i+"' />"+
         "</div>");
         if(type == 'QCM'){
@@ -68,7 +74,7 @@ $(document).ready(function(){
             j++;
             $("#retours").append("" +
             "<div id='ret"+j+"' >" +
-                "<input type='text' name='retour"+j+"' required />" +
+                "<input type='text' name='retour' required />" +
             "</div>");
       });
 

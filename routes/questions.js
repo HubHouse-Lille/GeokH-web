@@ -20,7 +20,7 @@ router.get('/view/', function(req, res) {
 router.get('/view/:id', function(req, res) {
     models.Question.findOne({
         where: { id: req.params.id }
-    }).then(
+    }, { include: [ models.Theme ] }).then(
         function(question) {
             res.render('questions_detail', {
                 question: question,

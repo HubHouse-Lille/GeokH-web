@@ -81,6 +81,32 @@ router.post('/create', function(req, res) {
     if (typeof req.body.ret5 !== "undefined" && req.body.ret5 != "") {
        retours.push("\""+req.body.ret5+"\"");
     }
+    var tabProps = [], tabRetour = [], tabReponses = [];
+
+    if(req.body.props instanceof Array) {
+        tabProps = req.body.props;
+    } else {
+        tabProps.push(req.body.props || "");
+    }
+
+
+    if(req.body.retour instanceof Array) {
+        tabRetour = req.body.retour;
+    } else {
+        tabRetour.push(req.body.retour || "");
+    }
+
+    if(req.body.type==="QCM") {
+        if(req.body.rqcm instanceof Array) {
+            tabReponses = req.body.rqcm;
+        } else {
+            tabReponses.push(req.body.rqcm);
+        }
+    } else {
+        tabReponses.push(req.body.rqcu);
+    }
+    console.log(req.body);
+
     var theme;
     if(req.body.newTheme !== "") {
         //valeur string
@@ -95,8 +121,8 @@ router.post('/create', function(req, res) {
                    type: req.body.type,
                    difficulte: req.body.difficulte,
                    question: req.body.question,
-                   propositions: ["test"],//'['+propositions.toString()+']',
-                   reponses: [1],  //TODO : A modifier selon ( reponses.toString())
+                   propositions: tabProps,//'['+propositions.toString()+']',
+                   reponses: tabReponses,  // A modifier selon ( reponses.toString())
                    retours: ["test"] //'['+retours.toString()+']'
                }).then(function() {
                    res.redirect('/Questions/view');
@@ -111,9 +137,9 @@ router.post('/create', function(req, res) {
             type: req.body.type,
             difficulte: req.body.difficulte,
             question: req.body.question,
-            propositions: ["test"],//'['+propositions.toString()+']',
-            reponses: [1],  //TODO : A modifier selon ( reponses.toString())
-            retours: ["test"] //'['+retours.toString()+']'
+            propositions: tabProps,//'['+propositions.toString()+']',
+            reponses: tabReponses,  // A modifier selon ( reponses.toString())
+            retours: tabRetour //'['+retours.toString()+']'
         }).then(function() {
             res.redirect('/Questions/view');
         });
