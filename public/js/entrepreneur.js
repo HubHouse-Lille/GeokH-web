@@ -19,8 +19,10 @@ $(document).ready(function(){
   });
 
    $("#moinsIqr").click(function(){
+        if(i>0){
           $("#iqr"+i+"").remove();
           i--;
+        }
     });
 
     $("#plusInd").click(function(){
@@ -38,9 +40,11 @@ $(document).ready(function(){
       });
 
       $("#moinsInd").click(function(){
+          if(j>0){
             $("#iind"+j+"").remove();
             // Augmentation si plusieurs questions
             j--;
+          }
       });
 
       $('#form-e').submit(function(){

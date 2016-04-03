@@ -3,14 +3,12 @@ var express = require('express');
 var router  = express.Router();
 
 router.post('/create', function(req, res) {
-    console.log("CREATION");
     models.Parcour.create({
         nom: req.body.nom,
         description: req.body.description,
         actif : false,
         UserId : req.session.sid
-    }).then(function(parcour) {
-        console.log("Parcour : userid : " + parcour.UserId );
+    }).then(function() {
         res.redirect('/parcours/view');
     });
 });
