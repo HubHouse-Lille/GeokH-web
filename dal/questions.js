@@ -60,6 +60,7 @@ router.post('/create', function(req, res) {
            propositions.push("\""+req.body.qu5+"\"");
         }
 
+        console.log("theme : " + req.body.selectTheme);
         console.log("rep qcm : "+req.body.repQcu);
         reponses = req.body.repQcu;
 
@@ -80,20 +81,44 @@ router.post('/create', function(req, res) {
     if (typeof req.body.ret5 !== "undefined" && req.body.ret5 != "") {
        retours.push("\""+req.body.ret5+"\"");
     }
+    var theme;
+    if(req.body.newTheme !== "") {
+        //valeur string
+        models.Theme.create({
+                nom: req.body.newTheme
+            }).then(function(t ) {
+               console.log("L'id du thème crée est :" + t.id);
+               theme = t.id;
+               models.Question.create({
+                   ThemeId: theme,
+                   objectif: req.body.objectif,
+                   type: req.body.type,
+                   difficulte: req.body.difficulte,
+                   question: req.body.question,
+                   propositions: ["test"],//'['+propositions.toString()+']',
+                   reponses: [1],  //TODO : A modifier selon ( reponses.toString())
+                   retours: ["test"] //'['+retours.toString()+']'
+               }).then(function() {
+                   res.redirect('/Questions/view');
+               });
+        });
+    } else {
+        //valeur integer
+        theme = req.body.selectTheme;
+        models.Question.create({
+            ThemeId: theme,
+            objectif: req.body.objectif,
+            type: req.body.type,
+            difficulte: req.body.difficulte,
+            question: req.body.question,
+            propositions: ["test"],//'['+propositions.toString()+']',
+            reponses: [1],  //TODO : A modifier selon ( reponses.toString())
+            retours: ["test"] //'['+retours.toString()+']'
+        }).then(function() {
+            res.redirect('/Questions/view');
+        });
+    }
 
-
-    models.Question.create({
-        theme: req.body.theme,
-        objectif: req.body.objectif,
-        type: req.body.type,
-        difficulte: req.body.difficulte,
-        question: req.body.question,
-        propositions: '['+propositions.toString()+']',
-        reponses: reponses.toString(),
-        retours: '['+retours.toString()+']'
-    }).then(function() {
-        res.redirect('/Questions/view');
-    });
 });
 
 router.get('/destroy/:Question_id', function(req, res) {
@@ -232,9 +257,30 @@ router.post('/update/:Question_id', function(req, res) {
        retours.push("\""+req.body.ret5+"\"");
     }
 
-
+    var theme;
+    if(req.body.newTheme !== "") {
+        //valeur string
+        theme = req.body.newTheme;
+        models.Theme.create({
+                nom: theme
+            }).then(function() {
+              models.Theme.findAll().then(
+                      function(themes) {
+                          var tmp;
+                          for (var i=0; i<themes.length;i++) {
+                              if(themes[i].nom.toLowerCase() === theme) {
+                                  tmp = themes[i].id;
+                              }
+                          }
+                          theme = tmp;
+                      });
+        });
+    } else {
+        //valeur integer
+        theme = req.body.selectTheme;
+    }
     models.Question.update({
-        theme: req.body.theme,
+        ThemeId: theme,
         objectif: req.body.objectif,
         type: req.body.type,
         difficulte: req.body.difficulte,

@@ -7,8 +7,9 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
-    models.Question.findAll().then(
+    models.Question.findAll({ include: [ models.Theme ] }).then(
         function(questions) {
+            console.log(questions);
             res.render('questions_view', {
                 questions: questions
             });
@@ -32,7 +33,15 @@ router.get('/view/:id', function(req, res) {
 
 // CREATE > GET
 router.get('/create/', function(req, res) {
-    res.render('questions_create');
+    //res.render('questions_create');
+       models.Theme.findAll().then(
+              function(themes) {
+                  console.log(themes);
+                  res.render('questions_create', {
+                      themes: themes
+                  });
+              });
+
 });
 
 // EDIT > GET

@@ -21,7 +21,7 @@ block content
             .alert.alert-info(role="alert") #{msg}
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
-        form(action="/dal/questions/create", method="post").input-group.input-group-lg
+        form(action="/dal/questions/create", method="post", id="form").input-group.input-group-lg
             #e1
                 p La question qui sera posée
                 div.input-lg-8.input-lg
@@ -31,8 +31,15 @@ block content
             #e2
                 p Le thème
                 div.input-lg-8.input-lg
-                    input(type="text", name="theme", placeholder="Thème").form-control
-                p.help-block exemple: Connaître la définition d’un entrepreneur
+                    div(class="row col-lg-5")
+                        select(id="selectTheme", class="form-control", name="selectTheme")
+                          each theme in themes
+                            option(value=theme.id) #{theme.nom}
+                    input(id="addTheme", type="button", value="Ajouter thème",class="btn")
+                    #newTheme
+                        input(id="inputNewTheme", type="text", name="newTheme", placeholder="Nouveau thème...").form-control
+
+            br
             br
             #e3
                 p L'objectif
@@ -120,6 +127,27 @@ block content
 
     script(type="text/javascript").
         $(function() {
+        $('form').submit(function(){
+            for(var i=0;i< $("#selectTheme option").size();i++) {
+                if(document.getElementById("selectTheme").options[i].text.toLowerCase() == $("#inputNewTheme").val().toLowerCase()) {
+                    alert("Ce thème existe déjà");
+                    return false;
+                }
+            }
+        });
+        $("#addTheme").click(function() {
+
+            if($("#newTheme").is(":hidden")) {
+                $("#newTheme").show();
+                $("#selectTheme").attr('disabled', 'disabled');
+            } else {
+                $("#newTheme").hide();
+                $("#selectTheme").removeAttr('disabled');
+                $("#inputNewTheme").val("");
+            }
+        });
+        console.log($("#selectTheme").text());
+        $("#newTheme").hide();
         $('#qqcm').hide();
         $('#type').change(function(){
         if($('#type').val() == 'QCM') {
