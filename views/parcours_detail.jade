@@ -32,11 +32,11 @@ block content
             #e1
                 p Le nom du parcour
                 div.input-lg-8.input-lg
-                    input(type="text", name="nom", value=parcour.nom, placeholder="nom du parcour" readonly).form-control
+                    input(type="text", name="nom", value=parcour.nom, placeholder="nom du parcours" readonly).form-control
                 p.help-block exemple: HubHouse lille1-ouest pour etudiant info
             br
             #e2
-                p Le parcour est-il visible dans l'application mobile ?
+                p Le parcours est-il visible dans l'application mobile ?
                     | &nbsp; &nbsp;
                     if (parcour.actif == 1)
                         input(type="checkbox", name="actif", value="1" checked disabled)
@@ -45,16 +45,16 @@ block content
             #e3
                 p Description
                 div.input-lg-8.input-lg
-                    input(type="textarea", name="description", value=parcour.description, placeholder="description du parcour" readonly).form-control
+                    input(type="textarea", name="description", value=parcour.description, placeholder="description du parcours" readonly).form-control
             br
             div.actions
-                button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcour.id+"';") modifier
+                button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcour.id+"';") Modifier
             br
             br
 
         hr
         br
-        h4 Les entrepreneurs liés à ce parcour
+        h4 Les entrepreneurs liés à ce parcours
         br
         table.table.table-hover.table-bordered(id="parcourEntTable")
             thead
@@ -64,7 +64,7 @@ block content
         br
         hr
         br
-        h4 Les balises et questions de ce parcour
+        h4 Les balises et questions de ce parcours
         br
         table.table.table-hover.table-bordered(id="parcourBalQuestTable")
             thead

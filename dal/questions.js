@@ -106,7 +106,7 @@ router.get('/destroy/:Question_id', function(req, res) {
                         where: { id: req.params.Question_id }
                     }).then(function() {
 
-                        models.Question.findAll().then(
+                        models.Question.findAll({include : [ models.Theme ]}).then(
                             function(questions) {
                                 res.render('questions_view', {
                                     questions: questions,
