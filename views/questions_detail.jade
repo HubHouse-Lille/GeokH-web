@@ -33,7 +33,7 @@ block content
             #e2
                 p Le thème
                 div.input-lg-8.input-lg
-                    input(type="text", name="theme", value=question.theme, placeholder="Thème" readonly).form-control
+                    input(type="text", name="theme", value=question.Theme.nom, placeholder="Thème" readonly).form-control
                 p.help-block exemple: Connaître la définition d’un entrepreneur
             br
             #e3
@@ -50,50 +50,38 @@ block content
                         if (question.type != "QCM")
                             option(value="QCU" selected) Question à choix unitaire
             br
-            if (question.type == "QCU")
-                #qqcu
-                    p Les réponses sous forme de QCU
-
-                    - var props = JSON.parse(propositions)
-                    - var repu = reponses
-                    - for(var prop in props)
+            #e5
+                p Les Propositions de réponses et les réponses
+                #propsrep
+                    - var i = 0
+                    - var j = 0
+                    each prop in question.propositions
+                        - i++
                         div.input-lg-8.input-lg
-                            input(type="text", value="#{props[prop]}" readonly).form-control
-                            | &nbsp;&nbsp;
-                            - var repok = 0
-                            if (prop == (repu-1))
-                                input(type="radio", name="repQcu", value="rq1" checked readonly disabled)
+                            input(type="text", name="props", value="#{prop}" readonly ).form-control
+                            if(question.type == "QCM")
+                                if( question.reponses[j] == i )
+                                    input(type="checkbox", name="rqcm", class="checkqcm", value="#{i}", checked, disabled)
+                                    - j++
+                                else
+                                    input(type="checkbox", name="rqcm", class="checkqcm", value="#{i}", disabled)
                             else
-                                input(type="radio", name="repQcu", value="rq1" readonly disabled)
+                                if( question.reponses[0] == i)
+                                    input(type="radio", name="rqcu", class="radioqcu", value="#{i}" checked, disabled)
+                                else
+                                    input(type="radio", name="rqcu", class="radioqcu", value="#{i}", disabled)
 
-            if (question.type == "QCM")
-                #qqcm
-                    p Les réponses sous forme de QCM
-                    - var props = JSON.parse(propositions)
-                    - var reps = JSON.parse(reponses)
-                    - for(var prop in props)
-                        div.input-lg-8.input-lg
-                            input(type="text", value="#{props[prop]}" readonly).form-control
-                            | &nbsp;&nbsp;
-                            - var repok = 0
-                            - for(var rep in reps)
-                                if ((reps[rep]-1) == prop)
-                                    - repok = 1
-
-                            if (repok == 1)
-                                input(type="checkbox", name="repQcm1", value="rq1" checked readonly disabled )
-                            else
-                                input(type="checkbox", name="repQcm1", value="rq1" readonly disabled )
-
+                br
             br
-            #rep
+            #e6
                 p Les Retours que vous souhaitez renvoyer
-
-                - var rets = JSON.parse(retours)
-                - for(var ret in rets)
-                    div.input-lg-8.input-lg
-                        input(type="text", name="ret1", value="#{rets[ret]}", placeholder="Retour 1" readonly).form-control
-            br
+                #retours
+                    - var i = 0
+                    each ret in question.retours
+                        - i++
+                        div.input-lg-8.input-lg
+                            input(type="text", name="retour", value="#{ret}", readonly).form-control
+                br
             br
             #diff
                 p Difficulté de la question

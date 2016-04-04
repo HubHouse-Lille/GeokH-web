@@ -1,15 +1,16 @@
 $(document).ready(function(){
-      var i = 0;
-      var j = 0;
+      var i = $("#propsrep div").length;
+      var j = $("#retours div").length;
     // Check du form
     $('form').submit(function(){
         for(var i=0;i< $("#selectTheme option").size();i++) {
-            if(document.getElementById("selectTheme").options[i].text.toLowerCase() == $("#inputNewTheme").val().toLowerCase()) {
+            if(document.getElementById("selectTheme").options[i].text.toLowerCase() == $("#inputNewTheme").val().toLowerCase() &&
+                            $("#inputNewTheme").val().toLowerCase() != "") {
                 alert("Ce thème existe déjà");
                 return false;
             }
         }
-        $("#propsrep").append("<input name='nbproposition' type='hidden' value='"+i+"'/>");
+        $("#propsrep").append("<input name='nbpropositions' type='hidden' value='"+i+"'/>");
         $("#retours").append("<input name='nbretours' type='hidden' value='"+j+"'/>");
          if(type == 'QCM'){
                 $('.radioqcu').remove();
@@ -33,10 +34,17 @@ $(document).ready(function(){
 
     $("#newTheme").hide();
 
-    var type = 'QCU';
+    var type = $('#type').val();
+    if(type == 'QCU'){
+        $('.checkqcm').hide();
+        $('.radioqcu').show();
+    }else{
+        $('.checkqcm').show();
+        $('.radioqcu').hide();
+    }
     $('#type').change(function(){
         type = $('#type').val();
-        if($('#type').val() == 'QCM') {
+        if(type == 'QCM') {
             $('.checkqcm').show();
             $('.radioqcu').hide();
         } else {
@@ -45,12 +53,11 @@ $(document).ready(function(){
         }
     });
 
-
   $("#plusProps").click(function(){
         i++;
         $("#propsrep").append("" +
-        "<div id='pr"+i+"' >" +
-            "<input type='text' name='props' required />" +
+        "<div id='pr"+i+"' class='input-lg-8 input-lg'>" +
+            "<input type='text' class='form-control' name='props' required />" +
             "<input class='checkqcm' type='checkbox' name='rqcm' value='"+i+"'/>" +
             "<input class='radioqcu' type='radio' name='rqcu' value='"+i+"' />"+
         "</div>");
@@ -73,8 +80,8 @@ $(document).ready(function(){
       $("#plusRet").click(function(){
             j++;
             $("#retours").append("" +
-            "<div id='ret"+j+"' >" +
-                "<input type='text' name='retour' required />" +
+            "<div id='ret"+j+"' class='iinput-lg-8 input-lg' >" +
+                "<input type='text' class='form-control' name='retour' required />" +
             "</div>");
       });
 

@@ -19,9 +19,11 @@ router.get('/view/', function(req, res) {
 // VIEW ONE > GET
 router.get('/view/:id', function(req, res) {
     models.Question.findOne({
-        where: { id: req.params.id }
-    }, { include: [ models.Theme ] }).then(
+        where: { id: req.params.id },
+        include: [ models.Theme ]
+    }).then(
         function(question) {
+            console.log(question);
             res.render('questions_detail', {
                 question: question,
                 propositions: question.propositions,
@@ -47,15 +49,21 @@ router.get('/create/', function(req, res) {
 // EDIT > GET
 router.get('/edit/:id', function(req, res) {
     models.Question.findOne({
-        where: { id: req.params.id }
+        where: { id: req.params.id },
+        include : [ models.Theme ]
     }).then(
         function(question) {
-            res.render('questions_edit', {
-                question: question,
-                propositions: question.propositions,
-                reponses: question.reponses,
-                retours: question.retours
-            });
+            models.Theme.findAll().then(
+              function(themes) {
+                  res.render('questions_edit', {
+                      themes : themes,
+                      question: question,
+                      propositions: question.propositions,
+                      reponses: question.reponses,
+                      retours: question.retours
+                  });
+              });
+
         });
 });
 

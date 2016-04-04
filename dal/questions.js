@@ -4,83 +4,6 @@ var router  = express.Router();
 
 router.post('/create', function(req, res) {
 
-    var reponses = [];
-    var propositions = [];
-    var retours = [];
-
-    if (req.body.type == "QCM") {
-        if (typeof req.body.qm1 !== "undefined" && req.body.qm1 != "") {
-           propositions.push("\""+req.body.qm1+"\"");
-        }
-        if (typeof req.body.qm2 !== "undefined" && req.body.qm2 != "") {
-           propositions.push("\""+req.body.qm2+"\"");
-        }
-        if (typeof req.body.qm3 !== "undefined" && req.body.qm3 != "") {
-           propositions.push("\""+req.body.qm3+"\"");
-        }
-        if (typeof req.body.qm4 !== "undefined" && req.body.qm3 != "") {
-           propositions.push("\""+req.body.qm4+"\"");
-        }
-        if (typeof req.body.qm5 !== "undefined" && req.body.qm5 != "") {
-           propositions.push("\""+req.body.qm5+"\"");
-        }
-
-        if (typeof req.body.repQcm1 !== "undefined" && req.body.repQcm1 == "rq1" ) {
-           reponses.push(1);
-        }
-        if (typeof req.body.repQcm2 !== "undefined" && req.body.repQcm2 == "rq2" ) {
-           reponses.push(2);
-        }
-        if (typeof req.body.repQcm3 !== "undefined" && req.body.repQcm3 == "rq3" ) {
-           reponses.push(3);
-        }
-        if (typeof req.body.repQcm4 !== "undefined" && req.body.repQcm4 == "rq4" ) {
-           reponses.push(4);
-        }
-        if (typeof req.body.repQcm5 !== "undefined" && req.body.repQcm5 == "rq5" ) {
-           reponses.push(5);
-        }
-
-        reponses = '['+reponses+']';
-
-    } else {
-        if (typeof req.body.qu1 !== "undefined" && req.body.qu1 != "") {
-           propositions.push("\""+req.body.qu1+"\"");
-        }
-        if (typeof req.body.qu2 !== "undefined" && req.body.qu2 != "") {
-           propositions.push("\""+req.body.qu2+"\"");
-        }
-        if (typeof req.body.qu3 !== "undefined" && req.body.qu3 != "") {
-           propositions.push("\""+req.body.qu3+"\"");
-        }
-        if (typeof req.body.qu4 !== "undefined" && req.body.qu3 != "") {
-           propositions.push("\""+req.body.qu4+"\"");
-        }
-        if (typeof req.body.qu5 !== "undefined" && req.body.qu5 != "") {
-           propositions.push("\""+req.body.qu5+"\"");
-        }
-
-        console.log("theme : " + req.body.selectTheme);
-        console.log("rep qcm : "+req.body.repQcu);
-        reponses = req.body.repQcu;
-
-    }
-
-    if (typeof req.body.ret1 !== "undefined" && req.body.ret1 != "") {
-       retours.push("\""+req.body.ret1+"\"");
-    }
-    if (typeof req.body.ret2 !== "undefined" && req.body.ret2 != "") {
-       retours.push("\""+req.body.ret2+"\"");
-    }
-    if (typeof req.body.ret3 !== "undefined" && req.body.ret3 != "") {
-       retours.push("\""+req.body.ret3+"\"");
-    }
-    if (typeof req.body.ret4 !== "undefined" && req.body.ret4 != "") {
-       retours.push("\""+req.body.ret4+"\"");
-    }
-    if (typeof req.body.ret5 !== "undefined" && req.body.ret5 != "") {
-       retours.push("\""+req.body.ret5+"\"");
-    }
     var tabProps = [], tabRetour = [], tabReponses = [];
 
     if(req.body.props instanceof Array) {
@@ -88,7 +11,6 @@ router.post('/create', function(req, res) {
     } else {
         tabProps.push(req.body.props || "");
     }
-
 
     if(req.body.retour instanceof Array) {
         tabRetour = req.body.retour;
@@ -105,7 +27,6 @@ router.post('/create', function(req, res) {
     } else {
         tabReponses.push(req.body.rqcu);
     }
-    console.log(req.body);
 
     var theme;
     if(req.body.newTheme !== "") {
@@ -113,7 +34,6 @@ router.post('/create', function(req, res) {
         models.Theme.create({
                 nom: req.body.newTheme
             }).then(function(t ) {
-               console.log("L'id du thème crée est :" + t.id);
                theme = t.id;
                models.Question.create({
                    ThemeId: theme,
@@ -123,7 +43,7 @@ router.post('/create', function(req, res) {
                    question: req.body.question,
                    propositions: tabProps,//'['+propositions.toString()+']',
                    reponses: tabReponses,  // A modifier selon ( reponses.toString())
-                   retours: ["test"] //'['+retours.toString()+']'
+                   retours: tabRetour //'['+retours.toString()+']'
                }).then(function() {
                    res.redirect('/Questions/view');
                });
@@ -166,9 +86,7 @@ router.get('/destroy/:Question_id', function(req, res) {
               }
         }).then(
             function(ents) {
-
                 if (ents.length > 0) {
-
                   models.Question.findOne({
                       where: { id: req.params.Question_id }
                   }).then(
@@ -205,120 +123,71 @@ router.get('/destroy/:Question_id', function(req, res) {
 
 router.post('/update/:Question_id', function(req, res) {
 
+ var tabProps = [], tabRetour = [], tabReponses = [];
 
-    var reponses = [];
-    var propositions = [];
-    var retours = [];
-
-    if (req.body.type == "QCM") {
-        if (typeof req.body.qm1 !== "undefined" && req.body.qm1 != "") {
-           propositions.push("\""+req.body.qm1+"\"");
-        }
-        if (typeof req.body.qm2 !== "undefined" && req.body.qm2 != "") {
-           propositions.push("\""+req.body.qm2+"\"");
-        }
-        if (typeof req.body.qm3 !== "undefined" && req.body.qm3 != "") {
-           propositions.push("\""+req.body.qm3+"\"");
-        }
-        if (typeof req.body.qm4 !== "undefined" && req.body.qm3 != "") {
-           propositions.push("\""+req.body.qm4+"\"");
-        }
-        if (typeof req.body.qm5 !== "undefined" && req.body.qm5 != "") {
-           propositions.push("\""+req.body.qm5+"\"");
-        }
-
-        if (typeof req.body.repQcm1 !== "undefined" && req.body.repQcm1 == "rq1" ) {
-           reponses.push(1);
-        }
-        if (typeof req.body.repQcm2 !== "undefined" && req.body.repQcm2 == "rq2" ) {
-           reponses.push(2);
-        }
-        if (typeof req.body.repQcm3 !== "undefined" && req.body.repQcm3 == "rq3" ) {
-           reponses.push(3);
-        }
-        if (typeof req.body.repQcm4 !== "undefined" && req.body.repQcm4 == "rq4" ) {
-           reponses.push(4);
-        }
-        if (typeof req.body.repQcm5 !== "undefined" && req.body.repQcm5 == "rq5" ) {
-           reponses.push(5);
-        }
-
-        reponses = '['+reponses+']';
-
+    if(req.body.props instanceof Array) {
+        tabProps = req.body.props;
     } else {
-        if (typeof req.body.qu1 !== "undefined" && req.body.qu1 != "") {
-           propositions.push("\""+req.body.qu1+"\"");
-        }
-        if (typeof req.body.qu2 !== "undefined" && req.body.qu2 != "") {
-           propositions.push("\""+req.body.qu2+"\"");
-        }
-        if (typeof req.body.qu3 !== "undefined" && req.body.qu3 != "") {
-           propositions.push("\""+req.body.qu3+"\"");
-        }
-        if (typeof req.body.qu4 !== "undefined" && req.body.qu3 != "") {
-           propositions.push("\""+req.body.qu4+"\"");
-        }
-        if (typeof req.body.qu5 !== "undefined" && req.body.qu5 != "") {
-           propositions.push("\""+req.body.qu5+"\"");
-        }
-
-        console.log("rep qcm : "+req.body.repQcu);
-        reponses = req.body.repQcu;
-
+        tabProps.push(req.body.props || "");
     }
 
-    if (typeof req.body.ret1 !== "undefined" && req.body.ret1 != "") {
-       retours.push("\""+req.body.ret1+"\"");
+    if(req.body.retour instanceof Array) {
+        tabRetour = req.body.retour;
+    } else {
+        tabRetour.push(req.body.retour || "");
     }
-    if (typeof req.body.ret2 !== "undefined" && req.body.ret2 != "") {
-       retours.push("\""+req.body.ret2+"\"");
+
+    if(req.body.type==="QCM") {
+        if(req.body.rqcm instanceof Array) {
+            tabReponses = req.body.rqcm;
+        } else {
+            tabReponses.push(req.body.rqcm);
+        }
+    } else {
+        tabReponses.push(req.body.rqcu);
     }
-    if (typeof req.body.ret3 !== "undefined" && req.body.ret3 != "") {
-       retours.push("\""+req.body.ret3+"\"");
-    }
-    if (typeof req.body.ret4 !== "undefined" && req.body.ret4 != "") {
-       retours.push("\""+req.body.ret4+"\"");
-    }
-    if (typeof req.body.ret5 !== "undefined" && req.body.ret5 != "") {
-       retours.push("\""+req.body.ret5+"\"");
-    }
+
 
     var theme;
     if(req.body.newTheme !== "") {
         //valeur string
-        theme = req.body.newTheme;
         models.Theme.create({
-                nom: theme
-            }).then(function() {
-              models.Theme.findAll().then(
-                      function(themes) {
-                          var tmp;
-                          for (var i=0; i<themes.length;i++) {
-                              if(themes[i].nom.toLowerCase() === theme) {
-                                  tmp = themes[i].id;
-                              }
-                          }
-                          theme = tmp;
-                      });
+                nom: req.body.newTheme
+            }).then(function(t ) {
+               theme = t.id;
+               models.Question.update({
+                    ThemeId: theme,
+                    objectif: req.body.objectif,
+                    type: req.body.type,
+                    difficulte: req.body.difficulte,
+                    question: req.body.question,
+                    propositions: tabProps,
+                    reponses: tabReponses,
+                    retours: tabRetour
+                },{
+                    where: { id : req.params.Question_id }
+                }).then(function() {
+                    res.redirect('/Questions/view/' + req.params.Question_id);
+                });
         });
     } else {
         //valeur integer
         theme = req.body.selectTheme;
+        models.Question.update({
+               ThemeId: theme,
+               objectif: req.body.objectif,
+               type: req.body.type,
+               difficulte: req.body.difficulte,
+               question: req.body.question,
+               propositions: tabProps,
+               reponses: tabReponses,
+               retours: tabRetour
+           },{
+               where: { id : req.params.Question_id }
+           }).then(function() {
+               res.redirect('/Questions/view/' + req.params.Question_id);
+           });
     }
-    models.Question.update({
-        ThemeId: theme,
-        objectif: req.body.objectif,
-        type: req.body.type,
-        difficulte: req.body.difficulte,
-        question: req.body.question,
-        propositions: '['+propositions.toString()+']',
-        reponses: reponses.toString(),
-        retours: '['+retours.toString()+']'
-    },{
-        where: { id : req.params.Question_id }
-    }).then(function() {
-        res.redirect('/Questions/view/' + req.params.Question_id);
-    });
 
 });
 
