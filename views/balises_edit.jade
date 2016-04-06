@@ -33,21 +33,21 @@ block content
             .alert.alert-warning(role="alert") #{err}
         form(action="/dal/balises/update/"+balise.id, method="post").input-group.input-group-lg
             div.input-lg-8.input-lg
-                input(type="text", name="nom", value=balise.nom, placeholder="nom de la balise").form-control
+                input(type="text", name="nom", value=balise.nom, placeholder="Nom de la balise", required=true).form-control
             p.help-block exemple: HubHouse lille1-ouest pour etudiant info
             br
             div.input-lg-8.input-lg
-                input(type="text", name="indice", value=balise.indice, placeholder="indice de la balise").form-control
+                input(type="text", name="indice", value=balise.indice, placeholder="Indice de la balise", required=true).form-control
             p.help-block exemple: Entre l'arbre et le banc
             br
             #map
             br
             div.input-lg-8.input-lg
-                input(type="text", name="latitude", value=balise.latitude, placeholder="latitude" readonly)#lat.form-control
+                input(type="text", name="latitude", value=balise.latitude, placeholder="Latitude" readonly)#lat.form-control
             p.help-block exemple: entre -90 et 90. Exemple: 50.6101406 (si positif, NORD)
             br
             div.input-lg-8.input-lg
-                input(type="text", name="longitude", value=balise.longitude, placeholder="longitude" readonly)#lng.form-control
+                input(type="text", name="longitude", value=balise.longitude, placeholder="Longitude" readonly)#lng.form-control
             p.help-block exemple: Entre -180 et 180. Exemple 3.1412428 (si positif, EST)
             br
             div.actions

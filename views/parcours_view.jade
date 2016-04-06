@@ -7,7 +7,7 @@ block content
         h2 Les parcours disponibles
         br
         div
-            p Pour plus d'informations sur les conséquences de ma modification d'un parcour,&nbsp;
+            p Pour plus d'informations sur les conséquences de ma modification d'un parcours,&nbsp;
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
             #info.collapse
                 .well
@@ -53,7 +53,7 @@ block content
                         else
                             td innactif
                         td
-                            a(href="/parcours/view/"+ parcour.id) Détails
+                            a(href="/parcours/view/"+ parcour.id) Détail
                             | &nbsp;-&nbsp;
                             a(href="/parcours/edit/"+ parcour.id) Editer
                         td #{parcour.User.username}

@@ -8,15 +8,15 @@ var markers = [];
 $(document).ready(function(){
   initMap();
 
-  $("#bcreate").submit(function(){
-      if(document.getElementById('lat').value == '' &&
-          document.getElementById('lng').value == ''){
-            alert("Veuillez choisir un point sur la map google.");
-            return false;
-          }
-  });
-});
 
+});
+$("#bcreate").submit(function(){
+  if(document.getElementById('lat').value == '' &&
+      document.getElementById('lng').value == ''){
+        alert("Veuillez choisir un point sur la map google.");
+        return false;
+      }
+});
 function initMap() {
   var haightAshbury;
   var dejainit = false;
