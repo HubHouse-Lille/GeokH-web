@@ -5,9 +5,9 @@ $(document).ready(function(){
     $('form').submit(function(){
         for(var i=0;i< $("#selectTheme option").size();i++) {
             if(document.getElementById("selectTheme").options[i].text.toLowerCase() == $("#inputNewTheme").val().toLowerCase() &&
-                            $("#inputNewTheme").val().toLowerCase() != "") {
-                alert("Ce thème existe déjà");
-                return false;
+                $("#inputNewTheme").val().toLowerCase() != "") {
+                    alert("Ce thème existe déjà");
+                    return false;
             }
         }
         $("#propsrep").append("<input name='nbpropositions' type='hidden' value='"+i+"'/>");

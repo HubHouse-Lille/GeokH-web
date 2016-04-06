@@ -1,8 +1,7 @@
 extends layout_main
-
 block content
     container.col-md-8
-
+        script(src='/js/parcours_create.js')
         br
         h2 Créer un parcour
         br
@@ -25,7 +24,7 @@ block content
             .alert.alert-info(role="alert") #{msg}
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
-        form(action="/dal/parcours/create", method="post").input-group.input-group-lg
+        form(action="/dal/parcours/create", method="post", id="form-p").input-group.input-group-lg
             #e1
                 p Nom du parcours
                 div.input-lg-8.input-lg
@@ -37,5 +36,47 @@ block content
                 div.input-lg-8.input-lg
                     input(type="textarea", name="description", placeholder="description du parcour", required=true).form-control
             br
+            #e3
+                p Entrepreneurs
+                table.table.table-hover.table-bordered
+                    thead
+                        tr
+                            th #
+                            th nom
+                    tbody#tabPtoe
+                br
+                #ee1
+                    p Ajouter un entrepreneur
+                    div.input-md-12(style="float:left; margin-right:8px;")
+                        select.form-control(id="optEnt", name="entrepreneur_id")
+                    div.actions(style="float:left; margin-right:8px;")
+                        input(type="button", value="Ajouter cet entrepreneur").btn.btn-success
+                br
+            br
+            hr
+            #e4
+                p Balises & Questions
+                table.table.table-hover.table-bordered
+                    thead
+                        tr
+                            th #
+                            th Nom balise
+                            th Question
+                            th Ordre
+                    tbody#tabPtobq
+                br
+                #eb1
+                    p Ajouter une balise, associée à une question, selon l'ordre souhaité
+                    div.input-md-12(style="float:left; margin-right:8px;")
+                        select.form-control(id="optb", name="balise")
+                    div.input-md-12(style="float:left;margin-right:8px;")
+                        select.form-control(id="optq", name="question")
+                    div.input-md-12(style="float:left; margin-right:8px;")
+                        select.form-control(id="ordre", name="ordre")
+                    div.actions(style="float:left;")
+                        input(id='addbq', type="button", value="Ajouter la balise").btn.btn-success
+                br
+            br
+            hr
             div.actions
                 input(type="submit", value="Créer le parcour").btn.btn-success

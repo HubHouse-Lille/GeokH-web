@@ -19,7 +19,7 @@ router.get('/parcour/:id', function(req, res) {
     models.Ptobq.findAll({
             where: { ParcourId: req.params.id },
             include: [ models.Balise, models.Question ],
-            order: '`ordre` ASC'
+            order: 'ordre ASC'
           }).then(
         function(ptobqs) {
             res.json(ptobqs);

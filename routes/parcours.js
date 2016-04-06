@@ -19,17 +19,14 @@ router.get('/view/', function(req, res) {
 // VIEW ONE > GET
 router.get('/view/:id', function(req, res) {
 
-    // Parcour
     models.Parcour.findOne({
-        where: { id: req.params.id }
-    }).then(
-        function(parcour) {
-        res.render('parcours_detail', {
-            parcour: parcour,
-            entrepreneurs_selected: {},
-            entrepreneur_all: {}
-        });
-    });
+            where: { id: req.params.id }
+        }).then(
+            function(parcour) {
+                res.render('parcours_detail', {
+                    parcour: parcour
+                });
+            });
 
 });
 

@@ -2,7 +2,7 @@ extends layout_main
 
 block content
     container.col-md-8
-
+        script(src='/js/parcours_create.js')
         br
         h2 Détail d'un parcour
         br
@@ -33,6 +33,7 @@ block content
                 p Le nom du parcour
                 div.input-lg-8.input-lg
                     input(type="text", name="nom", value=parcour.nom, placeholder="nom du parcour" readonly).form-control
+                    input(id="pId", type="hidden", name="idParcour", value=parcour.id)
                 p.help-block exemple: HubHouse lille1-ouest pour etudiant info
             br
             #e2
@@ -47,32 +48,33 @@ block content
                 div.input-lg-8.input-lg
                     input(type="textarea", name="description", value=parcour.description, placeholder="description du parcour" readonly).form-control
             br
+            #e4
+                h4 Les entrepreneurs liés à ce parcour
+                br
+                table.table.table-hover.table-bordered
+                    thead
+                        tr
+                            th #
+                            th nom
+                    tbody#tabPtoe
+            br
+            #e5
+                h4 Les balises et questions de ce parcour
+                br
+                table.table.table-hover.table-bordered(id="parcourBalQuestTable")
+                    thead
+                        tr
+                            th #
+                            th nom balise
+                            th question
+                            th ordre
+                    tbody#tabPtobq
+            br
             div.actions
                 button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcour.id+"';") modifier
             br
             br
 
-        hr
-        br
-        h4 Les entrepreneurs liés à ce parcour
-        br
-        table.table.table-hover.table-bordered(id="parcourEntTable")
-            thead
-                tr
-                    th #
-                    th nom
-        br
-        hr
-        br
-        h4 Les balises et questions de ce parcour
-        br
-        table.table.table-hover.table-bordered(id="parcourBalQuestTable")
-            thead
-                tr
-                    th #
-                    th nom balise
-                    th question
-                    th ordre
         script
             | var globalParcourId = #{parcour.id};
             | var editable = false;
