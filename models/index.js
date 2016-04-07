@@ -18,7 +18,7 @@ var sequelize = new Sequelize("postgres://abyvpzijtnigcu:ja0wEQfYo7F3fptAioE-0SC
 */
 // postgres://postgres:charlie887*@localhost:5432/geokh
 // postgres://postgres:postgres-postgres@91.121.181.105:5432/geokh
-var sequelize = new Sequelize("postgres:postgres-postgres@91.121.181.105:5432/geokh",{
+var sequelize = new Sequelize("postgres://postgres:charlie887*@localhost:5432/geokh",{
   dialect : 'postgres'
 });
 

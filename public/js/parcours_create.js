@@ -3,14 +3,13 @@ $( document ).ready(function() {
     var edit = false;
     var create = false;
     // DETAIL
-    var a = $("input").attr("readonly");
-    if(a != undefined)
+    if(document.location.href.indexOf("view")> -1)
         detail = true;
     // EDIT
-    var b = $("input").val()
-    if(b != "" )
+    if(document.location.href.indexOf("edit")> -1)
         edit = true;
-    else
+    // CREATE
+    if(document.location.href.indexOf("create")> -1)
         create = true;
 
 //////// TRAITEMENT DES DONNEES/////
@@ -20,21 +19,24 @@ $( document ).ready(function() {
     var entrepreneurs_add = [];
     var balise_add = [];
     var question_add = [];
+    var idparcour;
 
     if(detail || edit)
     {
-
-        var idparcour = $("#pId").val();
+        idparcour = $("#pId").val();
         // PTOES
         $.getJSON("/api/ptoes/parcour/"+idparcour, function(result) {
             $.each(result, function(item) {
-                 $('#tabPtoe').append(''+
-                 '<tr>'+
-                 '<td>'+nb_entrepreneur+'</td>' +
-                 '<td>'+
-                 '<a href="/entrepreneurs/view/'+result[item].Entrepreneur.id+'">'+result[item].Entrepreneur.nom+'</a>'+
-                 '</td>'+
-                 '</tr>')
+                var t = ''+
+                '<tr id='+nb_entrepreneur+'>'+
+                '<td>'+nb_entrepreneur+' <input type="hidden" name="entrepreneurId" value="'+result[item].Entrepreneur.id+'" /> </td>' +
+                '<td>'+
+                '<a href="/entrepreneurs/view/'+result[item].Entrepreneur.id+'">'+result[item].Entrepreneur.nom+'</a>'+
+                '</td>';
+                if(edit)
+                   t+= '<td><button type="button" name="supEnt" id="supEnt" value="supprimer" /></td>';
+                t += '</tr>';
+                $('#tabPtoe').append(t);
                  nb_entrepreneur++
             });
         }).done(function( data ){
@@ -46,22 +48,26 @@ $( document ).ready(function() {
         // PTOBQS
         $.getJSON("/api/ptobqs/parcour/"+idparcour, function(result) {
             $.each(result, function(item) {
-                 $('#tabPtobq').append(''+
-                 '<tr>'+
+                 var t = ''+
+                 '<tr id='+nb_balise_question+' >'+
                  '<td>'+nb_balise_question+'</td>'+
                  '<td>'+
-                 '<a href="/balises/view/'+result[item].Balise.id+'">'+result[item].Balise.nom+'</a>'+
+                 '<a href="/balises/view/'+result[item].Balise.id+'">'+result[item].Balise.nom+' </a> <input type="hidden" name="baliseId" value="'+result[item].Balise.id+'" />'+
                  '</td>'+
                  '<td>'+
-                 '<a href="/questions/view/'+result[item].Question.id+'">'+result[item].Question.question+'</a>'+
+                 '<a href="/questions/view/'+result[item].Question.id+'">'+result[item].Question.question+'</a> <input type="hidden" name="questionId" value="'+result[item].Question.id+'" />'+
                  '</td>'+
-                 '<td>'+result[item].ordre+'</td></tr>')
+                 '<td>'+result[item].ordre+'</td>';
+                if(edit)
+                    t+= '<td><button type="button" name="supBQ" id="supBQ" value="supprimer" ></td>';
+                t += '</tr>';
+                 $('#tabPtobq').append(t);
                  nb_balise_question++
             });
         }).done(function( data ){
           for(var i=0; i<data.length;i++){
               balise_add.push(data[i].Balise.id)
-              question_add.push(date[i].Question.id)
+              question_add.push(data[i].Question.id)
           }
         });;
 
@@ -109,14 +115,15 @@ $( document ).ready(function() {
             if(ent == null)
                 alert("L'entrepreneur utilisé n'existe pas !");
             else if($.inArray(ent.id, entrepreneurs_add) == -1){
-                $("#tabPtoe").append(""+
+
+                var t = "" +
                 "<tr >"+
                     "<td> "+ nb_entrepreneur +" <input type='hidden' name='entrepreneurId' value='"+ent.id+"' /> </td>"  +
                     "<td> "+
                     "<a href='/entrepreneurs/view/"+ent.id+"' >" + ent.nom + " </a> "+
-                    "</td>" +
-                "</tr>"
-                );
+                    "</td>"+
+                "</tr>";
+                $("#tabPtoe").append(t);
                 nb_entrepreneur++;
                 entrepreneurs_add.push(ent.id);
             }else{
@@ -176,6 +183,14 @@ $( document ).ready(function() {
             }
             return null;
         }
+    }
+    // Suppression des lignes du tableau
+    if(edit){
+        alert("special edit")
+        $("#supEnt").click(function(e){
+            // tr
+           console.log(e.target.parentNode.parentNode);
+        });
     }
 });
 

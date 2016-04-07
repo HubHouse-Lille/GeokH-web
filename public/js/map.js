@@ -7,9 +7,8 @@ var markers = [];
 
 $(document).ready(function(){
   initMap();
-
-
 });
+
 $("#bcreate").submit(function(){
   if(document.getElementById('lat').value == '' &&
       document.getElementById('lng').value == ''){
