@@ -20,6 +20,7 @@ $( document ).ready(function() {
     var balise_add = [];
     var question_add = [];
     var idparcour;
+    var entrepreneurs = null;
 
     if(detail || edit)
     {
@@ -28,13 +29,14 @@ $( document ).ready(function() {
         $.getJSON("/api/ptoes/parcour/"+idparcour, function(result) {
             $.each(result, function(item) {
                 var t = ''+
-                '<tr id='+nb_entrepreneur+'>'+
-                '<td>'+nb_entrepreneur+' <input type="hidden" name="entrepreneurId" value="'+result[item].Entrepreneur.id+'" /> </td>' +
+                '<tr>'+
+                '<td>'+nb_entrepreneur+' </td>' +
                 '<td>'+
                 '<a href="/entrepreneurs/view/'+result[item].Entrepreneur.id+'">'+result[item].Entrepreneur.nom+'</a>'+
+                '<input type="hidden" name="entrepreneurId" value="'+result[item].Entrepreneur.id+'" />'+
                 '</td>';
                 if(edit)
-                   t+= '<td><button type="button" name="supEnt" id="supEnt" value="supprimer" /></td>';
+                   t+= '<td><button type="button" name="supEnt" class="supEnt btn btn-default" id="supEnt'+result[item].Entrepreneur.id+'" value="supprimer">Supprimer</button></td>';
                 t += '</tr>';
                 $('#tabPtoe').append(t);
                  nb_entrepreneur++
@@ -43,23 +45,29 @@ $( document ).ready(function() {
             for(var i=0; i<data.length;i++){
                 entrepreneurs_add.push(data[i].Entrepreneur.id)
             }
+            // Suppression des lignes du tableau
+            if(edit){
+                $(".supEnt").click(function(e){
+                    eventSupprimerEnt(e);
+                });
+            }
         });
 
         // PTOBQS
         $.getJSON("/api/ptobqs/parcour/"+idparcour, function(result) {
             $.each(result, function(item) {
                  var t = ''+
-                 '<tr id='+nb_balise_question+' >'+
+                 '<tr>'+
                  '<td>'+nb_balise_question+'</td>'+
                  '<td>'+
-                 '<a href="/balises/view/'+result[item].Balise.id+'">'+result[item].Balise.nom+' </a> <input type="hidden" name="baliseId" value="'+result[item].Balise.id+'" />'+
+                 '<a href="/balises/view/'+result[item].Balise.id+'">'+result[item].Balise.nom+'</a><input type="hidden" name="baliseId" value="'+result[item].Balise.id+'"/>'+
                  '</td>'+
                  '<td>'+
-                 '<a href="/questions/view/'+result[item].Question.id+'">'+result[item].Question.question+'</a> <input type="hidden" name="questionId" value="'+result[item].Question.id+'" />'+
+                 '<a href="/questions/view/'+result[item].Question.id+'">'+result[item].Question.question+'</a><input type="hidden" name="questionId" value="'+result[item].Question.id+'"/>'+
                  '</td>'+
-                 '<td>'+result[item].ordre+'</td>';
+                 '<td>'+result[item].ordre +'<input type="hidden" name="ordre" value="'+result[item].ordre+'"/></td>';
                 if(edit)
-                    t+= '<td><button type="button" name="supBQ" id="supBQ" value="supprimer" ></td>';
+                    t+= '<td><button type="button" name="supBQ" class="supBQ btn btn-default" id="supBQ'+result[item].Balise.id+"-"+result[item].Question.id+'" value="supprimer">Supprimer</button></td>';
                 t += '</tr>';
                  $('#tabPtobq').append(t);
                  nb_balise_question++
@@ -69,13 +77,19 @@ $( document ).ready(function() {
               balise_add.push(data[i].Balise.id)
               question_add.push(data[i].Question.id)
           }
+              // Suppression des lignes du tableau
+          if(edit){
+              $(".supBQ").click(function(e){
+                  eventSupprimerBq(e);
+              });
+          }
         });;
 
     }
     if(create || edit)
     {
         // Chargement des données
-        var entrepreneurs = null;
+
         $.getJSON("/api/entrepreneurs/", function(result) {
            var options = $("#optEnt");
            $.each(result, function(item) {
@@ -118,13 +132,18 @@ $( document ).ready(function() {
 
                 var t = "" +
                 "<tr >"+
-                    "<td> "+ nb_entrepreneur +" <input type='hidden' name='entrepreneurId' value='"+ent.id+"' /> </td>"  +
-                    "<td> "+
-                    "<a href='/entrepreneurs/view/"+ent.id+"' >" + ent.nom + " </a> "+
+                    "<td>"+ nb_entrepreneur +"</td>"  +
+                    "<td>"+
+                    "<a href='/entrepreneurs/view/"+ent.id+"'>" + ent.nom + "</a>"+
+                    "<input type='hidden' name='entrepreneurId' value='"+ent.id+"'/>"+
+                    '<td><button type="button" name="supEnt" class="supEnt btn btn-default" id="supEnt'+ent.id+'" value="supprimer">Supprimer</button></td>'+
                     "</td>"+
                 "</tr>";
                 $("#tabPtoe").append(t);
                 nb_entrepreneur++;
+                $("#supEnt"+ent.id).click(function(e){
+                    eventSupprimerEnt(e);
+                });
                 entrepreneurs_add.push(ent.id);
             }else{
                 alert("Entrepreneur déjà présent dans le tableau !");
@@ -144,14 +163,18 @@ $( document ).ready(function() {
                 alert("Question déjà utilisé ! ");
             else{
                 $("#tabPtobq").append(""+
-                "<tr >"+
-                "<td> "+ nb_balise_question +"</td>"  +
-                "<td> <a href='/balises/view/"+b.id+"' >"+b.nom+"</a> <input type='hidden' name='baliseId' value='"+b.id+"' /> </td>" +
-                "<td> <a href='/questions/view/"+q.id+"' >"+q.question+"</a> <input type='hidden' name='questionId' value='"+q.id+"' /> </td>" +
-                "<td> "+ ordre +" <input type='hidden' name='ordre' value='"+ordre+"' /></td>" +
+                "<tr>"+
+                "<td>"+ nb_balise_question +"</td>" +
+                "<td><a href='/balises/view/"+b.id+"'>"+b.nom+"</a><input type='hidden' name='baliseId' value='"+b.id+"'/></td>" +
+                "<td><a href='/questions/view/"+q.id+"'>"+q.question+"</a><input type='hidden' name='questionId' value='"+q.id+"'/></td>" +
+                "<td>"+ ordre +"<input type='hidden' name='ordre' value='"+ordre+"'/></td>" +
+                "<td><button type='button' name='supBQ' class='supBQ btn btn-default' id='supBQ"+b.id+"-"+q.id+"' value='supprimer'>Supprimer</button></td>"+
                 "</tr>"
                 );
                 nb_balise_question++;
+                $("#supBQ"+b.id+"-"+q.id).click(function(e){
+                    eventSupprimerBq(e);
+                });
                 balise_add.push(b.id);
                 question_add.push(q.id);
             }
@@ -184,13 +207,44 @@ $( document ).ready(function() {
             return null;
         }
     }
-    // Suppression des lignes du tableau
-    if(edit){
-        alert("special edit")
-        $("#supEnt").click(function(e){
-            // tr
-           console.log(e.target.parentNode.parentNode);
-        });
-    }
-});
 
+    function eventSupprimerEnt(e) {
+           var ligneToDel = e.target.parentNode.parentNode;
+           var el = ligneToDel.nextSibling;
+
+           while (el) {
+                el.firstChild.textContent = (parseInt(el.firstChild.textContent) - 1) + "";
+                el = el.nextSibling;
+           }
+          for(var i=0;i < entrepreneurs_add.length;i++) {
+                if(entrepreneurs_add[i] == e.target.parentNode.parentNode.firstChild.nextSibling.lastChild.value) {
+                    entrepreneurs_add.splice(i, 1);
+                }
+          }
+          ligneToDel.remove();
+          nb_entrepreneur--;
+    };
+
+    function eventSupprimerBq(e) {
+        var ligneToDel = e.target.parentNode.parentNode;
+        var el = ligneToDel.nextSibling;
+
+        while (el) {
+                        el.firstChild.textContent = (parseInt(el.firstChild.textContent) - 1) + "";
+                        el = el.nextSibling;
+        }
+        for(var i=0;i < balise_add.length;i++) {
+            if(balise_add[i] == e.target.parentNode.parentNode.firstChild.nextSibling.firstChild.nextSibling.value) {
+                balise_add.splice(i, 1);
+            }
+        }
+        for(var i=0;i < question_add.length;i++) {
+            if(question_add[i] == e.target.parentNode.parentNode.firstChild.nextSibling.nextSibling.firstChild.nextSibling.value) {
+                question_add.splice(i, 1);
+            }
+        }
+        ligneToDel.remove();
+        nb_balise_question--;
+
+    };
+});

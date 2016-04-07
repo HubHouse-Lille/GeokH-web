@@ -110,7 +110,7 @@ router.get('/destroy/:Question_id', function(req, res) {
                             function(questions) {
                                 res.render('questions_view', {
                                     questions: questions,
-                                    ok: "La question à corrrectement été supprimée"
+                                    ok: "La question a corrrectement été supprimée"
                                 });
                             });
 
