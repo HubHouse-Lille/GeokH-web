@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+/////// TYPE DE REQUETE
     var detail = false;
     var edit = false;
     var create = false;
@@ -11,6 +12,11 @@ $( document ).ready(function() {
     // CREATE
     if(document.location.href.indexOf("create")> -1)
         create = true;
+
+///////// MAP //////////////////
+var neighborhoods = [
+    ];
+
 
 //////// TRAITEMENT DES DONNEES/////
 
@@ -75,6 +81,7 @@ $( document ).ready(function() {
         }).done(function( data ){
           for(var i=0; i<data.length;i++){
               balise_add.push(data[i].Balise.id)
+              neighborhoods.push({lat:data[i].Balise.latitude, lng:data[i].Balise.longitude});
               question_add.push(data[i].Question.id)
           }
               // Suppression des lignes du tableau
@@ -247,4 +254,59 @@ $( document ).ready(function() {
         nb_balise_question--;
 
     };
+    // Map detail parcours
+    var markers = [];
+    var map;
+
+    $("#map").hide();
+    $("#affParcours").click(function(){
+        centerPoint();
+        $("#affParcours").hide();
+    });
+
+    function centerPoint(){
+
+        var lt = 0;
+        var lg = 0;
+        for (var i = 0; i < neighborhoods.length; i++) {
+            lt += neighborhoods[i].lat;
+            lg += neighborhoods[i].lng;
+        }
+        var mlt = lt / neighborhoods.length;
+        var mlg = lg / neighborhoods.length;
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+            center: {lat: mlt, lng: mlg}
+        });
+
+        $("#map").show();
+        setTimeout(function(){drop()}, 3000);
+
+    }
+
+    function drop() {
+      clearMarkers();
+      for (var i = 0; i < neighborhoods.length; i++) {
+        addMarkerWithTimeout(neighborhoods[i], i * 500);
+      }
+    }
+
+    function addMarkerWithTimeout(position, timeout) {
+      window.setTimeout(function() {
+        markers.push(new google.maps.Marker({
+          position: position,
+          map: map,
+          animation: google.maps.Animation.DROP
+        }));
+      }, timeout);
+    }
+
+    function clearMarkers() {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+      }
+      markers = [];
+    }
+
 });

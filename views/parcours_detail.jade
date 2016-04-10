@@ -50,7 +50,9 @@ block content
             br
             #e3
                 h4 Le parcours
-                #parcourMap
+                button.btn.btn-success(type='button', id='affParcours') Afficher le parcours
+                br
+                #map
                 br
             br
             #e4
@@ -80,6 +82,4 @@ block content
             br
             br
 
-        script
-            | var globalParcourId = #{parcour.id};
-            | var editable = false;
+        script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCsYIFOc6SQMvtIYnlbLxkFt5AktvJeHOI&signed_in=true&callback=initMap')

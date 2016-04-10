@@ -1,27 +1,27 @@
 {
   "development": {
     "username": "postgres",
-    "password": "liondor97",
+    "password": "charlie887*",
     "database": "geokh",
-    "host": "91.121.181.105",
+    "host": "localhost",
     "port": "5432",
     "dialect": "postgres",
     "ssl" : true
   },
   "test": {
     "username": "postgres",
-    "password": "liondor97",
+    "password": "charlie887*",
     "database": "geokh",
-    "host": "91.121.181.105",
+    "host": "localhost",
     "port": "5432",
     "dialect": "postgres",
     "ssl" : true
   },
   "production": {
     "username": "postgres",
-    "password": "liondor97",
+    "password": "charlie887*",
     "database": "geokh",
-    "host": "91.121.181.105",
+    "host": "localhost",
     "port": "5432",
     "dialect": "postgres",
     "ssl" : true
