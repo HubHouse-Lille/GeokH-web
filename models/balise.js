@@ -5,11 +5,13 @@ module.exports = function(sequelize, DataTypes) {
     latitude: DataTypes.DOUBLE,
     longitude: DataTypes.DOUBLE,
     indice: DataTypes.TEXT,
-    nom: DataTypes.STRING
+    nom: DataTypes.STRING,
+    public : DataTypes.BOOLEAN
   }, {
       classMethods: {
         associate: function(models) {
           Balise.hasMany(models.Ptobq)
+          Balise.belongsTo(models.User)
         }
       }
     });

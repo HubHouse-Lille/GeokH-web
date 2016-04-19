@@ -7,7 +7,16 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
-    models.Question.findAll({ include: [ models.Theme ] }).then(
+    models.Question.findAll({
+        where: {
+                    $or : [
+                    {UserId : req.session.sid},
+                    {public : true}
+                    ]
+                },
+        include: [ models.Theme ]
+
+    }).then(
         function(questions) {
             console.log(questions);
             res.render('questions_view', {

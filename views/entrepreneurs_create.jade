@@ -32,6 +32,17 @@ block content
                 div.input-lg-8.input-lg
                     input(type="textarea", name="prenom", placeholder="description du parcours" required=true).form-control
             br
+            #e2a
+                p Visibilité de l'entrepreneur
+                     div.input-lg-8.input-lg
+                        .btn-group(data-toggle='buttons')
+                            label.btn.btn-success.active
+                                input#option1(type='radio', name='mode_ent', value='1', autocomplete='off', checked='')
+                                |  Public
+                            label.btn.btn-success
+                                input#option2(type='radio', name='mode_ent', value='0',autocomplete='off')
+                                |  Privé
+            br
             #e3b
                 p Mettre à jour la photo de profil
                 div.input-lg-8.input-lg

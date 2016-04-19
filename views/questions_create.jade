@@ -40,6 +40,16 @@ block content
                         input(id="inputNewTheme", type="text", name="newTheme", placeholder="Nouveau thème...").form-control
 
             br
+            #e2a
+                p Visibilité de la question
+                 div.input-lg-8.input-lg
+                    .btn-group(data-toggle='buttons')
+                        label.btn.btn-success.active
+                            input#option1(type='radio', name='mode_question', value="1", autocomplete='off', checked='')
+                            |  Public
+                        label.btn.btn-success
+                            input#option2(type='radio', name='mode_question', value="0",  autocomplete='off')
+                            |  Privé
             br
             #e3
                 p L'objectif

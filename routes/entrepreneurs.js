@@ -7,7 +7,13 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
-    models.Entrepreneur.findAll().then(
+    models.Entrepreneur.findAll({
+        where: {
+          $or : [
+          {UserId : req.session.sid},
+          {public : true}
+          ]
+    }}).then(
         function(entrepreneurs) {
             res.render('entrepreneurs_view', {
                 entrepreneurs: entrepreneurs

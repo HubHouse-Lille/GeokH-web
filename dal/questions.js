@@ -43,7 +43,9 @@ router.post('/create', function(req, res) {
                    question: req.body.question,
                    propositions: tabProps,//'['+propositions.toString()+']',
                    reponses: tabReponses,  // A modifier selon ( reponses.toString())
-                   retours: tabRetour //'['+retours.toString()+']'
+                   retours: tabRetour, //'['+retours.toString()+']'
+                   public: req.body.mode_question,
+                   UserId : req.session.sid
                }).then(function() {
                    res.redirect('/Questions/view');
                });
@@ -59,7 +61,9 @@ router.post('/create', function(req, res) {
             question: req.body.question,
             propositions: tabProps,//'['+propositions.toString()+']',
             reponses: tabReponses,  // A modifier selon ( reponses.toString())
-            retours: tabRetour //'['+retours.toString()+']'
+            retours: tabRetour, //'['+retours.toString()+']'
+            public: req.body.mode_question,
+            UserId : req.session.sid
         }).then(function() {
             res.redirect('/Questions/view');
         });
@@ -163,7 +167,8 @@ router.post('/update/:Question_id', function(req, res) {
                     question: req.body.question,
                     propositions: tabProps,
                     reponses: tabReponses,
-                    retours: tabRetour
+                    retours: tabRetour,
+                    public : req.body.mode_question
                 },{
                     where: { id : req.params.Question_id }
                 }).then(function() {
@@ -181,7 +186,8 @@ router.post('/update/:Question_id', function(req, res) {
                question: req.body.question,
                propositions: tabProps,
                reponses: tabReponses,
-               retours: tabRetour
+               retours: tabRetour,
+               public : req.body.mode_question
            },{
                where: { id : req.params.Question_id }
            }).then(function() {

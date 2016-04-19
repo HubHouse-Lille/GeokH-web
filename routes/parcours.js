@@ -8,7 +8,15 @@ var bodyParser = require('body-parser');
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
 
-    models.Parcour.findAll({ include: [ models.User ] }).then(
+    models.Parcour.findAll({
+        where: {
+            $or : [
+            {UserId : req.session.sid},
+            {public : true}
+            ]
+        },
+        include: [ models.User ]
+    }).then(
         function(parcours) {
             res.render('parcours_view', {
                 parcours: parcours

@@ -30,6 +30,19 @@ block content
                     input(type="text", name="question", value=question.question, placeholder="Question" readonly).form-control
                 p.help-block exemple: Quel est la couleur rose du cheval de napoléon ?
             br
+            #e2a
+                p Visibilité de la question
+                 div.input-lg-8.input-lg
+                    .btn-group(data-toggle='buttons')
+                        if(question.public == 1)
+                            label.btn.btn-success.active
+                                input#option1(type='radio', name='mode_question', value="1", autocomplete='off', checked='')
+                                |  Public
+                        else
+                            label.btn.btn-success.active
+                                input#option2(type='radio', name='mode_question', value="0",  autocomplete='off', checked='')
+                                |  Privé
+            br
             #e2
                 p Le thème
                 div.input-lg-8.input-lg

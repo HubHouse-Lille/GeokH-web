@@ -6,7 +6,13 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
-    models.Balise.findAll().then(
+    models.Balise.findAll({
+        where: {
+          $or : [
+          {UserId : req.session.sid},
+          {public : true}
+          ]
+    }}).then(
         function(balises) {
             res.render('balises_view', {
                 balises: balises

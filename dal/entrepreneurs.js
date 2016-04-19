@@ -27,7 +27,9 @@ router.post('/create', function(req, res) {
         photo: photo,
         interviewQ: interviewQuestion,
         interviewR: interviewReponse,
-        indices: indices_donnees
+        indices: indices_donnees,
+        UserId: req.session.sid,
+        public: req.body.mode_ent
     }).then(function() {
         res.redirect('/Entrepreneurs/view');
     });
@@ -114,7 +116,9 @@ router.post('/update/:Entrepreneur_id', function(req, res) {
         photo: photo,
         interviewQ: interviewQuestion,
         interviewR: interviewReponse,
-        indices: indices_donnees
+        indices: indices_donnees,
+        public: req.body.mode_ent
+
     },{
         where: { id : req.params.Entrepreneur_id }
     }).then(function() {

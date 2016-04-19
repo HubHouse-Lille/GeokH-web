@@ -40,6 +40,19 @@ block content
                 input(type="text", name="indice", value=balise.indice, placeholder="indice de la balise" readonly).form-control
             p.help-block exemple: Entre l'arbre et le banc
             br
+            #e2a
+                p Visibilité de la balise
+                 div.input-lg-8.input-lg
+                    .btn-group(data-toggle='buttons')
+                        if(balise.public == 1)
+                            label.btn.btn-success.active
+                                input#option1(type='radio', name='mode_balise', value="1", autocomplete='off', checked='')
+                                |  Public
+                        else
+                            label.btn.btn-success.active
+                                input#option1(type='radio', name='mode_balise', value="0", autocomplete='off', checked='')
+                                |  Privé
+            br
             #map
             br
             div.input-lg-8.input-lg.disabled

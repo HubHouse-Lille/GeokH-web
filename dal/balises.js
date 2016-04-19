@@ -8,7 +8,9 @@ router.post('/create', function(req, res) {
         nom: req.body.nom,
         indice: req.body.indice,
         latitude: req.body.latitude,
-        longitude: req.body.longitude
+        longitude: req.body.longitude,
+        UserId : req.session.sid,
+        public: req.body.mode_balise
     }).then(function() {
         res.redirect('/Balises/view');
     });
@@ -82,7 +84,8 @@ router.post('/update/:Balise_id', function(req, res) {
         nom: req.body.nom,
         indice: req.body.indice,
         latitude: req.body.latitude,
-        longitude: req.body.longitude
+        longitude: req.body.longitude,
+        public: req.body.mode_balise
     },{
         where: { id : req.params.Balise_id }
     }).then(function() {

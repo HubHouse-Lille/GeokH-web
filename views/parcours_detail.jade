@@ -43,6 +43,20 @@ block content
                         input(type="checkbox", name="actif", value="1" checked disabled)
                     else
                         input(type="checkbox", name="actif", value="1" disabled)
+            br
+            #e2a
+                p Visibilité du parcours
+                 div.input-lg-8.input-lg
+                    .btn-group(data-toggle='buttons')
+                        if (parcour.public == 1)
+                            label.btn.btn-success.active
+                                input#option1(type='radio', name='options', autocomplete='off', checked='', disabled)
+                                |  Public
+                        else
+                            label.btn.btn-success.active
+                                input#option2(type='radio', name='options', autocomplete='off', checked='', disabled)
+                                |  Privé
+            br
             #e3
                 p Description
                 div.input-lg-8.input-lg

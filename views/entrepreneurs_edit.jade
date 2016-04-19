@@ -32,6 +32,25 @@ block content
                 div.input-lg-8.input-lg
                     input(type="textarea", name="prenom", value=entrepreneur.prenom,placeholder="prénom de l'entrepreneur", required=true).form-control
             br
+            #e2a
+                p Visibilité de l'entrepreneur
+                     div.input-lg-8.input-lg
+                        .btn-group(data-toggle='buttons')
+                            if(entrepreneur.public == 1)
+                                label.btn.btn-success.active
+                                    input#option1(type='radio', name='mode_ent', value='1', autocomplete='off', checked='')
+                                    |  Public
+                                label.btn.btn-success
+                                    input#option2(type='radio', name='mode_ent', value='0',autocomplete='off')
+                                    |  Privé
+                            else
+                                label.btn.btn-success
+                                    input#option1(type='radio', name='mode_ent', value='1', autocomplete='off')
+                                    |  Public
+                                label.btn.btn-success.active
+                                    input#option2(type='radio', name='mode_ent', value='0',autocomplete='off', checked='')
+                                    |  Privé
+            br
             #e3a
                 p Image de profil actuelle
                 div.input-lg-8

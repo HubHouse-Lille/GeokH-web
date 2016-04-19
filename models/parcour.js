@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
   var Parcour = sequelize.define("Parcour", {
     nom: DataTypes.STRING,
     description: DataTypes.TEXT,
-    actif: DataTypes.BOOLEAN
+    actif: DataTypes.BOOLEAN,
+    public : DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {

@@ -8,12 +8,14 @@ module.exports = function(sequelize, DataTypes) {
     question: DataTypes.STRING,
     propositions: DataTypes.ARRAY(DataTypes.TEXT),
     reponses: DataTypes.ARRAY(DataTypes.INTEGER),
-    retours: DataTypes.ARRAY(DataTypes.TEXT)
+    retours: DataTypes.ARRAY(DataTypes.TEXT),
+    public : DataTypes.BOOLEAN
   }, {
        classMethods: {
          associate: function(models) {
            Question.hasMany(models.Ptobq),
-           Question.belongsTo(models.Theme)
+           Question.belongsTo(models.Theme),
+           Question.belongsTo(models.User)
          }
        }
      });

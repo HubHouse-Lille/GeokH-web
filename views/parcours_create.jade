@@ -6,7 +6,7 @@ block content
         h2 Créer un parcours
         br
         div
-            p Pour plus d'informations sur comment créer un s,&nbsp;
+            p Pour plus d'informations sur comment créer un parcours,&nbsp;
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') apprenez-en plus
             #info.collapse
                 .well
@@ -35,6 +35,17 @@ block content
                 p Description du parcours
                 div.input-lg-8.input-lg
                     input(type="textarea", name="description", placeholder="Description du parcours", required=true).form-control
+            br
+            #e2a
+                p Visibilité du parcours
+                 div.input-lg-8.input-lg
+                    .btn-group(data-toggle='buttons')
+                        label.btn.btn-success.active
+                            input#option1(type='radio', name='mode_public', value="1", autocomplete='off', checked='')
+                            |  Public
+                        label.btn.btn-success
+                            input#option2(type='radio', name='mode_public', value="0", autocomplete='off')
+                            |  Privé
             br
             #e3
                 p Entrepreneurs

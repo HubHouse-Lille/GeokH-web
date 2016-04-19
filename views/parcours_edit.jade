@@ -49,6 +49,26 @@ block content
                 div.input-md-12
                     input(type="textarea", name="description", value=parcour.description, placeholder="description du parcours").form-control
             br
+            #e2a
+                p Visibilité du parcours
+                 div.input-lg-8.input-lg
+                    .btn-group(data-toggle='buttons')
+                        if (parcour.public == 1)
+                            label.btn.btn-success.active
+                                input#option1(type='radio', name='mode_public', value="1", autocomplete='off', checked='')
+                                |  Public
+                            label.btn.btn-success
+                                input#option2(type='radio', name='mode_public', value="0", autocomplete='off')
+                                |  Privé
+                        else
+                            label.btn.btn-success
+                                input#option1(type='radio', name='mode_public', value="1", autocomplete='off')
+                                |  Public
+                            label.btn.btn-success.active
+                                input#option2(type='radio', name='mode_public', value="0", autocomplete='off', checked='')
+                                |  Privé
+
+            br
             #e4
                 h4 Les entrepreneurs liés à ce parcours
                 br

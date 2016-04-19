@@ -36,7 +36,8 @@ router.post('/create', function(req, res) {
         nom: req.body.nom,
         description: req.body.description,
         actif : false,
-        UserId : req.session.sid
+        UserId : req.session.sid,
+        public : req.body.mode_public
     }).then(function(parcour) {
         // Création du ptoe
         if(tabEnt != []){
@@ -60,6 +61,7 @@ router.post('/create', function(req, res) {
         }
         res.redirect('/parcours/view');
     });
+
 });
 
 router.get('/destroy/:parcour_id', function(req, res) {
@@ -100,7 +102,9 @@ router.get('/destroy/:parcour_id', function(req, res) {
 });
 
 router.post('/update/:parcour_id', function(req, res) {
-
+   var actif = req.body.actif;
+   if(actif == undefined)
+       actif = 0;
    var tabEnt = [];
    if(req.body.entrepreneurId instanceof Array){
        tabEnt = req.body.entrepreneurId;
@@ -129,12 +133,13 @@ router.post('/update/:parcour_id', function(req, res) {
        if(req.body.ordre != null)
            tabO.push(req.body.ordre);
    }
+
    // Modification du parcours
    models.Parcour.update({
        nom: req.body.nom,
        description: req.body.description,
-       actif : req.body.actif,
-       UserId : req.session.sid
+       actif : actif,
+       public : req.body.mode_public
    },{
         where: { id : req.params.parcour_id }
    }).then(function(parcour) {
@@ -170,6 +175,7 @@ router.post('/update/:parcour_id', function(req, res) {
        }
        res.redirect('/parcours/view/' + req.params.parcour_id);
     });
+
 
 });
 
