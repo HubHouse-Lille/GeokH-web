@@ -45,7 +45,8 @@ router.post('/create', function(req, res) {
                    reponses: tabReponses,  // A modifier selon ( reponses.toString())
                    retours: tabRetour, //'['+retours.toString()+']'
                    public: req.body.mode_question,
-                   UserId : req.session.sid
+                   UserId : req.session.sid,
+                   mystere : req.body.typeq
                }).then(function() {
                    res.redirect('/Questions/view');
                });
@@ -63,12 +64,12 @@ router.post('/create', function(req, res) {
             reponses: tabReponses,  // A modifier selon ( reponses.toString())
             retours: tabRetour, //'['+retours.toString()+']'
             public: req.body.mode_question,
-            UserId : req.session.sid
+            UserId : req.session.sid,
+            mystere : req.body.typeq
         }).then(function() {
             res.redirect('/Questions/view');
         });
     }
-
 });
 
 router.get('/destroy/:Question_id', function(req, res) {
@@ -127,7 +128,9 @@ router.get('/destroy/:Question_id', function(req, res) {
 
 router.post('/update/:Question_id', function(req, res) {
 
- var tabProps = [], tabRetour = [], tabReponses = [];
+    console.log(req.body.type)
+    /*
+    var tabProps = [], tabRetour = [], tabReponses = [];
 
     if(req.body.props instanceof Array) {
         tabProps = req.body.props;
@@ -194,7 +197,7 @@ router.post('/update/:Question_id', function(req, res) {
                res.redirect('/Questions/view/' + req.params.Question_id);
            });
     }
-
+    */
 });
 
 module.exports = router;

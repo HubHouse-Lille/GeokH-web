@@ -9,7 +9,8 @@ module.exports = function(sequelize, DataTypes) {
     propositions: DataTypes.ARRAY(DataTypes.TEXT),
     reponses: DataTypes.ARRAY(DataTypes.INTEGER),
     retours: DataTypes.ARRAY(DataTypes.TEXT),
-    public : DataTypes.BOOLEAN
+    public : DataTypes.BOOLEAN,
+    mystere : DataTypes.BOOLEAN
   }, {
        classMethods: {
          associate: function(models) {

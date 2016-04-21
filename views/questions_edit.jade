@@ -4,7 +4,7 @@ block content
     container.col-md-8
 
         br
-        h2 Créer une question
+        h2 Editer une question
         br
         div
             p Pour plus d'informations concernant les questions,&nbsp;
@@ -28,6 +28,22 @@ block content
                     input(type="text", name="question", value=question.question, placeholder="Question").form-control
                 p.help-block exemple: Quel est la couleur rose du cheval de napoléon ?
             br
+            #e2
+                p Le thème
+                 div.input-lg-8.input-lg
+                    div(class="row col-lg-5")
+                        select(id="selectTheme", class="form-control", name="selectTheme")
+                          each theme in themes
+                            if(theme.nom == question.Theme.nom)
+                                option(value=theme.id, selected) #{theme.nom}
+                            else
+                                option(value=theme.id
+                                ) #{theme.nom}
+                    input(id="addTheme", type="button", value="Ajouter thème",class="btn")
+                    #newTheme
+                        input(id="inputNewTheme", type="text", name="newTheme", placeholder="Nouveau thème...").form-control
+
+            br
             #e2a
                 p Visibilité de la question
                     div.input-lg-8.input-lg
@@ -47,22 +63,6 @@ block content
                                     input#option2(type='radio', name='mode_question', value="0",  autocomplete='off', checked='')
                                     |  Privé
             br
-            #e2
-                p Le thème
-                 div.input-lg-8.input-lg
-                    div(class="row col-lg-5")
-                        select(id="selectTheme", class="form-control", name="selectTheme")
-                          each theme in themes
-                            if(theme.nom == question.Theme.nom)
-                                option(value=theme.id, selected) #{theme.nom}
-                            else
-                                option(value=theme.id
-                                ) #{theme.nom}
-                    input(id="addTheme", type="button", value="Ajouter thème",class="btn")
-                    #newTheme
-                        input(id="inputNewTheme", type="text", name="newTheme", placeholder="Nouveau thème...").form-control
-
-            br
             #e3
                 p L'objectif
                 div.input-lg-8.input-lg
@@ -76,14 +76,21 @@ block content
                             option(value="QCM" selected) Question à choix multiple
                             option(value="QCU") Question à choix unitaire
                         if (question.type == "QCU")
-                            option(value="QCM") Question à choix multiple
-                            option(value="QCU" selected) Question à choix unitaire
+                            if(question.mystere == 1)
+                                option(value="QCU" selected) Question à choix unitaire
+                            else
+                                option(value="QCM") Question à choix multiple
+                                option(value="QCU" selected) Question à choix unitaire
+
             br
             #e5
                 p Les Propositions de réponses et les réponses
                 div.input-lg-8.input-lg
-                    button.btn#plusProps(type="button") Ajouter Propositions
-                    button.btn#moinsProps(type="button") Supprimer Propositions
+                    if(question.mystere == 1)
+
+                    else
+                        button.btn#plusProps(type="button") Ajouter Propositions
+                        button.btn#moinsProps(type="button") Supprimer Propositions
                 br
                 #propsrep
                     - var i = 0
@@ -91,7 +98,10 @@ block content
                     each prop in question.propositions
                         - i++
                         div(id='pr'+i).input-lg-8.input-lg
-                            input(type="text", name="props", value="#{prop}").form-control
+                            if(question.mystere == 1)
+                                input(type="text", name="props", value="#{prop}", disabled).form-control
+                            else
+                                input(type="text", name="props", value="#{prop}").form-control
                             if(question.type == "QCM")
                                 if( question.reponses[j] == i )
                                     input(type="checkbox", name="rqcm", class="checkqcm", value="#{i}", checked)
@@ -101,12 +111,15 @@ block content
                                     input(type="checkbox", name="rqcm", class="checkqcm", value="#{i}")
                                     input(type="radio", name="rqcu", class="radioqcu", value="#{i}")
                             else
-                                if( question.reponses[0] == i)
-                                    input(type="checkbox", name="rqcm", class="checkqcm", value="#{i}")
-                                    input(type="radio", name="rqcu", class="radioqcu", value="#{i}" checked)
+                                if(question.mystere == 1)
+
                                 else
-                                    input(type="checkbox", name="rqcm", class="checkqcm", value="#{i}")
-                                    input(type="radio", name="rqcu", class="radioqcu", value="#{i}")
+                                    if( question.reponses[0] == i)
+                                        input(type="checkbox", name="rqcm", class="checkqcm", value="#{i}")
+                                        input(type="radio", name="rqcu", class="radioqcu", value="#{i}" checked)
+                                    else
+                                        input(type="checkbox", name="rqcm", class="checkqcm", value="#{i}")
+                                        input(type="radio", name="rqcu", class="radioqcu", value="#{i}")
                 br
             br
             #e6

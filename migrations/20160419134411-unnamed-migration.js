@@ -20,6 +20,11 @@ module.exports = {
     Sequelize.BOOLEAN
     )
     queryInterface.addColumn(
+    'Questions',
+    'mystere',
+    Sequelize.BOOLEAN
+    )
+    queryInterface.addColumn(
     'Parcours',
     'public',
     Sequelize.BOOLEAN

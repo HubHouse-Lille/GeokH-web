@@ -20,4 +20,19 @@ router.get('/', function(req, res) {
 
 });
 
+router.get('/question_mystere', function(req, res) {
+    models.Parcour.findAll({
+             where: {
+                         $or : [
+                         {UserId : req.session.sid},
+                         {public : true}
+                         ]
+                    }
+          }).then(
+        function(parcours) {
+            res.json(parcours);
+        });
+
+});
+
 module.exports = router;
