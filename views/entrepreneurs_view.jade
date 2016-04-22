@@ -73,8 +73,9 @@ block content
                                         button.btn.btn-default(type='button', data-dismiss='modal') Close
                     td
                         a(href="/entrepreneurs/view/"+ entrepreneur.id) Détail
-                        | &nbsp;-&nbsp;
-                        a(href="/entrepreneurs/edit/"+ entrepreneur.id) Editer
+                        if(session.admin || session.sid == entrepreneur.UserId)
+                            | &nbsp;-&nbsp;
+                            a(href="/entrepreneurs/edit/"+ entrepreneur.id) Editer
                     td #{entrepreneur.createdAt}
                     td #{entrepreneur.updatedAt}
         br

@@ -6,18 +6,28 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
-    models.Balise.findAll({
-        where: {
-          $or : [
-          {UserId : req.session.sid},
-          {public : true}
-          ]
-    }}).then(
-        function(balises) {
-            res.render('balises_view', {
-                balises: balises
+    if(!req.session.admin){
+        models.Balise.findAll({
+            where: {
+              $or : [
+              {UserId : req.session.sid},
+              {public : true}
+              ]
+        }}).then(
+            function(balises) {
+                res.render('balises_view', {
+                    balises: balises
+                });
             });
-        });
+    }
+    else {
+        models.Balise.findAll().then(
+            function(balises) {
+                res.render('balises_view', {
+                    balises: balises
+                });
+            });
+    }
 });
 
 // VIEW ONE > GET
@@ -39,13 +49,30 @@ router.get('/create/', function(req, res) {
 
 // EDIT > GET
 router.get('/edit/:id', function(req, res) {
+
     models.Balise.findOne({
         where: { id: req.params.id }
     }).then(
         function(balise) {
-            res.render('balises_edit', {
-                balise: balise
-            });
+            if(!req.session.admin && balise.UserId != req.session.sid){
+                models.Balise.findAll({
+                    where: {
+                      $or : [
+                      {UserId : req.session.sid},
+                      {public : true}
+                      ]
+                }}).then(
+                    function(balises) {
+                        res.render('balises_view', {
+                            balises: balises,
+                            err : "Attention : Vous n'avez pas le droit de modifier la balise"
+                        });
+                });
+            }else{
+                res.render('balises_edit', {
+                    balise: balise
+                });
+            }
         });
 });
 

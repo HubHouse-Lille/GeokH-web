@@ -3,7 +3,7 @@ var express = require('express');
 var router  = express.Router();
 
 router.post('/create', function(req, res) {
-
+    // Récupération des propositions, retours et réponses du formulaire
     var tabProps = [], tabRetour = [], tabReponses = [];
 
     if(req.body.props instanceof Array) {
@@ -28,13 +28,15 @@ router.post('/create', function(req, res) {
         tabReponses.push(req.body.rqcu);
     }
 
+    // Création du nouveau thème ou non
     var theme;
     if(req.body.newTheme !== "") {
-        //valeur string
+        // Création du thème
         models.Theme.create({
                 nom: req.body.newTheme
             }).then(function(t ) {
                theme = t.id;
+               // Création de la Question
                models.Question.create({
                    ThemeId: theme,
                    objectif: req.body.objectif,
@@ -52,7 +54,7 @@ router.post('/create', function(req, res) {
                });
         });
     } else {
-        //valeur integer
+        // Creation de la question avec thème deja existant
         theme = req.body.selectTheme;
         models.Question.create({
             ThemeId: theme,
@@ -74,62 +76,80 @@ router.post('/create', function(req, res) {
 
 router.get('/destroy/:Question_id', function(req, res) {
 
-
-    if (!req.session.admin) {
-        res.render('error', {
-            message: "Accès refusé",
-            error: "Accès refusé"
-        });
-
-    } else {
-
-        models.Ptobq.findAll({
-            where: { QuestionId: req.params.Question_id,
-                 ParcourId: {
-                     $ne: null
-                 }
-              }
-        }).then(
+    models.Question.findOne({
+        where: { id: req.params.Question_id },
+        include: [ models.Theme ]
+    }).then(
+    function(question) {
+        if (!req.session.admin && req.session.sid != question.UserId) {
+            res.render('error', {
+                message: "Attention, vous n'avez pas le droit de supprimer la question.",
+                error: "Accès refusé"
+            });
+        }
+        else {
+            models.Ptobq.findAll({
+                where: { QuestionId: req.params.Question_id,
+                     ParcourId: {
+                         $ne: null
+                     }
+                  }
+            }).then(
             function(ents) {
                 if (ents.length > 0) {
-                  models.Question.findOne({
-                      where: { id: req.params.Question_id }
-                  }).then(
-                      function(question) {
-                          res.render('questions_detail', {
-                              question: question,
-                              propositions: question.propositions,
-                              reponses: question.reponses,
-                              retours: question.retours,
-                              err: "Vous ne pouvez pas supprimer cette balise car elle appartient à des Parcours."
+                      models.Question.findOne({
+                          where: { id: req.params.Question_id }
+                      }).then(
+                          function(question) {
+                              res.render('questions_detail', {
+                                  question: question,
+                                  propositions: question.propositions,
+                                  reponses: question.reponses,
+                                  retours: question.retours,
+                                  err: "Vous ne pouvez pas supprimer cette balise car elle appartient à des Parcours."
+                              });
                           });
-                      });
-
-                } else {
-
+                }
+                else {
                     models.Question.destroy({
                         where: { id: req.params.Question_id }
                     }).then(function() {
-
-                        models.Question.findAll({include : [ models.Theme ]}).then(
+                        if(!req.session.admin){
+                           models.Question.findAll({
+                               where: {
+                                   $or : [
+                                   {UserId : req.session.sid},
+                                   {public : true}
+                                   ]
+                               },
+                               include: [ models.Theme ]
+                           }).then(
+                                function(questions) {
+                                    res.render('questions_view', {
+                                        questions: questions,
+                                        ok: "La question a été correctement supprimée"
+                                    });
+                           });
+                        }
+                        else{
+                           models.Question.findAll().then(
                             function(questions) {
                                 res.render('questions_view', {
                                     questions: questions,
-                                    ok: "La question a corrrectement été supprimée"
+                                    ok: "La question a été correctement supprimée"
                                 });
                             });
+                        }
 
                     });
-
                 }
             });
-    }
+        }
+    });
 });
 
 router.post('/update/:Question_id', function(req, res) {
 
-    console.log(req.body.type)
-    /*
     var tabProps = [], tabRetour = [], tabReponses = [];
 
     if(req.body.props instanceof Array) {
@@ -197,7 +217,7 @@ router.post('/update/:Question_id', function(req, res) {
                res.redirect('/Questions/view/' + req.params.Question_id);
            });
     }
-    */
+
 });
 
 module.exports = router;

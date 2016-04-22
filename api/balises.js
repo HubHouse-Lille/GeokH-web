@@ -6,10 +6,24 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/', function(req, res) {
-    models.Balise.findAll().then(
-        function(balises) {
-            res.json(balises);
-        });
+   if(!req.session.admin){
+           models.Balise.findAll({
+               where: {
+                 $or : [
+                 {UserId : req.session.sid},
+                 {public : true}
+                 ]
+           }}).then(
+               function(balises) {
+                   res.json(balises);
+               });
+       }
+       else {
+           models.Balise.findAll().then(
+               function(balises) {
+                  res.json(balises);
+               });
+       }
 });
 
 module.exports = router;

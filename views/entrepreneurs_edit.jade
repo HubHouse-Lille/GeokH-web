@@ -99,10 +99,11 @@ block content
                             input(type='text', name='ind'+i, value=entrepreneur.indices[i-1], placeholder='Indice', required=true).form-control
             br
             div.actions
-                input(type="submit", value="Mettre à jour les données").btn.btn-success
-                | &nbsp; &nbsp;
+                if(session.admin || session.sid == entrepreneur.UserId)
+                    input(type="submit", value="Mettre à jour les données").btn.btn-success
+                    | &nbsp; &nbsp;
                 button.btn.btn-primary.btn-secondary(type='button', onclick="location.href='/entrepreneurs/view/"+entrepreneur.id+"';") Annuler
-                if (session.admin)
+                if (session.admin || session.sid == entrepreneur.UserId)
                     | &nbsp; &nbsp;
                     button.btn.btn-default(type='button', onclick="location.href='/dal/entrepreneurs/destroy/#{entrepreneur.id}';") Supprimer
 

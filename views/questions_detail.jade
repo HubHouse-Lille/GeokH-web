@@ -103,6 +103,7 @@ block content
 
             br
         div.actions
-            button.btn.btn-primary.btn-success(type='button', onclick="location.href='/questions/edit/"+question.id+"';") modifier
+            if(session.admin || session.sid == question.UserId)
+                button.btn.btn-primary.btn-success(type='button', onclick="location.href='/questions/edit/"+question.id+"';") modifier
         br
         br

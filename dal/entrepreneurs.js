@@ -37,60 +37,73 @@ router.post('/create', function(req, res) {
 
 router.get('/destroy/:Entrepreneur_id', function(req, res) {
 
+        models.Entrepreneur.findOne({
+           where: { id: req.params.Entrepreneur_id }
+       }).then(function(entrepreneur) {
+            if (!req.session.admin && req.session.sid != entrepreneur.UserId) {
+                   res.render('error', {
+                       message: "Attention, vous n'avez pas le droit de supprimer la personne mystère.",
+                       error: "Accès refusé"
+                   });
 
-    if (!req.session.admin) {
-        res.render('error', {
-            message: "Accès refusé",
-            error: "Accès refusé"
+            } else {
+                  models.Ptoe.findAll({
+                       where: { EntrepreneurId: req.params.Entrepreneur_id,
+                                 ParcourId: {
+                                     $ne: null
+                                 }
+                              }
+                       }).then(
+                       function(ents) {
+                           if (ents.length > 0) {
+                               models.Entrepreneur.findOne({
+                                   where: { id: req.params.Entrepreneur_id }
+                               }).then(
+                               function(entrepreneur) {
+                                  models.Entrepreneur.findOne({
+                                         where: { id: req.params.Entrepreneur_id }
+                                     }).then(function(entrepreneur) {
+                                          res.render('entrepreneurs_detail', {
+                                              entrepreneur: entrepreneur,
+                                              err: "Vous ne pouvez pas supprimer cette personne mystère car il appartient à des parcours. Vous devez d'abord le supprimer du parcour."
+                                          });
+                                  });
+                               });
+
+                           } else {
+                               models.Entrepreneur.destroy({
+                                   where: { id: req.params.Entrepreneur_id }
+                               }).then(function() {
+                               if(req.session.admin){
+                                    models.Entrepreneur.findAll().then(
+                                      function(entrepreneurs) {
+                                          res.render('entrepreneurs_view', {
+                                              entrepreneurs: entrepreneurs,
+                                              ok: "La personne mystère a correctement été supprimé"
+                                          });
+                                    });
+                               }else{
+                                   models.Entrepreneur.findAll({
+                                       where: {
+                                         $or : [
+                                         {UserId : req.session.sid},
+                                         {public : true}
+                                         ]
+                                   }}).then(
+                                       function(entrepreneurs) {
+                                           res.render('entrepreneurs_view', {
+                                               entrepreneurs: entrepreneurs,
+                                               ok: "La personne mystère a correctement été supprimé"
+                                           });
+                                       });
+                               }
+                               });
+
+                           }
+                       });
+               }
         });
 
-    } else {
-
-
-        models.Ptoe.findAll({
-            where: { EntrepreneurId: req.params.Entrepreneur_id,
-                      ParcourId: {
-                          $ne: null
-                      }
-                   }
-        }).then(
-            function(ents) {
-
-                if (ents.length > 0) {
-
-                    models.Entrepreneur.findOne({
-                        where: { id: req.params.Entrepreneur_id }
-                    }).then(
-                        function(entrepreneur) {
-                           models.Entrepreneur.findOne({
-                                  where: { id: req.params.Entrepreneur_id }
-                              }).then(function(entrepreneur) {
-                                   res.render('entrepreneurs_detail', {
-                                       entrepreneur: entrepreneur,
-                                       err: "Vous ne pouvez pas supprimer cet enttrepreneur car il appartient à des parcours. Vous devez d'abord le supprimer du parcour."
-                                   });
-                               });
-                    });
-
-                } else {
-
-                    models.Entrepreneur.destroy({
-                        where: { id: req.params.Entrepreneur_id }
-                    }).then(function() {
-
-                        models.Entrepreneur.findAll().then(
-                            function(entrepreneurs) {
-                                res.render('entrepreneurs_view', {
-                                    entrepreneurs: entrepreneurs,
-                                    ok: "L'entrepreneur à correctement été supprimé"
-                                });
-                            });
-
-                    });
-
-                }
-            });
-    }
 });
 
 router.post('/update/:Entrepreneur_id', function(req, res) {

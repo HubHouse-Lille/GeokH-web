@@ -50,8 +50,9 @@ block content
                     td #{balise.indice}
                     td
                         a(href="/balises/view/"+ balise.id) Détail
-                        | &nbsp;-&nbsp;
-                        a(href="/balises/edit/"+ balise.id) Editer
+                        if(session.admin || session.sid == balise.UserId)
+                            | &nbsp;-&nbsp;
+                            a(href="/balises/edit/"+ balise.id) Editer
                     td
                         a(target="_blank", href="http://google.com/maps/place/"+balise.latitude+","+balise.longitude) #{balise.latitude+", "+balise.longitude}
                     td #{balise.createdAt}

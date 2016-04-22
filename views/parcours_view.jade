@@ -54,8 +54,9 @@ block content
                             td inactif
                         td
                             a(href="/parcours/view/"+ parcour.id) Détail
-                            | &nbsp;-&nbsp;
-                            a(href="/parcours/edit/"+ parcour.id) Editer
+                            if(session.sid == parcour.UserId || session.admin)
+                                | &nbsp;-&nbsp;
+                                a(href="/parcours/edit/"+ parcour.id) Editer
                         td #{parcour.User.username}
                         td #{parcour.createdAt}
                         td #{parcour.updatedAt}

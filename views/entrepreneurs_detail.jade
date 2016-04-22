@@ -74,4 +74,5 @@ block content
 
         br
         div.actions
-            button.btn.btn-primary.btn-success(type='button', onclick="location.href='/entrepreneurs/edit/"+entrepreneur.id+"';") Modifier
+            if(session.sid == entrepreneur.UserId || session.admin)
+                button.btn.btn-primary.btn-success(type='button', onclick="location.href='/entrepreneurs/edit/"+entrepreneur.id+"';") Modifier

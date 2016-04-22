@@ -7,22 +7,34 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
-    models.Question.findAll({
-        where: {
-                    $or : [
-                    {UserId : req.session.sid},
-                    {public : true}
-                    ]
-                },
-        include: [ models.Theme ]
-
-    }).then(
-        function(questions) {
-            console.log(questions);
-            res.render('questions_view', {
-                questions: questions
-            });
+    if(req.session.admin){
+        models.Question.findAll({include: [ models.Theme ]}).then(
+            function(questions) {
+                console.log(questions);
+                res.render('questions_view', {
+                    questions: questions
+                });
         });
+    }
+    else{
+        models.Question.findAll({
+            where: {
+                        $or : [
+                        {UserId : req.session.sid},
+                        {public : true}
+                        ]
+                    },
+            include: [ models.Theme ]
+
+        }).then(
+            function(questions) {
+                console.log(questions);
+                res.render('questions_view', {
+                    questions: questions
+                });
+        });
+    }
+
 });
 
 // VIEW ONE > GET
@@ -32,7 +44,6 @@ router.get('/view/:id', function(req, res) {
         include: [ models.Theme ]
     }).then(
         function(question) {
-            console.log(question);
             res.render('questions_detail', {
                 question: question,
                 propositions: question.propositions,
@@ -62,17 +73,36 @@ router.get('/edit/:id', function(req, res) {
         include : [ models.Theme ]
     }).then(
         function(question) {
-            models.Theme.findAll().then(
-              function(themes) {
-                  res.render('questions_edit', {
-                      themes : themes,
-                      question: question,
-                      propositions: question.propositions,
-                      reponses: question.reponses,
-                      retours: question.retours
-                  });
-              });
+            if(req.session.sid != question.UserId && !req.session.admin){
+                models.Question.findAll({
+                    where: {
+                                $or : [
+                                {UserId : req.session.sid},
+                                {public : true}
+                                ]
+                            },
+                    include: [ models.Theme ]
 
+                }).then(
+                    function(questions) {
+                        console.log(questions);
+                        res.render('questions_view', {
+                            questions: questions,
+                            err : "Vous n'avez pas les droits pour modifier la question !"
+                        });
+                });
+            }else{
+                models.Theme.findAll().then(
+                  function(themes) {
+                      res.render('questions_edit', {
+                          themes : themes,
+                          question: question,
+                          propositions: question.propositions,
+                          reponses: question.reponses,
+                          retours: question.retours
+                      });
+                });
+            }
         });
 });
 

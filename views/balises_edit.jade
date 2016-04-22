@@ -69,10 +69,11 @@ block content
             p.help-block exemple: Entre -180 et 180. Exemple 3.1412428 (si positif, EST)
             br
             div.actions
-                input(type="submit", value="Mettre à jour la balise").btn.btn-success
-                | &nbsp; &nbsp;
+                if(session.admin || session.sid == balise.UserId)
+                    input(type="submit", value="Mettre à jour la balise").btn.btn-success
+                    | &nbsp; &nbsp;
                 button.btn.btn-primary.btn-secondary(type='button', onclick="location.href='/balises/view/"+balise.id+"';") Annuler
-                if (session.admin)
+                if (session.admin  || session.sid == balise.UserId)
                     | &nbsp; &nbsp;
                     button.btn.btn-default(type='button', onclick="location.href='/dal/balises/destroy/#{balise.id}';") Supprimer
             br

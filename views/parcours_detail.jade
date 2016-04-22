@@ -92,7 +92,8 @@ block content
                     tbody#tabPtobq
             br
             div.actions
-                button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcour.id+"';") Modifier
+                if(session.admin || session.sid == parcour.UserId)
+                    button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcour.id+"';") Modifier
             br
             br
 

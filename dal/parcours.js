@@ -3,6 +3,7 @@ var express = require('express');
 var router  = express.Router();
 
 router.post('/create', function(req, res) {
+    // Récupération des différentes personnes mystere
     var tabEnt = [];
     if(req.body.entrepreneurId instanceof Array){
         tabEnt = req.body.entrepreneurId;
@@ -10,6 +11,7 @@ router.post('/create', function(req, res) {
         if(req.body.entrepreneurId != null)
             tabEnt.push(req.body.entrepreneurId);
     }
+    // Récupération des différentes balises questions et ordres
     var tabB = [];
     var tabQ = [];
     var tabO = [];
@@ -59,46 +61,74 @@ router.post('/create', function(req, res) {
                 });
             }
         }
+        // Redirection vers la liste des parcours
         res.redirect('/parcours/view');
     });
 
 });
 
 router.get('/destroy/:parcour_id', function(req, res) {
-    if (!req.session.admin) {
-        res.render('error', {
-            message: "Accès refusé",
-            error: "Accès refusé"
-        });
-
-    } else {
-        models.Ptobq.destroy({
-            where: {
-                ParcourId: req.params.Parcour_id
+    models.Parcour.findOne({
+            where: { id: req.params.parcour_id }
+        }).then(
+        function(parcour) {
+            if (!req.session.admin && req.session.sid != parcour.UserId) {
+                res.render('error', {
+                message: "Attention, vous n'avez pas le droit de supprimer le parcours.",
+                error: "Accès refusé"
+                });
             }
-            }).then(function() {
-                models.Ptoe.destroy({
+            else {
+                models.Ptobq.destroy({
                     where: {
                         ParcourId: req.params.Parcour_id
                     }
-                }).then(function() {
-                     models.Parcour.destroy({
-                         where: { id: req.params.parcour_id }
-                     }).then(function() {
-                          models.Parcour.findAll().then(
-                              function(parcours) {
-                                  res.render('parcours_view', {
-                                      parcours: parcours,
-                                      ok: "Le parcour a correctement éré supprimé"
-                                  });
-                              });
+                    }).then(
+                    function() {
+                        models.Ptoe.destroy({
+                            where: {
+                                ParcourId: req.params.Parcour_id
+                            }
+                        }).then(
+                        function() {
+                            models.Parcour.destroy({
+                                where: { id: req.params.parcour_id }
+                            }).then(
+                            function() {
+                                if(req.session.admin){
+                                    models.Parcour.findAll().then(
+                                        function(parcours) {
+                                          res.render('parcours_view', {
+                                              parcours: parcours,
+                                              ok: "Le parcour a correctement éré supprimé"
+                                          });
+                                    });
+                                }else{
+                                    models.Parcour.findAll({
+                                        where: {
+                                            $or : [
+                                            {UserId : req.session.sid},
+                                            {public : true}
+                                            ]
+                                        },
+                                        include: [ models.User ]
+                                    }).then(
+                                    function(parcours) {
+                                        res.render('parcours_view', {
+                                            parcours: parcours,
+                                            ok: "Le parcour a correctement éré supprimé"
+                                        });
+                                    });
+                                }
+                            });
 
-                     });
+                        });
 
-                });
+                    });
+
+            }
 
         });
-    }
 });
 
 router.post('/update/:parcour_id', function(req, res) {

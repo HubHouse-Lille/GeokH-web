@@ -45,8 +45,9 @@ block content
                             a(href="/questions/view/"+ question.id) #{question.question}
                         td
                             a(href="/questions/view/"+ question.id) Détail
-                            | &nbsp;-&nbsp;
-                            a(href="/questions/edit/"+ question.id) Editer
+                            if(session.admin  || question.UserId == session.sid)
+                                | &nbsp;-&nbsp;
+                                a(href="/questions/edit/"+ question.id) Editer
                         td(class="theme") #{question.Theme.nom}
                         td #{question.objectif}
                         td #{question.type}
