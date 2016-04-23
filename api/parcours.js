@@ -7,7 +7,7 @@ var models  = require('../models/index');
 // VIEW ALL > GET
 router.get('/', function(req, res) {
     models.Parcour.findAll({
-              where: { actif: 1 },
+              where: { actif: true },
               attributes: ['id','nom','description']
           }).then(
         function(parcours) {
