@@ -42,7 +42,7 @@ block content
                     td
                         img(alt='photo', src='#{entrepreneur.photo}', style="max-height: 50px; max-width: 50px")
                     td
-                        button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal'+entrepreneur.id) Voir
+                        button.btn.btn-info(type='button', data-toggle='modal', data-target='#myModal'+entrepreneur.id) Voir
                         .modal.fade(role='dialog', id='myModal'+entrepreneur.id)
                             .modal-dialog
                                 .modal-content
@@ -58,7 +58,7 @@ block content
                                         button.btn.btn-default(type='button', data-dismiss='modal') Close
 
                     td
-                        button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal2'+entrepreneur.id) Voir
+                        button.btn.btn-info(type='button', data-toggle='modal', data-target='#myModal2'+entrepreneur.id) Voir
                         .modal.fade(role='dialog', id='myModal2'+entrepreneur.id)
                             .modal-dialog
                                 .modal-content

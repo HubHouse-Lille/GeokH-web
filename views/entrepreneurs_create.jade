@@ -4,14 +4,14 @@ block content
     container.col-md-8
 
         br
-        h2 Créer un entrepreneur
+        h2 Créer une personne mystère
         br
         div
-            p Pour plus d'informations sur comment concernant les entrepreneurs,&nbsp;
+            p Pour plus d'informations sur comment concernant les personnes mystères,&nbsp;
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus ici
             #info.collapse
                 .well
-                    p Informations concernant les entrepreneurs:
+                    p Informations concernant les personnes mystères:
                         br
 
         hr
@@ -23,17 +23,17 @@ block content
             .alert.alert-warning(role="alert") #{err}
         form(action="/dal/entrepreneurs/create", method="post").input-group.input-group-lg#form-e
             #e1
-                p Nom de l'entrepreneur
+                p Nom de la personne mystère
                 div.input-lg-8.input-lg
-                    input(type="text", name="nom", placeholder="nom de l'entrepreneur", required=true).form-control
+                    input(type="text", name="nom", placeholder="nom de la personne mystère", required=true).form-control
             br
             #e2
-                p Prénom de l'entrepreneur
+                p Prénom de la personne mystère
                 div.input-lg-8.input-lg
                     input(type="textarea", name="prenom", placeholder="description du parcours" required=true).form-control
             br
             #e2a
-                p Visibilité de l'entrepreneur
+                p Visibilité de la personne mystère
                      div.input-lg-8.input-lg
                         .btn-group(data-toggle='buttons')
                             label.btn.btn-success.active
@@ -54,7 +54,7 @@ block content
                     input(id="newPhoto", type="textarea", name="newPhoto", style="visibility: hidden;")
             br
             #e2
-                p Interview de l'entrepreneur
+                p Interview de la personne mystère
                 div.input-lg-8.input-lg
                     button.btn#plusIqr(type="button") Ajouter Q/R
                     button.btn#moinsIqr(type="button") Supprimer Q/R
@@ -62,7 +62,7 @@ block content
                 #interview
             br
             #e2
-                p Indice
+                p Indice de la personne mystère
                 div.input-lg-8.input-lg
                      button.btn#plusInd(type="button") Ajouter Indice
                      button.btn#moinsInd(type="button") Supprimer Indice
@@ -70,4 +70,4 @@ block content
                 #indice
             br
             div.actions
-                input(type="submit", value="Créer l'entrepreneur").btn.btn-success
+                input(type="submit", value="Créer la personne mystère").btn.btn-success

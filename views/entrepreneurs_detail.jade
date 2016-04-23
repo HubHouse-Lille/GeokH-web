@@ -4,14 +4,14 @@ block content
     container.col-md-8
 
         br
-        h2 Détails de l'entrepreneur
+        h2 Détails de la personne mystère
         br
         div
-            p Pour plus d'informations sur comment concernant les entrepreneurs,&nbsp;
+            p Pour plus d'informations sur comment concernant les personnes mystères,&nbsp;
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus ici
             #info.collapse
                 .well
-                    p Informations concernant les entrepreneurs:
+                    p Informations concernant les personnes mystères:
                         br
 
         hr
@@ -22,17 +22,17 @@ block content
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
         #e1
-            p Nom de l'entrepreneur
+            p Nom de la personne mystère
             div.input-lg-8.input-lg
                 input(type="text", name="nom", value="#{entrepreneur.nom}" disabled).form-control
         br
         #e2
-            p Prénom de l'entrepreneur
+            p Prénom de la personne mystère
             div.input-lg-8.input-lg
                 input(type="textarea", name="prenom", value="#{entrepreneur.prenom}" disabled).form-control
         br
         #e2a
-            p Visibilité de l'entrepreneur
+            p Visibilité de la personne mystère
              div.input-lg-8.input-lg
                 .btn-group(data-toggle='buttons')
                     if(entrepreneur.public == 1)
@@ -50,7 +50,7 @@ block content
                 img(src="#{entrepreneur.photo}", height="200px")
         br
         #e2
-            p Interview de l'entrepreneur
+            p Interview de la personne mystère
             div
               - var n = entrepreneur.interviewQ.length
               - for (var i = 1; i <= n; i++)
@@ -62,7 +62,7 @@ block content
                         input(type='text', name='r'+i, value=entrepreneur.interviewR[i-1], placeholder='Reponse', required=true, disabled).form-control
         br
         #e2
-            p Indice
+            p Indice de la personne mystère
             div
               - var n = entrepreneur.indices.length
               - for (var i = 1; i <= n; i++)

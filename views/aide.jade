@@ -22,7 +22,7 @@ block content
                         li
                             a(href='#question') Questions
                         li
-                            a(href='#entrepreneur') Entrepreneurs
+                            a(href='#entrepreneur') Personnes Mystères
 
             br
             hr
@@ -31,7 +31,7 @@ block content
             h3 1 Général
             br
             p L'application dans sa partie graphique se structure en trois partie. Premièrement la bare de navigation horizontale (noir, en haut), qui vous permet d'accéder aux options générales de l'application (accueil, aide etc).
-            p Deuxièmement, le volet de gauche donne accès à toutes les entités. Les Parcours, Balises, Questions et Entrepreneurs sont structurés de la même manière. Une page de visualisation permet d'avoir une vue globale sur les entités respective enregistrées dans le système. Pour chacune de ces entités, il est possible de les modifier. En tant qu'administrateur vous pourrez aussi les supprimer si les conditions de réfrencement sont respectées (voir encart référence de l'entité). Vous pouvez aussi créer de nouvelles entités.
+            p Deuxièmement, le volet de gauche donne accès à toutes les entités. Les Parcours, Balises, Questions et les Personnes Mystères sont structurés de la même manière. Une page de visualisation permet d'avoir une vue globale sur les entités respective enregistrées dans le système. Pour chacune de ces entités, il est possible de les modifier. En tant qu'administrateur vous pourrez aussi les supprimer si les conditions de réfrencement sont respectées (voir encart référence de l'entité). Vous pouvez aussi créer de nouvelles entités.
             p Concernant les parcours, il ne suffit pas de les créer, ils doivent ensuite être associés à des enttrepreneurs et des questions et balises.
             br
             br
@@ -39,7 +39,7 @@ block content
             h3 2 Les entités
             br
             p Les entités ci-dessous sont au coeur du système dès lors qu'ils doivent les gérer. Le schéma ci-dessous illustre les liens entre les différentes entités.
-            p Les entités PtoE et PtoBQ ne sont pas directement visibles par l'utilisateur mais correspond aux associations entre les parcours et les entrepreneurs (PtoE) d'une part, et les parcours et les balises et Questions d'autre part (PtoBQ)
+            p Les entités PtoE et PtoBQ ne sont pas directement visibles par l'utilisateur mais correspond aux associations entre les parcours et les personnes mystères (PtoE) d'une part, et les parcours et les balises et Questions d'autre part (PtoBQ)
             p Ces associations sont editables dans l'édition des parcours. Veuillez vous référes aux sous-parties Références des entités pour plus de détails.
             br
             img(src="/img/modeldb.png")
@@ -59,13 +59,13 @@ block content
             a(name="parcour")
             h4 2.2 Parcours
             br
-            p Les parcours sont la pièce maittresse du système. Ce sont eux qui lient les autres éléments. Ils possèdent des entrepreneurs, des balises et des questions.
+            p Les parcours sont la pièce maittresse du système. Ce sont eux qui lient les autres éléments. Ils possèdent des personnes mystères, des balises et des questions.
             p Le nom du parcour permet de facilement l'identifier.
             p La description du parcour permet d'avoir plus d'information concernant celui-ci.
             p Enfin, l'état d'un parcour est actif ou inactif. Seulement s'il est actif celui-ci sera visible par les utilisateurs mobile.
             br
             h5 Références :
-            p Les parcours possèdent des entrepreneurs. Un entrepreneur défini peut appartenir à plusieu parcours.
+            p Les parcours possèdent des personnes mystères. Une personne mystère défini peut appartenir à plusieurs parcours.
             p Ils possèdent aussi des Balise-Question. C'est à dire, une association entre une balise et une question. Ceci donne plus de souplesse au système et permet par exemple de faire passer l'utilisateur mobile deux fois à la même balise avec deux questions différente.
             br
             br
@@ -112,17 +112,17 @@ block content
             br
             br
             a(name="entrepreneur")
-            h4 2.5 Entrepreneurs
+            h4 2.5 Personnes Mystères
             br
-            p Les entrepreneurs permettent de définir la dernière question du parcour, celle ou l'utilisateur mobile devera choisir le bon entrepreneur avec tous les indices reçu durant la partie.
+            p Les personnes mystères permettent de définir la dernière question du parcour, celle ou l'utilisateur mobile devera choisir la bonne personne mystère avec tous les indices reçu durant la partie.
             p Le nom et le prénom permettent de l'identifier
-            p La photo de l'entrepreneur est affichée çà l'utilisateur mobile. Veuillez à choisir une image carré pour un meilleur rendu, et pas trop volumineuse afin de fluidifier la récupération des données par l'utilisateur.
-            p L'interview de l'entrepreneur est un text qui permet qui le décrit et qui sera affiché lors de la sélection de l'enttrepreneur pour aider les utilisateurs à répondre à la dernière question.
+            p La photo de la personne mystère est affichée çà l'utilisateur mobile. Veuillez à choisir une image carré pour un meilleur rendu, et pas trop volumineuse afin de fluidifier la récupération des données par l'utilisateur.
+            p L'interview de la personne mystère est un text qui permet qui le décrit et qui sera affiché lors de la sélection de l'enttrepreneur pour aider les utilisateurs à répondre à la dernière question.
             p Enfin les indices sont les informations que les utilisateurs glaneront en répondant aux questions.
             br
             h5 Références :
             p les enttrepreneurs peuvent être associés à un parcour dans la page d'édition d'un parcours.
-            p Vous ne pouvez pas supprimer un entrepreneur qui est référencée par un parcours. Ceci assure l'intégrité des données.
+            p Vous ne pouvez pas supprimer une personne mystère qui est référencée par un parcours. Ceci assure l'intégrité des données.
             br
             br
             br
