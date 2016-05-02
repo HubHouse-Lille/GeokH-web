@@ -1,0 +1,73 @@
+extends layout_main
+
+block content
+    container.col-md-12
+        script(src="/js/scores.js")
+        br
+        h2 Les Scores
+        br
+        div
+            p Pour plus d'informations concernant les scores,
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
+            #info.collapse
+                .well
+                    p Informations pour les scores:
+                        br
+                        br
+                        | Le tableau ci-dessous reprend les différents scores des différents parcours.
+                        br
+                        | Les parcours visible sont ceux que vous avez créés ainsi que les publics.
+                        br
+                        | Vous pouvez supprimer les scores d'un parcours qui n'ont plus d'importance pour vous.
+
+            hr
+            form(action="/dal/scores/destroy" , method="post")
+                - var p = 0;
+                each s in score
+                    - var pid = s.ParcourId
+                    if pid != p
+                        - p = pid
+                        if(session.admin || session.sid == s.Parcour.UserId || s.Parcour.public)
+                            div(id='parcours#{s.ParcourId}')
+                                h3 #{s.Parcour.nom}
+                                table.table.table-hover.table-bordered
+                                    thead
+                                        tr
+                                            th #
+                                            th Equipe
+                                            th Score
+                                            th Date
+                                            if(session.admin || session.sid == s.Parcour.UserId)
+                                                th Action
+                                    tbody(id=s.ParcourId)
+                                        tr
+                                            td #{s.id}
+                                            td #{s.nom}
+                                            td #{s.score}
+                                            td #{s.createdAt}
+                                            if(session.admin || session.sid == s.Parcour.UserId)
+                                                td
+                                                    input(id='#{s.id}', type="button",name="supone", value="Supprimer").btn.btn-default
+                                if(session.admin || session.sid == s.Parcour.UserId)
+                                    input(id='p#{s.ParcourId}', type="button", name="supall", value="Supprimer Tout").btn.btn-default
+                                hr
+                    else
+                        if(session.admin || session.sid == s.Parcour.UserId || s.Parcour.public)
+                            table.table.table-hover.table-bordered.temp
+                                tbody
+                                    tr
+                                        td #{s.id}
+                                        td #{s.nom}
+                                        td #{s.score}
+                                        td #{s.createdAt}
+                                        if(session.admin || session.sid == s.Parcour.UserId)
+                                            td
+                                                input(id='#{s.id}', type="button",name="supone", value="Supprimer").btn.btn-default
+                input(type='submit', value="Mettre à jour les scores").btn.btn-success
+            br
+            form(action='/scores/view')
+                input(type='submit', value="Annuler").btn.btn-primary
+            br
+
+
+

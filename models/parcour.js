@@ -10,7 +10,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Parcour.hasMany(models.Ptobq),
-        Parcour.belongsTo(models.User)
+        Parcour.belongsTo(models.User),
+        Parcour.hasMany(models.Score)
        }
     }
     });

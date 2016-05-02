@@ -60,6 +60,7 @@ var rQuestions = require('./routes/questions');
 var rBalises = require('./routes/balises');
 var rEntrepreneurs = require('./routes/entrepreneurs');
 var rComptes = require('./routes/comptes');
+var rScore = require('./routes/scores');
 
 // data access layer
 var rDalUsers = require('./dal/users');
@@ -70,6 +71,7 @@ var rDalQuestions = require('./dal/questions');
 var rDalEntrepreneurs = require('./dal/entrepreneurs');
 var rDalPtoes = require('./dal/ptoe');
 var rDalPtobqs = require('./dal/ptobq');
+var rDalScores = require('./dal/scores');
 
 // api
 var rApiEntrepreneurs = require('./api/entrepreneurs');
@@ -78,6 +80,7 @@ var rApiQuestions = require('./api/questions');
 var rApiPtoes = require('./api/ptoes');
 var rApiPtobqs = require('./api/ptobqs');
 var rApiParcours = require('./api/parcours');
+var rApiScore = require('./api/scores');
 
 // ROUTES CONFIGURATION
 // -----------------------------------------------------
@@ -89,6 +92,7 @@ app.use('/questions', rQuestions);
 app.use('/balises', rBalises);
 app.use('/entrepreneurs', rEntrepreneurs);
 app.use('/comptes', rComptes);
+app.use('/scores', rScore);
 
 app.use('/dal/users', rDalUsers);
 app.use('/dal/tasks', rDalTasks);
@@ -98,6 +102,7 @@ app.use('/dal/questions', rDalQuestions);
 app.use('/dal/entrepreneurs', rDalEntrepreneurs);
 app.use('/dal/ptoes', rDalPtoes);
 app.use('/dal/ptobqs', rDalPtobqs);
+app.use('/dal/scores', rDalScores);
 
 app.use('/api/entrepreneurs', rApiEntrepreneurs);
 app.use('/api/balises', rApiBalises);
@@ -105,6 +110,7 @@ app.use('/api/questions', rApiQuestions);
 app.use('/api/ptoes', rApiPtoes);
 app.use('/api/ptobqs', rApiPtobqs);
 app.use('/api/parcours', rApiParcours);
+app.use('/api/scores', rApiScore);
 
 
 
