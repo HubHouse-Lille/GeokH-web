@@ -111,3 +111,13 @@ block content
                 input(type="submit", value="Créer la question").btn.btn-success
             br
             br
+            .modal.fade(role='dialog', id='myModalCaution')
+                            .modal-dialog
+                                .modal-content
+                                    .modal-header
+                                        button.close(type='button', data-dismiss='modal') ×
+                                        h4.modal-title Attention
+                                    .modal-body
+                                        p(class="alert alert-danger" id="paraModal")
+                                    .modal-footer
+                                        button.btn.btn-default(type='button', data-dismiss='modal') Close

@@ -83,16 +83,61 @@ $(document).ready(function(){
         for(var i=0;i< $("#selectTheme option").size();i++) {
             if(document.getElementById("selectTheme").options[i].text.toLowerCase() == $("#inputNewTheme").val().toLowerCase() &&
                 $("#inputNewTheme").val().toLowerCase() != "") {
-                    alert("Ce thème existe déjà");
+                    $("#paraModal").text("Ce thème existe déjà.");
+                    $("#myModalCaution").modal('show');
                     return false;
             }
         }
         $("#propsrep").append("<input name='nbpropositions' type='hidden' value='"+i+"'/>");
         $("#retours").append("<input name='nbretours' type='hidden' value='"+j+"'/>");
+        if( $("input[name$='question']").val().trim() == "") {
+            $("#paraModal").text("Veuillez sélectionner une question.");
+            $("#myModalCaution").modal('show');
+            return false;
+        }
+        if( $("input[name$='objectif']").val().trim() == "") {
+            $("#paraModal").text("Veuillez sélectionner un objectif.");
+            $("#myModalCaution").modal('show');
+            return false;
+        }
+        if( $("#pr1").val() == undefined) {
+            if($("#mystere").parent()[0].className != "btn btn-success active") {
+                $("#paraModal").text("Veuillez ajouter au moins une proposition.");
+                $("#myModalCaution").modal('show');
+                return false;
+            }
+
+        }
+        if( $("#ret1").val() == undefined) {
+            $("#paraModal").text("Veuillez ajouter au moins un retour.");
+            $("#myModalCaution").modal('show');
+            return false;
+        }
+
+        var coche = false;
+
+
          if(type == 'QCM'){
                 $('.radioqcu').remove();
+                $( "input[name$='rqcm']" ).each(function( index ) {
+                  if(this.checked== true) {
+                    coche = true;
+                  }
+                });
          }else{
                 $('.checkqcm').remove();
+                $( "input[name$='rqcu']" ).each(function( index ) {
+                  if(this.checked== true) {
+                    coche = true;
+                  }
+                  });
+         }
+         if(!coche) {
+             if($("#mystere").parent()[0].className != "btn btn-success active") {
+                 $("#paraModal").text("Veuillez cocher au moins une bonne réponse.");
+                 $("#myModalCaution").modal('show');
+                 return false;
+             }
          }
 
     });

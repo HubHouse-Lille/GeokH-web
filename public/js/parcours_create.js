@@ -133,9 +133,10 @@ var neighborhoods = [
         // Traitement des données
         $("#addEnt").click(function(){
             var ent = recupererEntrepreneur($("#optEnt").val());
-            if(ent == null)
-                alert("L'entrepreneur utilisé n'existe pas !");
-            else if($.inArray(ent.id, entrepreneurs_add) == -1){
+            if(ent == null) {
+                $("#paraModal").text("L'entrepreneur utilise n'existe pas !");
+                $("#myModalCaution").modal('show');
+            } else if($.inArray(ent.id, entrepreneurs_add) == -1){
 
                 var t = "" +
                 "<tr >"+
@@ -153,7 +154,8 @@ var neighborhoods = [
                 });
                 entrepreneurs_add.push(ent.id);
             }else{
-                alert("Entrepreneur déjà présent dans le tableau !");
+                $("#paraModal").text("Entrepreneur déjà présent dans le tableau !");
+                $("#myModalCaution").modal('show');
             }
         });
 
@@ -162,12 +164,18 @@ var neighborhoods = [
             var q = recupererQuestion($("#optq").val());
             var ordre = $("#ordre").val();
 
-            if(b == null || q == null )
-                alert("La Balise ou Question utilisé n'existe pas ! ");
-            else if($.inArray(b.id, balise_add) != -1)
-                alert("Balise déjà utilisé ! ");
-            else if($.inArray(q.id, question_add) != -1)
-                alert("Question déjà utilisé ! ");
+            if(b == null || q == null ) {
+                $("#paraModal").text("La Balise ou Question utilisé n'existe pas !");
+                $("#myModalCaution").modal('show');
+                }
+            else if($.inArray(b.id, balise_add) != -1) {
+                $("#paraModal").text("Balise déjà utilisé !");
+                $("#myModalCaution").modal('show');
+                }
+            else if($.inArray(q.id, question_add) != -1) {
+                $("#paraModal").text("Question déjà utilisé !");
+                $("#myModalCaution").modal('show');
+                }
             else{
                 $("#tabPtobq").append(""+
                 "<tr>"+
