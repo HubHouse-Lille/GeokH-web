@@ -53,7 +53,6 @@ $(document).ready(function(){
 
     $('form').submit(function(){
         $.each(tabSuppression, function(i){
-            alert(tabSuppression[i]);
             $('form:eq(0)').append("<input type='hidden' name='score' value='"+tabSuppression[i]+"' >");
         });
     });

@@ -36,7 +36,10 @@ block content
                                             th #
                                             th Equipe
                                             th Score
-                                            th Date
+                                            th Niveau
+                                            th Temps
+                                            th Balises Trouvées
+                                            th Reponses Trouvées
                                             if(session.admin || session.sid == s.Parcour.UserId)
                                                 th Action
                                     tbody(id=s.ParcourId)
@@ -44,7 +47,10 @@ block content
                                             td #{s.id}
                                             td #{s.nom}
                                             td #{s.score}
-                                            td #{s.createdAt}
+                                            td #{s.niveau}
+                                            td #{s.temps}
+                                            td #{s.balises_trouvees}
+                                            td #{s.reponses_trouvees}
                                             if(session.admin || session.sid == s.Parcour.UserId)
                                                 td
                                                     input(id='#{s.id}', type="button",name="supone", value="Supprimer").btn.btn-default
@@ -59,7 +65,10 @@ block content
                                         td #{s.id}
                                         td #{s.nom}
                                         td #{s.score}
-                                        td #{s.createdAt}
+                                        td #{s.niveau}
+                                        td #{s.temps}
+                                        td #{s.balises_trouvees}
+                                        td #{s.reponses_trouvees}
                                         if(session.admin || session.sid == s.Parcour.UserId)
                                             td
                                                 input(id='#{s.id}', type="button",name="supone", value="Supprimer").btn.btn-default

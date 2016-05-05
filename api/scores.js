@@ -9,12 +9,19 @@ var models  = require('../models/index');
 
 // CREATE
 router.post('/create/:id_parcours', function(req, res) {
-    // TODO : créer le score dans la db
+
     models.Score.create({
         nom: req.body.nom,
-        score: req.body.description,
-        ParcourId : req.params.id_parcours
-    });
+        temps: req.body.temps,
+        niveau: req.body.niveau,
+        score : req.body.score,
+        balises_trouvees : req.body.nb_balises_trouvees,
+        reponses_trouvees : req.body.nb_reponses_trouvees,
+        ParcourId : req.params.id_parcours,
+    }).then(
+        function(score) {
+            res.json(score);
+        });
 });
 
 module.exports = router;
