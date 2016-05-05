@@ -12,7 +12,7 @@ $(document).ready(function(){
 $("#bcreate").submit(function(){
   if(document.getElementById('lat').value == '' &&
       document.getElementById('lng').value == ''){
-        alert("Veuillez choisir un point sur la map google.");
+        $("#myModal").modal('show');
         return false;
       }
 });
