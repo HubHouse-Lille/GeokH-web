@@ -21,7 +21,7 @@ block content
                         | Vous pouvez supprimer les scores d'un parcours qui n'ont plus d'importance pour vous.
 
             hr
-            form(action="/dal/scores/destroy" , method="post")
+            form(action="/dal/scores/destroy" , method="post", id="scoreform")
                 - var p = 0;
                 each s in score
                     - var pid = s.ParcourId

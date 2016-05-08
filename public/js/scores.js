@@ -2,6 +2,7 @@
  * Created by Charlie on 01/05/2016.
  */
 $(document).ready(function(){
+
     // Initialisation des scores
     var t = $('tbody');
     var pid = 0;

@@ -2,11 +2,12 @@ extends layout_main
 
 block content
     container.col-md-8
-
+        script(src='/js/propositions.js')
         br
         h2 Editer une question
         br
         div
+
             p Pour plus d'informations concernant les questions,&nbsp;
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
             #info.collapse
