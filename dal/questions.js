@@ -43,9 +43,9 @@ router.post('/create', function(req, res) {
                    type: req.body.type,
                    difficulte: req.body.difficulte,
                    question: req.body.question,
-                   propositions: tabProps,//'['+propositions.toString()+']',
-                   reponses: tabReponses,  // A modifier selon ( reponses.toString())
-                   retours: tabRetour, //'['+retours.toString()+']'
+                   propositions: tabProps,
+                   reponses: tabReponses,
+                   retours: tabRetour,
                    public: req.body.mode_question,
                    UserId : req.session.sid,
                    mystere : req.body.typeq
@@ -62,9 +62,9 @@ router.post('/create', function(req, res) {
             type: req.body.type,
             difficulte: req.body.difficulte,
             question: req.body.question,
-            propositions: tabProps,//'['+propositions.toString()+']',
-            reponses: tabReponses,  // A modifier selon ( reponses.toString())
-            retours: tabRetour, //'['+retours.toString()+']'
+            propositions: tabProps,
+            reponses: tabReponses,
+            retours: tabRetour,
             public: req.body.mode_question,
             UserId : req.session.sid,
             mystere : req.body.typeq

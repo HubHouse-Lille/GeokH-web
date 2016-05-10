@@ -10,7 +10,7 @@ var models  = require('../models/index');
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
 
-        models.Score.findAll({include:[models.Parcour]}).then(
+        models.Score.findAll({include:[models.Parcours]}).then(
             function(scores) {
                 res.render('scores_view', {
                     score: scores

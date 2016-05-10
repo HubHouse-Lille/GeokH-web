@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
     if(!req.session.admin){
-        models.Parcour.findAll({
+        models.Parcours.findAll({
             where: {
                 $or : [
                 {UserId : req.session.sid},
@@ -23,7 +23,7 @@ router.get('/view/', function(req, res) {
                 });
             });
     }else{
-        models.Parcour.findAll({
+        models.Parcours.findAll({
         include: [ models.User ]
         }).then(
         function(parcours) {
@@ -37,7 +37,7 @@ router.get('/view/', function(req, res) {
 // VIEW ONE > GET
 router.get('/view/:id', function(req, res) {
 
-    models.Parcour.findOne({
+    models.Parcours.findOne({
             where: { id: req.params.id }
         }).then(
             function(parcour) {
@@ -55,12 +55,12 @@ router.get('/create/', function(req, res) {
 
 // EDIT > GET
 router.get('/edit/:id', function(req, res) {
-    models.Parcour.findOne({
+    models.Parcours.findOne({
         where: { id: req.params.id }
     }).then(
         function(parcour) {
             if(!req.session.admin && parcour.UserId != req.session.sid){
-                models.Parcour.findAll({
+                models.Parcours.findAll({
                     where: {
                     $or : [
                     {UserId : req.session.sid},

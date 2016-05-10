@@ -8,11 +8,11 @@ var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + '/../config/config.json')[env];
 var db        = {};
 
-// postgres://postgres:charlie887*@localhost:5432/geokh
-// postgres://postgres:postgres-postgres@91.121.181.105:5432/geokh
-var sequelize = new Sequelize("postgres://postgres:postgres-postgres@91.121.181.105:5432/geokh",{
-  dialect : 'postgres'
-});
+if (config.use_env_variable) {
+  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+} else {
+  var sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
 
 fs
   .readdirSync(__dirname)

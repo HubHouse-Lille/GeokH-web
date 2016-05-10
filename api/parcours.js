@@ -6,7 +6,7 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/', function(req, res) {
-    models.Parcour.findAll({
+    models.Parcours.findAll({
               where: { actif: true },
               attributes: ['id','nom','description']
           }).then(
@@ -21,7 +21,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/question_mystere', function(req, res) {
-    models.Parcour.findAll({
+    models.Parcours.findAll({
              where: {
                          $or : [
                          {UserId : req.session.sid},

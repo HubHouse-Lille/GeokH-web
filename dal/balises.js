@@ -69,7 +69,7 @@ router.get('/destroy/:Balise_id', function(req, res) {
                                 function(balises) {
                                     res.render('balises_view', {
                                         balises: balises,
-                                        ok: "La balise à correctement été supprimée"
+                                        ok: "La balise a correctement été supprimée"
                                     });
                                 });
                             }
@@ -78,7 +78,7 @@ router.get('/destroy/:Balise_id', function(req, res) {
                                 function(balises) {
                                     res.render('balises_view', {
                                         balises: balises,
-                                        ok: "La balise à correctement été supprimée"
+                                        ok: "La balise a correctement été supprimée"
                                     });
                                 });
                              }

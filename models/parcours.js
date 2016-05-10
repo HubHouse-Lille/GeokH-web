@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var Parcour = sequelize.define("Parcour", {
+  var Parcours = sequelize.define("Parcours", {
     nom: DataTypes.STRING,
     description: DataTypes.TEXT,
     actif: DataTypes.BOOLEAN,
@@ -9,11 +9,11 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Parcour.hasMany(models.Ptobq),
-        Parcour.belongsTo(models.User),
-        Parcour.hasMany(models.Score)
+        Parcours.hasMany(models.Ptobq),
+        Parcours.belongsTo(models.User),
+        Parcours.hasMany(models.Score)
        }
     }
     });
-  return Parcour;
+  return Parcours;
 };

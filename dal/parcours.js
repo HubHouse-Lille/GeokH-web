@@ -34,7 +34,7 @@ router.post('/create', function(req, res) {
             tabO.push(req.body.ordre);
     }
     // Creation du parcours
-    models.Parcour.create({
+    models.Parcours.create({
         nom: req.body.nom,
         description: req.body.description,
         actif : false,
@@ -68,7 +68,7 @@ router.post('/create', function(req, res) {
 });
 
 router.get('/destroy/:parcour_id', function(req, res) {
-    models.Parcour.findOne({
+    models.Parcours.findOne({
             where: { id: req.params.parcour_id }
         }).then(
         function(parcour) {
@@ -91,20 +91,20 @@ router.get('/destroy/:parcour_id', function(req, res) {
                             }
                         }).then(
                         function() {
-                            models.Parcour.destroy({
+                            models.Parcours.destroy({
                                 where: { id: req.params.parcour_id }
                             }).then(
                             function() {
                                 if(req.session.admin){
-                                    models.Parcour.findAll().then(
+                                    models.Parcours.findAll().then(
                                         function(parcours) {
                                           res.render('parcours_view', {
                                               parcours: parcours,
-                                              ok: "Le parcour a correctement éré supprimé"
+                                              ok: "Le parcours a correctement été supprimé"
                                           });
                                     });
                                 }else{
-                                    models.Parcour.findAll({
+                                    models.Parcours.findAll({
                                         where: {
                                             $or : [
                                             {UserId : req.session.sid},
@@ -116,7 +116,7 @@ router.get('/destroy/:parcour_id', function(req, res) {
                                     function(parcours) {
                                         res.render('parcours_view', {
                                             parcours: parcours,
-                                            ok: "Le parcour a correctement éré supprimé"
+                                            ok: "Le parcours a correctement été supprimé"
                                         });
                                     });
                                 }
@@ -165,7 +165,7 @@ router.post('/update/:parcour_id', function(req, res) {
    }
 
    // Modification du parcours
-   models.Parcour.update({
+   models.Parcours.update({
        nom: req.body.nom,
        description: req.body.description,
        actif : actif,

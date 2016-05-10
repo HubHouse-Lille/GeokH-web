@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                Score.belongsTo(models.Parcour)
+                Score.belongsTo(models.Parcours)
             }
         }
     });

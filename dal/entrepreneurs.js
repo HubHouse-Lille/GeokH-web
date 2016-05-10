@@ -79,7 +79,7 @@ router.get('/destroy/:Entrepreneur_id', function(req, res) {
                                       function(entrepreneurs) {
                                           res.render('entrepreneurs_view', {
                                               entrepreneurs: entrepreneurs,
-                                              ok: "La personne mystère a correctement été supprimé"
+                                              ok: "La personne mystère a correctement été supprimée"
                                           });
                                     });
                                }else{
@@ -93,7 +93,7 @@ router.get('/destroy/:Entrepreneur_id', function(req, res) {
                                        function(entrepreneurs) {
                                            res.render('entrepreneurs_view', {
                                                entrepreneurs: entrepreneurs,
-                                               ok: "La personne mystère a correctement été supprimé"
+                                               ok: "La personne mystère a correctement été supprimée"
                                            });
                                        });
                                }
