@@ -4,14 +4,14 @@ block content
     container.col-md-8
 
         br
-        h2 Détails de l'entrepreneur
+        h2 Détails de la personne mystère
         br
         div
-            p Pour plus d'informations sur comment concernant les entrepreneurs,&nbsp;
+            p Pour plus d'informations sur comment concernant les personnes mystères,&nbsp;
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus ici
             #info.collapse
                 .well
-                    p Informations concernant les entrepreneurs:
+                    p Informations concernant les personnes mystères:
                         br
 
         hr
@@ -22,14 +22,27 @@ block content
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
         #e1
-            p Nom de l'entrepreneur
+            p Nom de la personne mystère
             div.input-lg-8.input-lg
                 input(type="text", name="nom", value="#{entrepreneur.nom}" disabled).form-control
         br
         #e2
-            p Prénom de l'entrepreneur
+            p Prénom de la personne mystère
             div.input-lg-8.input-lg
                 input(type="textarea", name="prenom", value="#{entrepreneur.prenom}" disabled).form-control
+        br
+        #e2a
+            p Visibilité de la personne mystère
+             div.input-lg-8.input-lg
+                .btn-group(data-toggle='buttons')
+                    if(entrepreneur.public == 1)
+                        label.btn.btn-success.active
+                            input#option1(type='radio', name='options', value='1', autocomplete='off', checked='')
+                            |  Public
+                    else
+                        label.btn.btn-success.active
+                            input#option2(type='radio', name='options', value='0', autocomplete='off', checked='')
+                            |  Privé
         br
         #e3
             p Image de profil
@@ -37,14 +50,29 @@ block content
                 img(src="#{entrepreneur.photo}", height="200px")
         br
         #e2
-            p Interview de l'entrepreneur
-            div.input-lg-8.input-lg
-                input(type="textarea", name="interview", value="#{entrepreneur.interview}" disabled).form-control
+            p Interview de la personne mystère
+            div
+              - var n = entrepreneur.interviewQ.length
+              - for (var i = 1; i <= n; i++)
+                div.panel.panel-primary(id='iqr'+i)
+                    div.panel-heading
+                        p Question #{i} :
+                    div.panel-body
+                        input(type='text', name='q'+i, value=entrepreneur.interviewQ[i-1], placeholder='Question', required=true, disabled).form-control
+                        input(type='text', name='r'+i, value=entrepreneur.interviewR[i-1], placeholder='Reponse', required=true, disabled).form-control
         br
         #e2
-            p Indice
-            div.input-lg-8.input-lg
-                input(type="textarea", name="indice", value="#{entrepreneur.indice}" disabled).form-control
+            p Indice de la personne mystère
+            div
+              - var n = entrepreneur.indices.length
+              - for (var i = 1; i <= n; i++)
+                div.panel.panel-primary(id='ind'+i)
+                    div.panel-heading
+                        p Indice #{i} :
+                    div.panel-body
+                        input(type='text', name='q'+i, value=entrepreneur.indices[i-1], placeholder='Indice', required=true, disabled).form-control
+
         br
         div.actions
-            button.btn.btn-primary.btn-success(type='button', onclick="location.href='/entrepreneurs/edit/"+entrepreneur.id+"';") modifier
+            if(session.sid == entrepreneur.UserId || session.admin)
+                button.btn.btn-primary.btn-success(type='button', onclick="location.href='/entrepreneurs/edit/"+entrepreneur.id+"';") Modifier

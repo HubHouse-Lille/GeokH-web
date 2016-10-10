@@ -31,31 +31,57 @@ block content
             .alert.alert-info(role="alert") #{msg}
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
-        form(action="/dal/balises/create", method="post").input-group.input-group-lg
+        form(action="/dal/balises/create", method="post").input-group.input-group-lg#bcreate
             #e1
                 p Nom de la balise
                 div.input-lg-8.input-lg
-                    input(type="text", name="nom", placeholder="nom de la balise").form-control
+                    input(type="text", name="nom", placeholder="Nom de la balise", required=true).form-control
             br
             #e2
-                p indice
+                p Indice
                 div.input-lg-8.input-lg
-                    input(type="text", name="indice", placeholder="indice de la balise").form-control
+                    input(type="text", name="indice", placeholder="Indice de la balise", required=true).form-control
+            br
+            #e2a
+                p Visibilité de la balise
+                 div.input-lg-8.input-lg
+                    .btn-group(data-toggle='buttons')
+                        label.btn.btn-success.active
+                            input#option1(type='radio', name='mode_balise', value="1", autocomplete='off', checked='')
+                            |  Public
+                        label.btn.btn-success
+                            input#option2(type='radio', name='mode_balise', value="0", autocomplete='off')
+                            |  Privé
+            br
+            #e2
+                p Placez la balise sur la map
+            br
+            #map
             br
             #e3
                 p Latitude
                 div.input-lg-8.input-lg
-                    input(type="text", name="latitude", placeholder="latitude").form-control
-                p.help-block exemple: entre -90 et 90. Exemple: 50.6101406 (si positif, NORD)
+                    input(type="text", name="latitude", placeholder="Latitude", readonly, required=true)#lat.form-control
             br
             #e4
                 p Longitude
                 div.input-lg-8.input-lg
-                    input(type="text", name="longitude", placeholder="longitude").form-control
-                p.help-block exemple: Entre -180 et 180. Exemple 3.1412428 (si positif, EST)
+                    input(type="text", name="longitude", placeholder="Longitude", readonly,  required=true)#lng.form-control
             br
             #e5
                 div.actions
                     input(type="submit", value="Créer la balise").btn.btn-success
             br
             br
+            .modal.fade(role='dialog', id='myModal')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            button.close(type='button', data-dismiss='modal') ×
+                            h4.modal-title Attention
+                        .modal-body
+                            p(class="alert alert-danger") Veuillez choisir un point sur la map google en cliquant dessus.
+                        .modal-footer
+                            button.btn.btn-default(type='button', data-dismiss='modal') Close
+        script(src='/js/map.js', type='text/javascript')
+        script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCsYIFOc6SQMvtIYnlbLxkFt5AktvJeHOI&signed_in=true&callback=initMap')

@@ -2,11 +2,12 @@ extends layout_main
 
 block content
     container.col-md-8
-
+        script(src='/js/propositions.js')
         br
-        h2 Créer une question
+        h2 Editer une question
         br
         div
+
             p Pour plus d'informations concernant les questions,&nbsp;
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
             #info.collapse
@@ -30,9 +31,38 @@ block content
             br
             #e2
                 p Le thème
-                div.input-lg-8.input-lg
-                    input(type="text", name="theme", value=question.theme, placeholder="Thème").form-control
-                p.help-block exemple: Connaître la définition d’un entrepreneur
+                 div.input-lg-8.input-lg
+                    div(class="row col-lg-5")
+                        select(id="selectTheme", class="form-control", name="selectTheme")
+                          each theme in themes
+                            if(theme.nom == question.Theme.nom)
+                                option(value=theme.id, selected) #{theme.nom}
+                            else
+                                option(value=theme.id
+                                ) #{theme.nom}
+                    input(id="addTheme", type="button", value="Ajouter thème",class="btn")
+                    #newTheme
+                        input(id="inputNewTheme", type="text", name="newTheme", placeholder="Nouveau thème...").form-control
+
+            br
+            #e2a
+                p Visibilité de la question
+                    div.input-lg-8.input-lg
+                        .btn-group(data-toggle='buttons')
+                            if(question.public == 1)
+                                label.btn.btn-success.active
+                                    input#option1(type='radio', name='mode_question', value="1", autocomplete='off', checked='')
+                                    |  Public
+                                label.btn.btn-success
+                                    input#option2(type='radio', name='mode_question', value="0",  autocomplete='off')
+                                    |  Privé
+                            else
+                                label.btn.btn-success
+                                    input#option1(type='radio', name='mode_question', value="1", autocomplete='off')
+                                    |  Public
+                                label.btn.btn-success.active
+                                    input#option2(type='radio', name='mode_question', value="0",  autocomplete='off', checked='')
+                                    |  Privé
             br
             #e3
                 p L'objectif
@@ -47,71 +77,65 @@ block content
                             option(value="QCM" selected) Question à choix multiple
                             option(value="QCU") Question à choix unitaire
                         if (question.type == "QCU")
-                            option(value="QCM") Question à choix multiple
-                            option(value="QCU" selected) Question à choix unitaire
-            br
-            -var props = JSON.parse(propositions)
-
-            -var dispRB = block;
-            -var dispCB = block;
-            if (question.type == "QCU")
-                -dispRB = none
-            else
-                -dispCB = none
-
-            #qqcu
-                p Les réponses sous forme de QCU
-                    if (question.type == "QCU")
-                        -var repu = reponses;
-                    else
-                        -var repu = -1;
-                    -each prop in [1, 2, 3, 4, 5]
-                        div.input-lg-8.input-lg
-                            input(type="text", name="qu#{prop}", value=props[prop-1], placeholder="Réponse possible #{prop}").form-control
-                            | &nbsp;&nbsp;&nbsp;&nbsp;
-                            -var repok = 0
-                            if (repu == prop)
-                                input(type="radio", name="repQcu", value="#{prop}" checked)
+                            if(question.mystere == 1)
+                                option(value="QCU" selected) Question à choix unitaire
                             else
-                                input(type="radio", name="repQcu", value="#{prop}")
+                                option(value="QCM") Question à choix multiple
+                                option(value="QCU" selected) Question à choix unitaire
 
-            #qqcm
-                p Les réponses sous forme de QCM
-                    if (question.type == "QCM")
-                        -var reps = JSON.parse(reponses)
+            br
+            #e5
+                p Les Propositions de réponses et les réponses
+                div.input-lg-8.input-lg
+                    if(question.mystere == 1)
+
                     else
-                        -var reps = []
-                    -each prop in [1, 2, 3, 4, 5]
-                        div.input-lg-8.input-lg
-                            input(type="text", name="qm#{prop}", value=props[prop-1], placeholder="Réponse possible #{prop}").form-control
-                            | &nbsp;&nbsp;&nbsp;&nbsp;
-                            -var repok = 0
-                            -for(var rep in reps)
-                                if (reps[rep] == prop)
-                                    -repok = 1
-                            if (repok == 1)
-                                input(type="checkbox", name="repQcm#{prop}", value="rq#{prop}" checked)
+                        button.btn#plusProps(type="button") Ajouter Propositions
+                        button.btn#moinsProps(type="button") Supprimer Propositions
+                br
+                #propsrep
+                    - var i = 0
+                    - var j = 0
+                    each prop in question.propositions
+                        - i++
+                        div(id='pr'+i).input-lg-8.input-lg
+                            if(question.mystere == 1)
+                                input(type="text", name="props", value="#{prop}", disabled).form-control
                             else
-                                input(type="checkbox", name="repQcm#{prop}", value="rq#{prop}")
+                                input(type="text", name="props", value="#{prop}").form-control
+                            if(question.type == "QCM")
+                                if( question.reponses[j] == i )
+                                    input(type="checkbox", name="rqcm", class="checkqcm", value="#{i}", checked)
+                                    input(type="radio", name="rqcu", class="radioqcu", value="#{i}")
+                                    - j++
+                                else
+                                    input(type="checkbox", name="rqcm", class="checkqcm", value="#{i}")
+                                    input(type="radio", name="rqcu", class="radioqcu", value="#{i}")
+                            else
+                                if(question.mystere == 1)
 
-            div.row
+                                else
+                                    if( question.reponses[0] == i)
+                                        input(type="checkbox", name="rqcm", class="checkqcm", value="#{i}")
+                                        input(type="radio", name="rqcu", class="radioqcu", value="#{i}" checked)
+                                    else
+                                        input(type="checkbox", name="rqcm", class="checkqcm", value="#{i}")
+                                        input(type="radio", name="rqcu", class="radioqcu", value="#{i}")
+                br
             br
-            br
-            -var rets = JSON.parse(retours)
-            #rep
+            #e6
                 p Les Retours que vous souhaitez renvoyer
                 div.input-lg-8.input-lg
-                    input(type="text", name="ret1", value=rets[0], placeholder="Retour 1").form-control
-                div.input-lg-8.input-lg
-                    input(type="text", name="ret2", value=rets[1], placeholder="Retour 2").form-control
-                div.input-lg-8.input-lg
-                    input(type="text", name="ret3", value=rets[2], placeholder="Retour 3").form-control
-                div.input-lg-8.input-lg
-                    input(type="text", name="ret4", value=rets[3], placeholder="Retour 4").form-control
-                div.input-lg-8.input-lg
-                    input(type="text", name="ret5", value=rets[4], placeholder="Retour 5").form-control
-            br
-            br
+                    button.btn#plusRet(type="button") Ajouter Retour
+                    button.btn#moinsRet(type="button") Supprimer Retour
+                br
+                #retours
+                    - var i = 0
+                    each ret in question.retours
+                        - i++
+                        div(id='ret'+i).input-lg-8.input-lg
+                            input(type="text", name="retour", value="#{ret}").form-control
+                br
             br
             #diff
                 p Difficulté de la question
@@ -131,33 +155,12 @@ block content
                             option(value="3" selected) Niveau 3
             br
             div.actions
-                input(type="submit", value="Modifier la question").btn.btn-success
-                | &nbsp; &nbsp;
+                if (session.admin || session.sid == question.UserId)
+                    input(type="submit", value="Modifier la question").btn.btn-success
+                    | &nbsp; &nbsp;
                 button.btn.btn-primary.btn-secondary(type='button', onclick="location.href='/questions/view/"+question.id+"';") Annuler
-                if (session.admin)
+                if (session.admin || session.sid == question.UserId)
                     | &nbsp; &nbsp;
                     button.btn.btn-default(type='button', onclick="location.href='/dal/questions/destroy/#{question.id}';") Supprimer
             br
             br
-
-    script(type="text/javascript").
-        $(function() {
-        $('#qqcm').hide();
-        $('#type').change(function(){
-        if($('#type').val() == 'QCM') {
-            $('#qqcm').show();
-            $('#qqcu').hide();
-        } else {
-            $('#qqcm').hide();
-            $('#qqcu').show();
-        }
-        });
-        if($('#type').val() == 'QCM') {
-            $('#qqcm').show();
-            $('#qqcu').hide();
-        } else {
-            $('#qqcm').hide();
-            $('#qqcu').show();
-        }
-
-        });

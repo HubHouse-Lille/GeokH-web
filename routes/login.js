@@ -3,6 +3,7 @@ var router = express.Router();
 var models  = require('../models/index');
 
 // SESSION HANDLER
+
 router.get('/*', function(req, res, next) {
   var sess = req.session;
 
@@ -12,7 +13,8 @@ router.get('/*', function(req, res, next) {
     console.log("SID: " + sess.sid);
   }
 
-  var pathExceptionArray = new Array("/api/parcours");
+// Accès depuis l'extérieur du site
+  var pathExceptionArray = new Array("/api/parcours", "/api/ptobqs/parcour/", "/api/ptoes/parcour/");
 
   if (sess.connected == undefined || sess.connected == false) {
 
@@ -21,8 +23,14 @@ router.get('/*', function(req, res, next) {
         if(pathExceptionArray[i] == req.path ){
             freeToGo = true;
         }
-    }
+        // ajout charlie : permet de récupérer les balises et questions du parcours sélectionné
+        // NB : Peut être améliorer en récupérant la valeur dans le tableau et en la formattant pour la regexp
+        var r = new RegExp("\\/api\\/pto(bq|e)s\\/parcour\\/[0-9]+", "g")
+        if(r.test(req.path)){
+          freeToGo = true;
+        }
 
+    }
     if (freeToGo) {
         sess.connected = false;
         next();
@@ -56,12 +64,12 @@ router.post('/login', function(req, res) {
         if (user != null) {
             sess.connected = true;
 
-            if (user.admin == true) {
+           if (user.admin == true) {
                 req.session.admin = true;
-            } else {
+           } else {
                 req.session.admin = false;
             }
-            req.session.sid = user.id;
+       req.session.sid = user.id;
 
             res.render('index', {
                 menu: "accueil"

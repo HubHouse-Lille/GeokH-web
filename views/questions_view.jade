@@ -2,7 +2,7 @@ extends layout_main
 
 block content
     container.col-md-12
-
+        script(src='/js/propositions.js')
         br
         h2 Les questions disponibles
         br
@@ -22,7 +22,10 @@ block content
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
         br
-        table.table.table-hover.table-bordered
+        div(class="input-group")
+            span(class="input-group-addon") Filtre
+            input(id="filter",type="text",class="form-control",placeholder="Choisir un thème")
+        table(class="table table-hover table-bordered", id="tabQuestion")
             thead
                 tr
                     th #
@@ -34,19 +37,30 @@ block content
                     th Difficulté
                     th Création
                     th Mise à jour
+            tbody(class="searchable")
+                each question in questions
+                    tr
+                        td #{question.id}
+                        td
+                            a(href="/questions/view/"+ question.id) #{question.question}
+                        td
+                            a(href="/questions/view/"+ question.id) Détail
+                            if(session.admin  || question.UserId == session.sid)
+                                | &nbsp;-&nbsp;
+                                a(href="/questions/edit/"+ question.id) Editer
+                        td(class="theme") #{question.Theme.nom}
+                        td #{question.objectif}
+                        td #{question.type}
+                        td #{question.difficulte}
+                        td #{question.createdAt}
+                        td #{question.updatedAt}
 
-            each question in questions
-                tr
-                    td #{question.id}
-                    td
-                        a(href="/questions/view/"+ question.id) #{question.question}
-                    td
-                        a(href="/questions/view/"+ question.id) Détails
-                        | &nbsp;-&nbsp;
-                        a(href="/questions/edit/"+ question.id) Editer
-                    td #{question.theme}
-                    td #{question.objectif}
-                    td #{question.type}
-                    td #{question.difficulte}
-                    td #{question.createdAt}
-                    td #{question.updatedAt}
+    script(type="text/javascript").
+        $('#filter').keyup(function () {
+            var rex = new RegExp($(this).val(), 'i');
+            $('.searchable tr').hide();
+            $('.searchable tr').filter(function () {
+                  return rex.test(this.children[3].textContent);
+            }).show();
+
+        })

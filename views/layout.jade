@@ -2,6 +2,7 @@ doctype html
 html(lang="fr")
     head
         title= title
+        meta(http-equiv='content-type', content='text/html; charset=iso-8859-1')
         link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
         link(rel='stylesheet', href='/stylesheets/sidebar.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
@@ -10,8 +11,7 @@ html(lang="fr")
         script(src='/js/bootstrap.min.js')
         script(src='/js/delete.js')
         script(src='/js/photoPreview.js')
-        script(src='/js/ptoe.js')
-        script(src='/js/ptobq.js')
+        script(src='/js/entrepreneur.js')
 
 
     body
@@ -57,7 +57,7 @@ html(lang="fr")
                         li
                             a(href='/parcours/view') Voir les parcours
                         li
-                            a(href='/parcours/create') Créer un parcour
+                            a(href='/parcours/create') Créer un parcours
                         li
                             p
                         li.sidebar-brand
@@ -75,16 +75,21 @@ html(lang="fr")
                         li
                             a(href='/questions/view') Voir les questions
                         li
-                            a(href='/questions/create') Créer un question
+                            a(href='/questions/create') Créer une question
                         li
                             p
                         li.sidebar-brand
                             img(src="/img/user.png").menuIcons
-                            h3 Entrepreneurs
+                            h3 Pers. Mystères
                         li
-                            a(href='/entrepreneurs/view') Voir les entrepreneurs
+                            a(href='/entrepreneurs/view') Voir les personnes mystères
                         li
-                            a(href='/entrepreneurs/create') Créer un entrepreneur
+                            a(href='/entrepreneurs/create') Créer une personne mystère
+                        li.sidebar-brand
+                            img(src="/img/score.png").menuIcons
+                            h3 Scores
+                        li
+                            a(href="/scores/view") Voir les scores
                         li
                             hr(style='height: 1px;margin: 5 0 5 0; color:#000000; background-color:#A9A9A9;')
                         li.sidebar-brand

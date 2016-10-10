@@ -2,7 +2,7 @@ extends layout_main
 
 block content
     container.col-md-8
-
+        script(src='/js/parcours_create.js')
         br
         h2 Détail d'un parcour
         br
@@ -30,49 +30,71 @@ block content
         div.input-group.input-group-lg
             br
             #e1
-                p Le nom du parcour
+                p Le nom du parcours
                 div.input-lg-8.input-lg
-                    input(type="text", name="nom", value=parcour.nom, placeholder="nom du parcour" readonly).form-control
+                    input(type="text", name="nom", value=parcour.nom, placeholder="nom du parcours" readonly).form-control
+                    input(id="pId", type="hidden", name="idParcour", value=parcour.id)
                 p.help-block exemple: HubHouse lille1-ouest pour etudiant info
             br
             #e2
-                p Le parcour est-il visible dans l'application mobile ?
+                p Le parcours est-il visible dans l'application mobile ?
                     | &nbsp; &nbsp;
                     if (parcour.actif == 1)
                         input(type="checkbox", name="actif", value="1" checked disabled)
                     else
                         input(type="checkbox", name="actif", value="1" disabled)
+            br
+            #e2a
+                p Visibilité du parcours
+                 div.input-lg-8.input-lg
+                    .btn-group(data-toggle='buttons')
+                        if (parcour.public == 1)
+                            label.btn.btn-success.active
+                                input#option1(type='radio', name='options', autocomplete='off', checked='', disabled)
+                                |  Public
+                        else
+                            label.btn.btn-success.active
+                                input#option2(type='radio', name='options', autocomplete='off', checked='', disabled)
+                                |  Privé
+            br
             #e3
                 p Description
                 div.input-lg-8.input-lg
-                    input(type="textarea", name="description", value=parcour.description, placeholder="description du parcour" readonly).form-control
+                    input(type="textarea", name="description", value=parcour.description, placeholder="Description du parcours" readonly).form-control
+            br
+            #e3
+                h4 Le parcours
+                button.btn.btn-success(type='button', id='affParcours') Afficher le parcours
+                br
+                #map
+                br
+            br
+            #e4
+                h4 Les personnes mystères liés à ce parcours
+                br
+                table.table.table-hover.table-bordered
+                    thead
+                        tr
+                            th #
+                            th nom
+                    tbody#tabPtoe
+            br
+            #e5
+                h4 Les balises et questions de ce parcours
+                br
+                table.table.table-hover.table-bordered(id="parcourBalQuestTable")
+                    thead
+                        tr
+                            th #
+                            th nom balise
+                            th question
+                            th ordre
+                    tbody#tabPtobq
             br
             div.actions
-                button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcour.id+"';") modifier
+                if(session.admin || session.sid == parcour.UserId)
+                    button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcour.id+"';") Modifier
             br
             br
 
-        hr
-        br
-        h4 Les entrepreneurs liés à ce parcour
-        br
-        table.table.table-hover.table-bordered(id="parcourEntTable")
-            thead
-                tr
-                    th #
-                    th nom
-        br
-        hr
-        br
-        h4 Les balises et questions de ce parcour
-        br
-        table.table.table-hover.table-bordered(id="parcourBalQuestTable")
-            thead
-                tr
-                    th #
-                    th nom balise
-                    th question
-                    th ordre
-        script
-            | var globalParcourId = #{parcour.id};
-            | var editable = false;
+        script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCsYIFOc6SQMvtIYnlbLxkFt5AktvJeHOI&signed_in=true&callback=initMap')

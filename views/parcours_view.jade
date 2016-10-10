@@ -7,7 +7,7 @@ block content
         h2 Les parcours disponibles
         br
         div
-            p Pour plus d'informations sur les conséquences de ma modification d'un parcour,&nbsp;
+            p Pour plus d'informations sur les conséquences de ma modification d'un parcours,&nbsp;
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
             #info.collapse
                 .well
@@ -25,7 +25,10 @@ block content
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
         br
-        table.table.table-hover.table-bordered
+        div(class="input-group")
+            span(class="input-group-addon") Filtre
+            input(id="filter",type="text",class="form-control",placeholder="Choisir un nom de parcours")
+        table(class="table table-hover table-bordered", id="tabParcours")
             thead
                 tr
                     th #
@@ -33,23 +36,37 @@ block content
                     th Description
                     th Etat
                     th Actions
+                    th Créateur
                     th Création
                     th Mise à jour
 
-            each parcour in parcours
-                tr
-                    td #{parcour.id}
-                    td
-                        a(href="/parcours/view/"+ parcour.id) #{parcour.nom}
-                    td #{parcour.description}
+            tbody(class="searchable")
+                each parcour in parcours
+                    tr
+                        td #{parcour.id}
+                        td
+                            a(href="/parcours/view/"+ parcour.id, class="nom") #{parcour.nom}
+                        td #{parcour.description}
 
-                    if (parcour.actif == 1)
-                        td actif
-                    else
-                        td innactif
-                    td
-                        a(href="/parcours/view/"+ parcour.id) Détails
-                        | &nbsp;-&nbsp;
-                        a(href="/parcours/edit/"+ parcour.id) Editer
-                    td #{parcour.createdAt}
-                    td #{parcour.updatedAt}
+                        if (parcour.actif == 1)
+                            td actif
+                        else
+                            td inactif
+                        td
+                            a(href="/parcours/view/"+ parcour.id) Détail
+                            if(session.sid == parcour.UserId || session.admin)
+                                | &nbsp;-&nbsp;
+                                a(href="/parcours/edit/"+ parcour.id) Editer
+                        td #{parcour.User.username}
+                        td #{parcour.createdAt}
+                        td #{parcour.updatedAt}
+
+      script(type="text/javascript").
+          $('#filter').keyup(function () {
+              var rex = new RegExp($(this).val(), 'i');
+              $('.searchable tr').hide();
+              $('.searchable tr').filter(function () {
+                    return rex.test(this.children[1].textContent);
+              }).show();
+
+          })

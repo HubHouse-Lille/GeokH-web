@@ -2,7 +2,7 @@ extends layout_main
 
 block content
     container.col-md-8
-
+        script(src='/js/propositions.js')
         br
         h2 Créer une question
         br
@@ -21,7 +21,24 @@ block content
             .alert.alert-info(role="alert") #{msg}
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
-        form(action="/dal/questions/create", method="post").input-group.input-group-lg
+        form(action="/dal/questions/create", method="post", id="form").input-group.input-group-lg
+            #e0
+                p Type de question
+                    div.input-lg-8.input-lg
+                        #typeq.btn-group(data-toggle='buttons')
+                                label.btn.btn-success.active
+                                    input#normal(type='radio', name='typeq', value="0", autocomplete='off')
+                                    |  Normal
+                                label.btn.btn-success
+                                    input#mystere(type='radio', name='typeq', value="1",  autocomplete='off')
+                                    |  Mystère
+            br
+            #e0a
+                p Choix du parcours
+                    div#smq.input-lg-8.input-lg
+                        select.form-control(id="optqm", name="pqm")
+            br
+            hr
             #e1
                 p La question qui sera posée
                 div.input-lg-8.input-lg
@@ -31,8 +48,25 @@ block content
             #e2
                 p Le thème
                 div.input-lg-8.input-lg
-                    input(type="text", name="theme", placeholder="Thème").form-control
-                p.help-block exemple: Connaître la définition d’un entrepreneur
+                    div(class="row col-lg-5")
+                        select(id="selectTheme", class="form-control", name="selectTheme")
+                          each theme in themes
+                            option(value=theme.id) #{theme.nom}
+                    input(id="addTheme", type="button", value="Ajouter thème",class="btn")
+                    #newTheme
+                        input(id="inputNewTheme", type="text", name="newTheme", placeholder="Nouveau thème...").form-control
+
+            br
+            #e2a
+                p Visibilité de la question
+                 div.input-lg-8.input-lg
+                    .btn-group(data-toggle='buttons')
+                        label.btn.btn-success.active
+                            input#option1(type='radio', name='mode_question', value="1", autocomplete='off', checked='')
+                            |  Public
+                        label.btn.btn-success
+                            input#option2(type='radio', name='mode_question', value="0",  autocomplete='off')
+                            |  Privé
             br
             #e3
                 p L'objectif
@@ -46,63 +80,23 @@ block content
                         option(value="QCU" selected) Question à choix unitaire
                         option(value="QCM") Question à choix multiple
             br
-            #qqcu
-                p Les réponses sous forme de QCU
+            #e5
+                p Les Propositions de réponses et les réponses
                 div.input-lg-8.input-lg
-                    input(type="text", name="qu1", placeholder="Réponse possible 1").form-control
-                    | &nbsp;&nbsp;
-                    input(type="radio", name="repQcu", value="1" checked)
-                div.input-lg-8.input-lg
-                    input(type="text", name="qu2", placeholder="Réponse possible 2").form-control
-                    | &nbsp;&nbsp;
-                    input(type="radio", name="repQcu", value="2")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qu3", placeholder="Réponse possible 3").form-control
-                    | &nbsp;&nbsp;
-                    input(type="radio", name="repQcu", value="3")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qu4", placeholder="Réponse possible 4").form-control
-                    | &nbsp;&nbsp;
-                    input(type="radio", name="repQcu", value="4")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qu5", placeholder="Réponse possible 5").form-control
-                    | &nbsp;&nbsp;
-                    input(type="radio", name="repQcu", value="5")
-            #qqcm
-                p Les réponses sous forme de QCM
-                div.input-lg-8.input-lg
-                    input(type="text", name="qm1", placeholder="Réponse possible 1").form-control
-                    | &nbsp;&nbsp;
-                    input(type="checkbox", name="repQcm1", value="1")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qm2", placeholder="Réponse possible 2").form-control
-                    | &nbsp;&nbsp;
-                    input(type="checkbox", name="repQcm2", value="2")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qm3", placeholder="Réponse possible 3").form-control
-                    | &nbsp;&nbsp;
-                    input(type="checkbox", name="repQcm3", value="3")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qm4", placeholder="Réponse possible 4").form-control
-                    | &nbsp;&nbsp;
-                    input(type="checkbox", name="repQcm4", value="4")
-                div.input-lg-8.input-lg
-                    input(type="text", name="qm5", placeholder="Réponse possible 5").form-control
-                    | &nbsp;&nbsp;
-                    input(type="checkbox", name="repQcm5", value="5")
+                    button.btn#plusProps(type="button") Ajouter Propositions
+                    button.btn#moinsProps(type="button") Supprimer Propositions
+                br
+                #propsrep
+                br
             br
-            #rep
+            #e6
                 p Les Retours que vous souhaitez renvoyer
                 div.input-lg-8.input-lg
-                    input(type="text", name="ret1", placeholder="Retour 1").form-control
-                div.input-lg-8.input-lg
-                    input(type="text", name="ret2", placeholder="Retour 2").form-control
-                div.input-lg-8.input-lg
-                    input(type="text", name="ret3", placeholder="Retour 3").form-control
-                div.input-lg-8.input-lg
-                    input(type="text", name="ret4", placeholder="Retour 4").form-control
-                div.input-lg-8.input-lg
-                    input(type="text", name="ret5", placeholder="Retour 5").form-control
+                    button.btn#plusRet(type="button") Ajouter Retour
+                    button.btn#moinsRet(type="button") Supprimer Retour
+                br
+                #retours
+                br
             br
             #diff
                 p Difficulté de la question
@@ -117,17 +111,13 @@ block content
                 input(type="submit", value="Créer la question").btn.btn-success
             br
             br
-
-    script(type="text/javascript").
-        $(function() {
-        $('#qqcm').hide();
-        $('#type').change(function(){
-        if($('#type').val() == 'QCM') {
-            $('#qqcm').show();
-            $('#qqcu').hide();
-        } else {
-            $('#qqcm').hide();
-            $('#qqcu').show();
-        }
-        });
-        });
+            .modal.fade(role='dialog', id='myModalCaution')
+                            .modal-dialog
+                                .modal-content
+                                    .modal-header
+                                        button.close(type='button', data-dismiss='modal') ×
+                                        h4.modal-title Attention
+                                    .modal-body
+                                        p(class="alert alert-danger" id="paraModal")
+                                    .modal-footer
+                                        button.btn.btn-default(type='button', data-dismiss='modal') Close

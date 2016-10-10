@@ -4,14 +4,14 @@ block content
     container.col-md-12
 
         br
-        h2 Les entrepreneurs disponibles
+        h2 Les personnes mystères disponibles
         br
         div
-            p Pour plus d'informations sur comment concernant les entrepreneurs,&nbsp;
+            p Pour plus d'informations sur comment concernant les personnes mystères,&nbsp;
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus ici
             #info.collapse
                 .well
-                    p Informations concernant les entrepreneurs:
+                    p Informations concernant les personnes mystères:
                         br
 
         hr
@@ -41,12 +41,41 @@ block content
                         a(href="/entrepreneurs/view/"+ entrepreneur.id) #{entrepreneur.prenom}&nbsp;#{entrepreneur.nom}
                     td
                         img(alt='photo', src='#{entrepreneur.photo}', style="max-height: 50px; max-width: 50px")
-                    td #{entrepreneur.interview}
-                    td #{entrepreneur.indice}
                     td
-                        a(href="/entrepreneurs/view/"+ entrepreneur.id) Détails
-                        | &nbsp;-&nbsp;
-                        a(href="/entrepreneurs/edit/"+ entrepreneur.id) Editer
+                        button.btn.btn-info(type='button', data-toggle='modal', data-target='#myModal'+entrepreneur.id) Voir
+                        .modal.fade(role='dialog', id='myModal'+entrepreneur.id)
+                            .modal-dialog
+                                .modal-content
+                                    .modal-header
+                                        button.close(type='button', data-dismiss='modal') ×
+                                        h4.modal-title Interview de #{entrepreneur.prenom}&nbsp;#{entrepreneur.nom}
+                                    .modal-body
+                                        - var n = entrepreneur.interviewQ.length
+                                        - for (var i = 0; i < n; i++)
+                                            p Q : #{entrepreneur.interviewQ[i]}
+                                            p R : #{entrepreneur.interviewR[i]}
+                                    .modal-footer
+                                        button.btn.btn-default(type='button', data-dismiss='modal') Close
+
+                    td
+                        button.btn.btn-info(type='button', data-toggle='modal', data-target='#myModal2'+entrepreneur.id) Voir
+                        .modal.fade(role='dialog', id='myModal2'+entrepreneur.id)
+                            .modal-dialog
+                                .modal-content
+                                    .modal-header
+                                        button.close(type='button', data-dismiss='modal') ×
+                                        h4.modal-title Indice de #{entrepreneur.prenom}&nbsp;#{entrepreneur.nom}
+                                    .modal-body
+                                        - var n = entrepreneur.indices.length
+                                        - for (var i = 0; i < n; i++)
+                                            p #{entrepreneur.indices[i]}
+                                    .modal-footer
+                                        button.btn.btn-default(type='button', data-dismiss='modal') Close
+                    td
+                        a(href="/entrepreneurs/view/"+ entrepreneur.id) Détail
+                        if(session.admin || session.sid == entrepreneur.UserId)
+                            | &nbsp;-&nbsp;
+                            a(href="/entrepreneurs/edit/"+ entrepreneur.id) Editer
                     td #{entrepreneur.createdAt}
                     td #{entrepreneur.updatedAt}
         br

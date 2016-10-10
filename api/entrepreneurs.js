@@ -6,7 +6,8 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/', function(req, res) {
-    models.Entrepreneur.findAll().then(
+    if(req.session.admin){
+        models.Entrepreneur.findAll().then(
         function(entrepreneurs) {
             res.format({
               'application/json': function(){
@@ -14,6 +15,22 @@ router.get('/', function(req, res) {
               }
             });
         });
+    }else{
+        models.Entrepreneur.findAll({
+                    where: {
+                      $or : [
+                      {UserId : req.session.sid},
+                      {public : true}
+                      ]
+                }}).then(
+                    function(entrepreneurs) {
+                        res.format({
+                             'application/json': function(){
+                               res.send(entrepreneurs);
+                             }
+                        });
+                    });
+    }
 });
 
 

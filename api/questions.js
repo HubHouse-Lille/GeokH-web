@@ -6,10 +6,27 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/', function(req, res) {
-    models.Question.findAll().then(
-        function(questions) {
-            res.json(questions);
-        });
+    if(req.session.admin){
+           models.Question.findAll({include: [ models.Theme ]}).then(
+               function(questions) {
+                   res.json(questions)
+           });
+       }
+       else{
+           models.Question.findAll({
+               where: {
+                           $or : [
+                           {UserId : req.session.sid},
+                           {public : true}
+                           ]
+                       },
+               include: [ models.Theme ]
+
+           }).then(
+               function(questions) {
+                   res.json(questions)
+           });
+       }
 });
 
 module.exports = router;

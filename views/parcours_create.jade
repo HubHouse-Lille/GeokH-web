@@ -1,20 +1,19 @@
 extends layout_main
-
 block content
     container.col-md-8
-
+        script(src='/js/parcours_create.js')
         br
-        h2 Créer un parcour
+        h2 Créer un parcours
         br
         div
-            p Pour plus d'informations sur comment créer un parcour,&nbsp;
+            p Pour plus d'informations sur comment créer un parcours,&nbsp;
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') apprenez-en plus
             #info.collapse
                 .well
-                    p Informations pour la création d'un parcour:
+                    p Informations pour la création d'un parcours:
                         br
                         br
-                        | Lorsque vous créez un parcour, veillez à avoir déjà crée les balises et les questions associées.
+                        | Lorsque vous créez un parcours, veillez à avoir déjà crée les balises et les questions associées.
                         br
                         | Dans un premier temps vous créez le parcours, et ensuite vous y associerez des balises.
 
@@ -25,17 +24,80 @@ block content
             .alert.alert-info(role="alert") #{msg}
         if (err != undefined)
             .alert.alert-warning(role="alert") #{err}
-        form(action="/dal/parcours/create", method="post").input-group.input-group-lg
+        form(action="/dal/parcours/create", method="post", id="form-p").input-group.input-group-lg
             #e1
                 p Nom du parcours
                 div.input-lg-8.input-lg
-                    input(type="text", name="nom", placeholder="nom du parcour").form-control
+                    input(type="text", name="nom", placeholder="Nom du parcours", required=true).form-control
                 p.help-block exemple: HubHouse lille1-ouest pour etudiant info
             br
             #e2
                 p Description du parcours
                 div.input-lg-8.input-lg
-                    input(type="textarea", name="description", placeholder="description du parcour").form-control
+                    input(type="textarea", name="description", placeholder="Description du parcours", required=true).form-control
             br
+            #e2a
+                p Visibilité du parcours
+                 div.input-lg-8.input-lg
+                    .btn-group(data-toggle='buttons')
+                        label.btn.btn-success.active
+                            input#option1(type='radio', name='mode_public', value="1", autocomplete='off', checked='')
+                            |  Public
+                        label.btn.btn-success
+                            input#option2(type='radio', name='mode_public', value="0", autocomplete='off')
+                            |  Privé
+            br
+            #e3
+                p Personnes mystères
+                table.table.table-hover.table-bordered
+                    thead
+                        tr
+                            th #
+                            th nom
+                    tbody#tabPtoe
+                br
+                #ee1
+                    p Ajouter une personne mystère
+                    div.input-md-12(style="float:left; margin-right:8px;")
+                        select.form-control(id="optEnt", name="entrepreneur_id")
+                    div.actions(style="float:left; margin-right:8px;")
+                        input(id="addEnt",type="button", value="Ajouter cette personne mystère").btn.btn-success
+                br
+            br
+            hr
+            #e4
+                p Balises & Questions
+                table.table.table-hover.table-bordered
+                    thead
+                        tr
+                            th #
+                            th Nom balise
+                            th Question
+                            th Ordre
+                    tbody#tabPtobq
+                br
+                #eb1
+                    p Ajouter une balise, associée à une question, selon l'ordre souhaité
+                    div.input-md-12(style="float:left; margin-right:8px;")
+                        select.form-control(id="optb", name="balise")
+                    div.input-md-12(style="float:left;margin-right:8px;")
+                        select.form-control(id="optq", name="question")
+                    div.input-md-12(style="float:left; margin-right:8px;")
+                        select.form-control(id="ordre", name="ordre")
+                    div.actions(style="float:left;")
+                        input(id='addbq', type="button", value="Ajouter la balise").btn.btn-success
+                br
+            br
+            hr
             div.actions
-                input(type="submit", value="Créer le parcour").btn.btn-success
+                input(type="submit", value="Créer le parcours").btn.btn-success
+            .modal.fade(role='dialog', id='myModalCaution')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            button.close(type='button', data-dismiss='modal') ×
+                            h4.modal-title Attention
+                        .modal-body
+                            p(class="alert alert-danger" id="paraModal") Attention.
+                        .modal-footer
+                            button.btn.btn-default(type='button', data-dismiss='modal') Close

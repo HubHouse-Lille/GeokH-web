@@ -5,8 +5,16 @@ module.exports = function(sequelize, DataTypes) {
     nom: DataTypes.STRING,
     prenom: DataTypes.STRING,
     photo: DataTypes.BLOB,
-    interview: DataTypes.TEXT,
-    indice: DataTypes.TEXT
-  });
+    interviewQ: DataTypes.ARRAY(DataTypes.TEXT),
+    interviewR: DataTypes.ARRAY(DataTypes.TEXT),
+    indices : DataTypes.ARRAY(DataTypes.TEXT),
+    public : DataTypes.BOOLEAN
+  }, {
+       classMethods: {
+         associate: function(models) {
+           Entrepreneur.belongsTo(models.User)
+          }
+       }
+       });
   return Entrepreneur;
 };

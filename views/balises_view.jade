@@ -49,9 +49,10 @@ block content
                         a(href="/balises/view/"+ balise.id) #{balise.nom}
                     td #{balise.indice}
                     td
-                        a(href="/balises/view/"+ balise.id) Détails
-                        | &nbsp;-&nbsp;
-                        a(href="/balises/edit/"+ balise.id) Editer
+                        a(href="/balises/view/"+ balise.id) Détail
+                        if(session.admin || session.sid == balise.UserId)
+                            | &nbsp;-&nbsp;
+                            a(href="/balises/edit/"+ balise.id) Editer
                     td
                         a(target="_blank", href="http://google.com/maps/place/"+balise.latitude+","+balise.longitude) #{balise.latitude+", "+balise.longitude}
                     td #{balise.createdAt}

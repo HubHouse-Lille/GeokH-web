@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Ptobq.belongsTo(models.Balise),
         Ptobq.belongsTo(models.Question),
-        Ptobq.belongsTo(models.Parcour)
+        Ptobq.belongsTo(models.Parcours)
       }
     }
   });

@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Ptoe.belongsTo(models.Entrepreneur),
-        Ptoe.belongsTo(models.Parcour)
+        Ptoe.belongsTo(models.Parcours)
       }
     }
   });

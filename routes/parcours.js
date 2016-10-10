@@ -7,29 +7,44 @@ var bodyParser = require('body-parser');
 
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
-
-    models.Parcour.findAll().then(
+    if(!req.session.admin){
+        models.Parcours.findAll({
+            where: {
+                $or : [
+                {UserId : req.session.sid},
+                {public : true}
+                ]
+            },
+            include: [ models.User ]
+        }).then(
+            function(parcours) {
+                res.render('parcours_view', {
+                    parcours: parcours
+                });
+            });
+    }else{
+        models.Parcours.findAll({
+        include: [ models.User ]
+        }).then(
         function(parcours) {
             res.render('parcours_view', {
                 parcours: parcours
             });
         });
+    }
 });
 
 // VIEW ONE > GET
 router.get('/view/:id', function(req, res) {
 
-    // Parcour
-    models.Parcour.findOne({
-        where: { id: req.params.id }
-    }).then(
-        function(parcour) {
-        res.render('parcours_detail', {
-            parcour: parcour,
-            entrepreneurs_selected: {},
-            entrepreneur_all: {}
-        });
-    });
+    models.Parcours.findOne({
+            where: { id: req.params.id }
+        }).then(
+            function(parcour) {
+                res.render('parcours_detail', {
+                    parcour: parcour
+                });
+            });
 
 });
 
@@ -40,13 +55,29 @@ router.get('/create/', function(req, res) {
 
 // EDIT > GET
 router.get('/edit/:id', function(req, res) {
-    models.Parcour.findOne({
+    models.Parcours.findOne({
         where: { id: req.params.id }
     }).then(
         function(parcour) {
-            res.render('parcours_edit', {
-                parcour: parcour
-            });
+            if(!req.session.admin && parcour.UserId != req.session.sid){
+                models.Parcours.findAll({
+                    where: {
+                    $or : [
+                    {UserId : req.session.sid},
+                    {public : true}
+                    ]
+                }}).then(
+                function(balises) {
+                    res.render('balises_view', {
+                     balises: balises,
+                     err : "Attention : Vous n'avez pas le droit de modifier le parcours !"
+                    });
+                });
+            }else{
+                res.render('parcours_edit', {
+                    parcour: parcour
+                });
+            }
         });
 });
 

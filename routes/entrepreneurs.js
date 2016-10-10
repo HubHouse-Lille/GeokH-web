@@ -7,12 +7,28 @@ var models  = require('../models/index');
 
 // VIEW ALL > GET
 router.get('/view/', function(req, res) {
-    models.Entrepreneur.findAll().then(
+    if(req.session.admin){
+         models.Entrepreneur.findAll().then(
         function(entrepreneurs) {
             res.render('entrepreneurs_view', {
                 entrepreneurs: entrepreneurs
             });
         });
+    }
+    else{
+        models.Entrepreneur.findAll({
+            where: {
+              $or : [
+              {UserId : req.session.sid},
+              {public : true}
+              ]
+        }}).then(
+            function(entrepreneurs) {
+                res.render('entrepreneurs_view', {
+                    entrepreneurs: entrepreneurs
+                });
+            });
+    }
 });
 
 // VIEW ONE > GET
@@ -37,9 +53,25 @@ router.get('/edit/:id', function(req, res) {
         where: { id: req.params.id }
     }).then(
         function(entrepreneur) {
-            res.render('entrepreneurs_edit', {
-                entrepreneur: entrepreneur
-            });
+            if(!req.session.admin && req.session.sid != entrepreneur.UserId){
+                models.Entrepreneur.findAll({
+                    where: {
+                      $or : [
+                      {UserId : req.session.sid},
+                      {public : true}
+                      ]
+                }}).then(
+                    function(entrepreneurs) {
+                        res.render('entrepreneurs_view', {
+                            entrepreneurs: entrepreneurs,
+                            err : "Attention : Vous n'avez pas les droits pour modifier la personne mystere ! "
+                        });
+                    });
+            }else{
+                res.render('entrepreneurs_edit', {
+                    entrepreneur: entrepreneur
+                });
+            }
         });
 });
 
