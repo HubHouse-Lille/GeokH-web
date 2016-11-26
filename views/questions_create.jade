@@ -11,7 +11,9 @@ block content
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
             #info.collapse
                 .well
-                    p Informations concernant les questions:
+                    p 
+                        a(href='/aide#question') Informations concernant les questions
+                        p Lors de la création d'une question, veillez à ce qu'elles soient bien compréhensibles par un uilisateur. Une fois que vous aurez créé la question, vous pourrez l'utiliser dans un parcours en l'associant à une balise
                     br
 
         hr
@@ -41,9 +43,11 @@ block content
             hr
             #e1
                 p La question qui sera posée
-                div.input-lg-8.input-lg
-                    input(type="text", name="question", placeholder="Question").form-control
-                p.help-block exemple: Quel est la couleur rose du cheval de napoléon ?
+                div.row
+                    div.input-lg-8.input-lg
+                        textarea(name="question", placeholder="Question").form-control
+                div.row
+                    p.help-block exemple: Quel est la couleur du cheval de napoléon ?
             br
             #e2
                 p Le thème

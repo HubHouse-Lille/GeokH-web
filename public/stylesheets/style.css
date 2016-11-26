@@ -52,6 +52,9 @@ textarea {
     max-width: 280px;
 }
 
+.input-group .form-control.answer-input {
+    width: 90%;
+}
 
 button {
     border: 1px #AAA solid;

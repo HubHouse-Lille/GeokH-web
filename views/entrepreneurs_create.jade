@@ -5,14 +5,7 @@ block content
 
         br
         h2 Créer une personne mystère
-        br
-        div
-            p Pour plus d'informations sur comment concernant les personnes mystères,&nbsp;
-                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus ici
-            #info.collapse
-                .well
-                    p Informations concernant les personnes mystères:
-                        br
+
 
         hr
         if (ok != undefined)
@@ -47,7 +40,7 @@ block content
                 p Mettre à jour la photo de profil
                 div.input-lg-8.input-lg
                     input(type="file", name="photo", onchange="previewFile()")
-                p.help-block Pour un rendu optimal, l'image doit êttre de format carré.
+                p.help-block Pour un rendu optimal, l'image doit être de format carré.
             #e3c
                 div.input-lg-8
                     img(id="imgPreview", name="newPhoto", src="", style="max-height:200px", alt="Image preview...")
