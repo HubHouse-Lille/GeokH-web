@@ -50,7 +50,11 @@ router.get('/view/:id', function(req, res) {
 
 // CREATE > GET
 router.get('/create/', function(req, res) {
-    res.render('parcours_create');
+    //res.render('parcours_create');
+    models.Theme.findAll().then(
+        function(themes) {
+            res.render('parcours_create', {themes: themes})
+        });
 });
 
 // EDIT > GET

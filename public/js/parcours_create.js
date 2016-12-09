@@ -124,10 +124,10 @@ var neighborhoods = [
             $.each(result, function(item) {
                 options.append($("<option />").val(result[item].id).text(result[item].question));
                 ordre.append($("<option />").val(i).text('Ordre ' + i));
-                i++
+                i++;
             });
         }).done(function( data ) {
-            questions = data
+            questions = data;
         });
 
         // Traitement des données
@@ -193,6 +193,23 @@ var neighborhoods = [
                 balise_add.push(b.id);
                 question_add.push(q.id);
             }
+        });
+
+        $('#filterbox').click(function() {
+            var theme = $("#selectTheme option:selected" ).text();
+            var input = $('filterbox');
+            var options = $("#optq");
+            options.empty();
+            if ($('#filterbox').is(':checked'))
+                $.each(questions, function(item) {
+                    if (questions[item].Theme.nom === theme)
+                        options.append($("<option />").val(questions[item].id).text(questions[item].question));
+                });
+            else 
+                $.each(questions, function(item) {
+                    options.append($("<option />").val(questions[item].id).text(questions[item].question));
+                });
+
         });
 
         // Récupération des données déjà présentes
