@@ -55,6 +55,21 @@ function initMap() {
   }
 }
 
+function onLatLongUpdated() {
+  var lat = parseFloat($('#lat')[0].value.replace(',', '.'));
+  var lng = parseFloat($('#lng')[0].value.replace(',', '.'));
+  deleteMarkers();
+  var marker = new google.maps.Marker({
+    position: {lat : lat, lng : lng},
+    map: map,
+    title : 'Balise'
+  });
+  markers.push(marker);
+}
+
+$('#lat')[0].onchange = onLatLongUpdated;
+$('#lng')[0].onchange = onLatLongUpdated;
+
 // Adds a marker to the map and push to the array.
 function addMarker(location) {
   deleteMarkers();
@@ -64,8 +79,8 @@ function addMarker(location) {
     title : 'Balise'
   });
   markers.push(marker);
-  document.getElementById('lat').value=location.lat();
-  document.getElementById('lng').value=location.lng();
+  document.getElementById('lat').value = location.lat();
+  document.getElementById('lng').value = location.lng();
 }
 
 // Sets the map on all markers in the array.

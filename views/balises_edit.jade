@@ -43,11 +43,11 @@ block content
             #map
             br
             div.input-lg-8.input-lg
-                input(type="text", name="latitude", value=balise.latitude, placeholder="Latitude" readonly)#lat.form-control
+                input(type="number", name="latitude", value=balise.latitude, placeholder="Latitude")#lat.form-control
             p.help-block exemple: entre -90 et 90. Exemple: 50.6101406 (si positif, NORD)
             br
             div.input-lg-8.input-lg
-                input(type="text", name="longitude", value=balise.longitude, placeholder="Longitude" readonly)#lng.form-control
+                input(type="number", name="longitude", value=balise.longitude, placeholder="Longitude")#lng.form-control
             p.help-block exemple: Entre -180 et 180. Exemple 3.1412428 (si positif, EST)
             br
             div.actions
