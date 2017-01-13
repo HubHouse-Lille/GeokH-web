@@ -11,6 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Parcours.hasMany(models.Ptobq),
         Parcours.belongsTo(models.User),
+        Parcours.belongsTo(models.Theme),
         Parcours.hasMany(models.Score)
        }
     }

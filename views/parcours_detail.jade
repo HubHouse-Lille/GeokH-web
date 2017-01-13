@@ -20,14 +20,14 @@ block content
             #e1
                 p Le nom du parcours
                 div.input-lg-8.input-lg
-                    input(type="text", name="nom", value=parcour.nom, placeholder="nom du parcours" readonly).form-control
-                    input(id="pId", type="hidden", name="idParcour", value=parcour.id)
+                    input(type="text", name="nom", value=parcours.nom, placeholder="nom du parcours" readonly).form-control
+                    input(id="pId", type="hidden", name="idParcour", value=parcours.id)
                 p.help-block exemple: HubHouse lille1-ouest pour etudiant info
             br
             #e2
                 p Le parcours est-il visible dans l'application mobile ?
                     | &nbsp; &nbsp;
-                    if (parcour.actif == 1)
+                    if (parcours.actif == 1)
                         input(type="checkbox", name="actif", value="1" checked disabled)
                     else
                         input(type="checkbox", name="actif", value="1" disabled)
@@ -36,7 +36,7 @@ block content
                 p Visibilité du parcours
                  div.input-lg-8.input-lg
                     .btn-group(data-toggle='buttons')
-                        if (parcour.public == 1)
+                        if (parcours.public == 1)
                             label.btn.btn-success.active
                                 input#option1(type='radio', name='options', autocomplete='off', checked='', disabled)
                                 |  Public
@@ -48,7 +48,13 @@ block content
             #e3
                 p Description
                 div.input-lg-8.input-lg
-                    input(type="textarea", name="description", value=parcour.description, placeholder="Description du parcours" readonly).form-control
+                    input(type="textarea", name="description", value=parcours.description, placeholder="Description du parcours" readonly).form-control
+
+            br
+            #e2
+                p Le thème
+                div.input-lg-8.input-lg
+                    input(type="text", name="theme", value=parcours.Theme, placeholder="Thème" readonly).form-control
             br
             #e3
                 h4 Le parcours
@@ -80,8 +86,8 @@ block content
                     tbody#tabPtobq
             br
             div.actions
-                if(session.admin || session.sid == parcour.UserId)
-                    button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcour.id+"';") Modifier
+                if(session.admin || session.sid == parcours.UserId)
+                    button.btn.btn-primary.btn-success(type='button', onclick="location.href='/parcours/edit/"+parcours.id+"';") Modifier
             br
             br
 
