@@ -18,12 +18,6 @@
     "ssl" : false
   },
  "production": {
-    "username": "ehzgtlkvryftjs",
-    "password": "z5vGjV8CohRlZbXFFgEoLYAl5A",
-    "database": "dbro2cgred2ah9",
-    "host": "ec2-54-195-241-189.eu-west-1.compute.amazonaws.com",
-    "port": "5432",
-    "dialect": "postgres",
-    "ssl" : true
+    "use_env_variable": "DATABASE_URL"
   }
 }
