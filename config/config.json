@@ -18,10 +18,10 @@
     "ssl" : false
   },
  "production": {
-    "username": "pijawtxivxzokg",
-    "password": "99321c7462d646329852bdb23b00f0c6f4c06ac8ff93c834c903d1b751a02957",
-    "database": "d4pj4kde5of056",
-    "host": "ec2-54-195-248-0.eu-west-1.compute.amazonaws.com",
+    "username": "ehzgtlkvryftjs",
+    "password": "z5vGjV8CohRlZbXFFgEoLYAl5A",
+    "database": "dbro2cgred2ah9",
+    "host": "ec2-54-195-241-189.eu-west-1.compute.amazonaws.com",
     "port": "5432",
     "dialect": "postgres",
     "ssl" : true
