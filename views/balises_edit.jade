@@ -5,25 +5,7 @@ block content
 
         br
         h2 Modifier la balise
-        br
-        div
-            p Pour plus d'informations concernant la création d'une balise,&nbsp;
-                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
-            #info.collapse
-                .well
-                    p Informations pour la création d'une balise:
-                        br
-                        br
-                        | Lorsque vous créez une balise, veillez à avoir déjà crée la question associée.
-                        br
-                        | Toute balise possède une question. Plusieurs balises peuvent avoir la même question.
-                        br
-                        | Pour trouver la position GPS d'une position, vous pouvez utiliser&nbsp;
-                        a(href='https://www.google.com/maps/') google maps
-                        br
-                        | Si vous souhaitez plus d'informations concernant les coordonnées géographiques, veuillez vous référer à&nbsp;
-                        a(href='https://fr.wikipedia.org/wiki/Coordonn%C3%A9es_g%C3%A9ographiques') Wikipédia
-
+    
         hr
         if (ok != undefined)
             .alert.alert-success(role="alert") #{ok}
@@ -61,11 +43,11 @@ block content
             #map
             br
             div.input-lg-8.input-lg
-                input(type="text", name="latitude", value=balise.latitude, placeholder="Latitude" readonly)#lat.form-control
+                input(type="number", name="latitude", value=balise.latitude, placeholder="Latitude")#lat.form-control
             p.help-block exemple: entre -90 et 90. Exemple: 50.6101406 (si positif, NORD)
             br
             div.input-lg-8.input-lg
-                input(type="text", name="longitude", value=balise.longitude, placeholder="Longitude" readonly)#lng.form-control
+                input(type="number", name="longitude", value=balise.longitude, placeholder="Longitude")#lng.form-control
             p.help-block exemple: Entre -180 et 180. Exemple 3.1412428 (si positif, EST)
             br
             div.actions

@@ -30,17 +30,17 @@ block content
             a(name="general")
             h3 1 Général
             br
-            p L'application dans sa partie graphique se structure en trois parties. Premièrement la bare de navigation horizontale (noir, en haut), qui vous permet d'accéder aux options générales de l'application (accueil, aide etc).
-            p Deuxièmement, le volet de gauche donne accès à toutes les entités. Les Parcours, Balises, Questions et les Personnes Mystères sont structurés de la même manière. Une page de visualisation permet d'avoir une vue globale sur les entités respective enregistrées dans le système. Pour chacune de ces entités, il est possible de les modifier. En tant qu'administrateur vous pourrez aussi les supprimer si les conditions de réfrencement sont respectées (voir encart référence de l'entité). Vous pouvez aussi créer de nouvelles entités.
+            p L'application dans sa partie graphique se structure en trois parties. Premièrement la barre de navigation horizontale (noire, en haut), qui vous permet d'accéder aux options générales de l'application (accueil, aide etc).
+            p Deuxièmement, le volet de gauche donne accès à toutes les entités. Les Parcours, Balises, Questions et les Personnes Mystères sont structurés de la même manière. Une page de visualisation permet d'avoir une vue globale sur les entités respectives enregistrées dans le système. Pour chacune de ces entités, il est possible de les modifier. En tant qu'administrateur vous pourrez aussi les supprimer si les conditions de référencement sont respectées (voir encart référence de l'entité). Vous pouvez aussi créer de nouvelles entités.
             p Concernant les parcours, il ne suffit pas de les créer, ils doivent ensuite être associés à des enttrepreneurs et des questions et balises.
             br
             br
             a(name="entites")
             h3 2 Les entités
             br
-            p Les entités ci-dessous sont au coeur du système dès lors qu'ils doivent les gérer. Le schéma ci-dessous illustre les liens entre les différentes entités.
-            p Les entités PtoE et PtoBQ ne sont pas directement visibles par l'utilisateur mais correspond aux associations entre les parcours et les personnes mystères (PtoE) d'une part, et les parcours et les balises et Questions d'autre part (PtoBQ)
-            p Ces associations sont editables dans l'édition des parcours. Veuillez vous référes aux sous-parties Références des entités pour plus de détails.
+            p Les entités ci-dessous sont au coeur du système . Le schéma ci-dessous illustre les liens entre les différentes entités.
+            p Les entités PtoE et PtoBQ ne sont pas directement visibles par l'utilisateur ou l'administrateur mais correspondent aux associations entre les parcours et les personnes mystères (PtoE) d'une part, et les parcours et les balises et Questions d'autre part (PtoBQ)
+            p Ces associations sont editables dans l'édition des parcours. Veuillez vous référer aux sous-parties Références des entités pour plus de détails.
             br
             img(src="/img/modeldb.png")
             br
@@ -50,23 +50,24 @@ block content
             h4 2.1 Utilisateurs
             br
             p Les utilisateurs sont dissociés du reste des entités car ils n'interfèrent pas avec l'application mobile.
-            p Les utilisateurs possèdent un login avec lequel ils peuvent se connecter, une adresse e-mail qui les représente, un mot de passe et un status.
+            p Les utilisateurs possèdent un login avec lequel ils peuvent se connecter, une adresse e-mail qui les représente, un mot de passe et un statut.
             p Pour se connecter l'utilisateur doit utiliser son login et son mot de passe.
-            p Le status de l'utilisateur est soit Utilisateur Privilégié, soit Administrateur. Seul un administrateur peut modifier le status d'un Utilisateur. Enfin, il n'est pas possible pour un administrateur de changer son status.
+            p Le status de l'utilisateur est soit Utilisateur Privilégié, soit Administrateur. Seul un administrateur peut modifier le statut d'un Utilisateur. Enfin, il n'est pas possible pour un administrateur de changer son statut.
             br
             br
             br
             a(name="parcour")
             h4 2.2 Parcours
             br
-            p Les parcours sont la pièce maitresse du système. Ce sont eux qui lient les autres éléments. Ils possèdent des personnes mystères, des balises et des questions.
-            p Le nom du parcour permet de facilement l'identifier.
-            p La description du parcour permet d'avoir plus d'information concernant celui-ci.
-            p Enfin, l'état d'un parcour est actif ou inactif. Seulement s'il est actif celui-ci sera visible par les utilisateurs mobile.
+            p Les parcours constituent la pièce maitresse du système. Ce sont eux qui lient les autres éléments. Ils possèdent des personnes mystères, des balises et des questions.
+            p Le nom du parcours permet de facilement l'identifier.
+            p La description du parcours permet d'avoir plus d'informations concernant celui-ci.
+            p Enfin, l'état d'un parcours est actif ou inactif. Il ne sera visible par les utilisateurs mobiles que s'il est actif. Ainsi, un parcours qui n'est pas encore terminé ne sera pas visible.
             br
             h5 Références :
-            p Les parcours possèdent des personnes mystères. Une personne mystère défini peut appartenir à plusieurs parcours.
-            p Ils possèdent aussi des Balise-Question. C'est à dire, une association entre une balise et une question. Ceci donne plus de souplesse au système et permet par exemple de faire passer l'utilisateur mobile deux fois à la même balise avec deux questions différente.
+            p Un parcours possède une référence vers une personne mystère. Une personne mystère définie peut appartenir à plusieurs parcours. Dès lors qu'une personne mystère est référencée par un parcours, il devient impossible de la supprimer. Si vous désirez supprimer cette personne mystère, alors il faut d'abord modifier le parcours qui la référence.
+            P Ceci est valable pour toutes les entités référencées par d'autres (ce sera de nouveau précisé à la suite de ce guide).
+            p Les parcours possèdent aussi des Balise-Question. C'est à dire, une association entre une balise et une question. Ceci donne plus de souplesse au système et permet par exemple de faire passer l'utilisateur mobile deux fois à la même balise avec deux questions différente.
             br
             br
             br
@@ -74,14 +75,14 @@ block content
             h4 2.3 Balises
             br
             p Les balises sont la représentation géographique d'un lieu. Elles sont constituées de coordonnées géographique, d'un nom et dun indice.
-            p Le nom des balises permet de mieux les manipuler dans le système. Veuillez donc à en indiquer un nom clair.
-            p L'indice d'une balise est une courte phrase qui peut aider l'utilisateru mobile à trouver la balise. On donner par exemple l'indice "Au pied du grand arbre".
-            p Les coordonnées géographiques en latitude doivent être comprises entre -90° et 90°. Pour indiquer une position dans l'émisphère nord on notera une valeur positive tandis que pour une position dans l'émisphère sud on notera une valeur négative.
+            p Le nom des balises permet de mieux les manipuler lors de la création d'un parcours. Veillez donc à indiquer un nom clair, pour que vous puissiez savoir ou se trouve la balise sans devoir consulter ses coordonnées.
+            p L'indice d'une balise est une courte phrase qui peut aider l'utilisateur mobile à trouver la balise. On peut donner par exemple l'indice "Au pied du grand arbre".
+            p Les coordonnées géographiques en latitude doivent être comprises entre -90° et 90°. Pour indiquer une position dans l'hémisphère nord on notera une valeur positive tandis que pour une position dans l'hémisphère sud on notera une valeur négative.
             p Les coordonnées géographiques en longitude doivent elles être comprises entre -180° et 180°. Pour indiquer une position à l'ouest du méridien de Greenwich notez une valeur négative, tandis que pour une position à l'est, notez une valeur positive.
             br
             h5 Références :
-            p Toutes les balises lorsquelles sont utilisées par un parcour sont associées à une question. Cette opération d'association se fait dans l'édition du parcour.
-            p Vous ne puuvez pas supprimer une balise qui est référencée par un parcours. Ceci assure l'intégrité des données.
+            p Toutes les balises lorsqu'elles sont utilisées par un parcours sont associées à une question. Cette opération d'association se fait dans l'édition du parcours.
+            p Vous ne puuvez pas supprimer une balise qui est référencée par un parcours. Ceci assure l'intégrité des données. Si vous souhaitez vraiment supprimer une balise, alors vous devrez d'abord modifier le parcours en question.
             br
             h5 Aide :
             p Pour trouver la position GPS d'une position, vous pouvez utiliser&nbsp;
@@ -94,35 +95,35 @@ block content
             a(name="question")
             h4 2.4 Questions
             br
-            p Les questions sont essentielles dans le jeu. Parmi les éléments a manipuler, les questions seront le plus visible pour l'utilisateur, veuillez donc à bien les vérifier.
-            p Les questions comportent tout d'abord la question qui sera posée à l'utilisateur mobile.
-            p Le thème de la question n'est pas indiqué pour l'utilisateur mobile. Il vous aidera à ordonner les questions et à créer un parcour cohérent. Vous pouvez par exemple utiliser le thème Economie ou Business Plan
+            p Les questions sont essentielles dans le jeu. Parmi les éléments à manipuler, les questions seront le plus visible pour l'utilisateur, veillez donc à bien vérifier qu'elles soient compréhensibles.
+            p Les questions comportent tout d'abord le texte de la question qui sera posée à l'utilisateur mobile.
+            p Le thème de la question n'est pas indiqué pour l'utilisateur mobile. Il vous aidera à ordonner les questions et à créer un parcours cohérent. Vous pouvez par exemple utiliser le thème Économie ou Business Plan, associer plusieurs questions à un même th_ème puis construire un parcours autour de ce dernier.
             p L'objectif de la question n'est pas non plus indiqué à l'utilisateur mobile. Il permet de donner une indication supplémentaire sur la question posée pour mieux en comprendre l'enjeu.
             p Les questions peuvent soit être de type Question Choix Multiple (QCM), soit Question Choix Unitaire (QCU).
-            p Cette distinction modifie la facon dont l'utilisateur doit répondre à la question. Il ne peut (et doit) donner qu'une bonne réponse avec une question de type QCU, alors qu'il doit choisir quel question est la bonne parmi les propositions dans le cas d'une QCM.
-            p Les propositions sont les options de réponse données aux utilisateurs mobile.
-            p La difficulté de la question modifiera le comportement de la gestion des points de l'application mobile lors de la réponse à la question.
-            p Les réponses déterminent quels réponses sont les bonne
-            p Les retours sont des informations qui seront données aux utilisateur mobile après la réponse à la question en tant qu'aide.
+            p Cette distinction modifie la facon dont l'utilisateur doit répondre à la question. Il ne peut (et doit) donner qu'une bonne réponse avec une question de type QCU, alors qu'il doit choisir quelles sont les bonnes réponses dans le cas d'une QCM.
+            p Les propositions sont les options de réponses données aux utilisateurs mobile.
+            p La difficulté de la question définira le nombre de points que vaut la question.
+            p Vous devrez également indiquer quelle sera la bonne réponse parmi le choix proposé (ou les bonnes réponses, dans le cas d'une QCM)
+            p Les retours sont des informations qui seront données aux utilisateurs mobile après avoir répondu à la question, en tant qu'aide.
             br
             h5 Références :
-            p Toutes les questions lorsquelles sont utilisées par un parcour sont associées à une balise. Cette opération d'association se fait dans l'édition du parcour.
-            p Vous ne puuvez pas supprimer une question qui est référencée par un parcours. Ceci assure l'intégrité des données.
+            p Toutes les questions lorsqu'elles sont utilisées par un parcours sont associées à une balise. Cette opération d'association se fait dans l'édition du parcours.
+            p Vous ne puuvez pas supprimer une question qui est référencée par un parcours. Ceci assure l'intégrité des données (Même princippe que pour les balises).
             br
             br
             br
             a(name="entrepreneur")
             h4 2.5 Personnes Mystères
             br
-            p Les personnes mystères permettent de définir la dernière question du parcour, celle ou l'utilisateur mobile devera choisir la bonne personne mystère avec tous les indices reçu durant la partie.
+            p Les personnes mystères permettent de définir la dernière question du parcours, celle ou l'utilisateur mobile devera choisir la bonne personne mystère avec tous les indices reçus durant la partie.
             p Le nom et le prénom permettent de l'identifier
-            p La photo de la personne mystère est affichée çà l'utilisateur mobile. Veuillez à choisir une image carré pour un meilleur rendu, et pas trop volumineuse afin de fluidifier la récupération des données par l'utilisateur.
-            p L'interview de la personne mystère est un text qui permet qui le décrit et qui sera affiché lors de la sélection de l'enttrepreneur pour aider les utilisateurs à répondre à la dernière question.
+            p La photo de la personne mystère est affichée à l'utilisateur mobile. Veillez à choisir une image carrée pour un meilleur rendu, et pas trop volumineuse afin de fluidifier la récupération des données par l'utilisateur.
+            p L'interview de la personne mystère est un texte qui permet de le décrire et qui sera affiché lors de la sélection de l'enttrepreneur pour aider les utilisateurs à répondre à la dernière question.
             p Enfin les indices sont les informations que les utilisateurs glaneront en répondant aux questions.
             br
             h5 Références :
-            p les enttrepreneurs peuvent être associés à un parcour dans la page d'édition d'un parcours.
-            p Vous ne pouvez pas supprimer une personne mystère qui est référencée par un parcours. Ceci assure l'intégrité des données.
+            p les entrepreneurs peuvent être associés à un parcours dans la page d'édition d'un parcours.
+            p Vous ne pouvez pas supprimer une personne mystère qui est référencée par un parcours. Ceci assure l'intégrité des données. C'est le même principe que pour les balises ou les questions.
             br
             br
             br

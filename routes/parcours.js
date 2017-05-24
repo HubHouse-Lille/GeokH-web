@@ -40,9 +40,9 @@ router.get('/view/:id', function(req, res) {
     models.Parcours.findOne({
             where: { id: req.params.id }
         }).then(
-            function(parcour) {
+            function(parcours) {
                 res.render('parcours_detail', {
-                    parcour: parcour
+                    parcours: parcours
                 });
             });
 
@@ -50,7 +50,11 @@ router.get('/view/:id', function(req, res) {
 
 // CREATE > GET
 router.get('/create/', function(req, res) {
-    res.render('parcours_create');
+    models.Theme.findAll().then(
+        function(themes) {
+            res.render('parcours_create', {themes: themes});
+            console.log(parcours);
+        });
 });
 
 // EDIT > GET

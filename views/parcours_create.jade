@@ -7,15 +7,13 @@ block content
         br
         div
             p Pour plus d'informations sur comment créer un parcours,&nbsp;
-                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') apprenez-en plus
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') cliquez ici
             #info.collapse
                 .well
                     p Informations pour la création d'un parcours:
                         br
                         br
-                        | Lorsque vous créez un parcours, veillez à avoir déjà crée les balises et les questions associées.
-                        br
-                        | Dans un premier temps vous créez le parcours, et ensuite vous y associerez des balises.
+                        | Lorsque vous créez un parcours, veillez à avoir déjà crée les balises et les questions associées, car ce sont ces questions et balises déjà créées qui seront disponibles dans la liste déroulante (en bas de page)
 
         hr
         if (ok != undefined)
@@ -35,6 +33,15 @@ block content
                 p Description du parcours
                 div.input-lg-8.input-lg
                     input(type="textarea", name="description", placeholder="Description du parcours", required=true).form-control
+
+            br
+            #e2b
+                p Le thème
+                div.input-lg-8.input-lg
+                    div(class="row col-lg-5")
+                        select(id="selectTheme", class="form-control", name="selectTheme")
+                          each theme in themes
+                            option(value=theme.id) #{theme.nom}
             br
             #e2a
                 p Visibilité du parcours
@@ -66,7 +73,7 @@ block content
             br
             hr
             #e4
-                p Balises & Questions
+                p Balises et Questions
                 table.table.table-hover.table-bordered
                     thead
                         tr
@@ -78,14 +85,18 @@ block content
                 br
                 #eb1
                     p Ajouter une balise, associée à une question, selon l'ordre souhaité
-                    div.input-md-12(style="float:left; margin-right:8px;")
-                        select.form-control(id="optb", name="balise")
-                    div.input-md-12(style="float:left;margin-right:8px;")
-                        select.form-control(id="optq", name="question")
-                    div.input-md-12(style="float:left; margin-right:8px;")
-                        select.form-control(id="ordre", name="ordre")
-                    div.actions(style="float:left;")
-                        input(id='addbq', type="button", value="Ajouter la balise").btn.btn-success
+                    div.row
+                        input#filterbox.col-md-1(type="checkbox" name="filterbox" style="margin-top:0px") 
+                        div.col-md-11(style="padding-left=5px;") Filtrer les questions selon le thème du parcours
+                    div.row
+                        div.input-md-12(style="float:left; margin-right:8px;")
+                            select.form-control(id="optb", name="balise")
+                        div.input-md-12(style="float:left;margin-right:8px;")
+                            select.form-control(id="optq", name="question")
+                        div.input-md-12(style="float:left; margin-right:8px;")
+                            select.form-control(id="ordre", name="ordre")
+                        div.actions(style="float:left;")
+                            input(id='addbq', type="button", value="Ajouter la balise").btn.btn-success
                 br
             br
             hr

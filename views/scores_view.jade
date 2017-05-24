@@ -7,18 +7,14 @@ block content
         h2 Les Scores
         br
         div
-            p Pour plus d'informations concernant les scores,
-                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
+            p Pour plus d'informations concernant les scores, 
+                a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') cliquez ici
             #info.collapse
                 .well
-                    p Informations pour les scores:
-                        br
-                        br
-                        | Le tableau ci-dessous reprend les différents scores des différents parcours.
-                        br
-                        | Les parcours visible sont ceux que vous avez créés ainsi que les publics.
-                        br
-                        | Vous pouvez supprimer les scores d'un parcours qui n'ont plus d'importance pour vous.
+
+                        p Le tableau ci-dessous reprend les différents scores des différents parcours.
+                        p Les parcours visible sont ceux que vous avez créés ainsi que les publics.
+                        p Vous pouvez supprimer les scores d'un parcours qui n'ont plus d'importance pour vous.
 
             hr
             form(action="/dal/scores/destroy" , method="post", id="scoreform")

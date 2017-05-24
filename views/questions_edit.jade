@@ -12,8 +12,10 @@ block content
                 a(role='button', data-toggle='collapse', href='#info', aria-expanded='false', aria-controls='info') lisez-en plus
             #info.collapse
                 .well
-                    p Informations concernant les questions:
-                    br
+                    p 
+                        a(href='/aide#question') Informations concernant les questions
+                        p Pour supprimer une question, vous devez vous assurer qu'elle n'est référencée par aucun parcours. Dans le cas contraire, vous devez d'abord modifier ledit parcours pour qu'il n'utilise plus cette question
+
 
         hr
         if (ok != undefined)
@@ -25,9 +27,10 @@ block content
         form(action="/dal/questions/update/#{question.id}", method="post").input-group.input-group-lg
             #e1
                 p Question à poser
-                div.input-lg-8.input-lg
-                    input(type="text", name="question", value=question.question, placeholder="Question").form-control
-                p.help-block exemple: Quel est la couleur rose du cheval de napoléon ?
+                div.row
+                    div.input-lg-8.input-lg
+                        textarea(name="question", placeholder="Question").form-control #{question.question}
+                p.help-block exemple: Quel est la couleur du cheval de napoléon ?
             br
             #e2
                 p Le thème

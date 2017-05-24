@@ -6,7 +6,8 @@ module.exports = function(sequelize, DataTypes) {
  }, {
         classMethods: {
           associate: function(models) {
-            Theme.hasMany(models.Question)
+            Theme.hasMany(models.Question),
+            Theme.hasMany(models.Parcours)
           }
         }
       });
